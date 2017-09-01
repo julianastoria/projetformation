@@ -1,0 +1,1 @@
+C:/xampp/htdocs/projetformation/vendor/bower_components/bootstrap/dist/js/bootstrap.js

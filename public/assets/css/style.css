@@ -1,11 +1,12 @@
 html, body {
 	font-family: Consolas, monaco, monospace;
-	background-color: #272822;
 	color: #F8F8F2;
+	background-color: transparent;
 }
 
 .container {
 	margin: 50px;
+	
 }
 
 a {
@@ -19,8 +20,19 @@ a:hover {
 
 h1 {
 	color: #F92672;
+
 }
 
 h2 {
 	color: #66D9EF;
 }
+
+html{
+	background-color: background: #b3dced; /* Old browsers */
+background: -moz-linear-gradient(top, #b3dced 0%, #29b8e5 38%, #bce0ee 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, #b3dced 0%,#29b8e5 38%,#bce0ee 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, #b3dced 0%,#29b8e5 38%,#bce0ee 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	background-repeat: no-repeat;
+
+}
+
