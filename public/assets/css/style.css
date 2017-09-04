@@ -1,7 +1,7 @@
 html, body {
 	font-family: Consolas, monaco, monospace;
 	color: #F8F8F2;
-	background-color: transparent;
+	background-color: #F2E4D1;
 }
 
 .container {
@@ -11,15 +11,18 @@ html, body {
 
 a {
 	text-decoration: none;
-	color: #A6E22E;
+	color: #fff;
+	font-size: 20px;
 }
 
 a:hover {
 	color: #F92672;
+
 }
 
+/* Titre du site */
 h1 {
-	color: #F92672;
+	color: #00d8ff;
 
 }
 
@@ -27,12 +30,107 @@ h2 {
 	color: #66D9EF;
 }
 
-html{
-	background-color: background: #b3dced; /* Old browsers */
-background: -moz-linear-gradient(top, #b3dced 0%, #29b8e5 38%, #bce0ee 100%); /* FF3.6-15 */
-background: -webkit-linear-gradient(top, #b3dced 0%,#29b8e5 38%,#bce0ee 100%); /* Chrome10-25,Safari5.1-6 */
-background: linear-gradient(to bottom, #b3dced 0%,#29b8e5 38%,#bce0ee 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-	background-repeat: no-repeat;
+/* navbar */
+.navbar, .navbar-default, .navbar-static-top{
+	background-color: #00d8ff;
+	font-family: 'Estrangelo Edessa', cursive;
+}
 
+.navbar-default .navbar-brand {
+	color: #fff;
+	font-size: 25px;
+}
+
+.navbar-default .navbar-nav > li > a {
+	color: #fff;
+	font-size: 20px;
+}
+
+.dropdown-menu, .fa, i{
+	color: #fff;
+	font-size: 15px;
+}
+
+
+
+/* header */
+header h2 {
+	color: #fff;
+	font-family: 'Estrangelo Edessa', cursive;
+}
+
+header {
+	/* moyen pour ajuster une image à sa hauteur */
+	background-image: url(../img/water-1330252_1920.jpg);
+	background-size:cover;
+    margin:0;
+}
+
+label {
+	color: #00cdf2;
+}
+
+footer {
+	background-color: #00d8ff;
+}
+
+.regions {
+	color: #8845e0;
+}
+
+.btn-blue {
+	background-color: #00d8ff;
+	border-color: #00d8ff;
+	color: #fff;
+	font-size: 15px;
+}
+
+.btn-purple {
+	background-color: #8845e0;
+	border-color: #8845e0;
+	color: #fff;
+	
+}
+
+/* responsive design */
+@media screen and (max-width: 767px) {
+	/* méthode pour afficher les éléments dans le navbar */
+	.btn-blue{
+		float: left;
+		display: inline;
+
+	}
+
+.navbar-default, .navbar-nav > li > a {
+		float: left;
+		display: block;
+	}
+
+.btn-blue a {
+	font-size: 28px;
+}
+
+.dropdown-menu {
+	color: #fff;
+}
+
+
+}
+
+figure a h4 {
+	color: #8845e0;
+
+}
+
+figure a {
+	color: #8845e0;
+}
+
+label {
+	color: #8845e0;
+}
+
+.afficher {
+	color: #8845e0;
 }
 
