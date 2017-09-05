@@ -1,55 +1,30 @@
-<?php $this->layout('layout', ['title' => 'annautisma']) ?>
+<?php $this->layout('layout') ?>
 
 
 <?php $this->start('main_content') ?>
 <header class="jumbotron">
 	<h1 class="text-center">Annautisma</h1>
-	<h2>Phrase d'accroche pour définir en une ou deux ligne le site en question.</h2>
-	<button class="btn btn-purple btn-md">En savoir plus</button>
+	<h2 class="text-center">Phrase d'accroche pour définir en une ou deux ligne le site en question.</h2>
+	<div class="row">
+		<div class="col-md-8 col-md-offset-4">
+			<button class="btn btn-purple btn-md" id="savoir">En savoir plus</button>
+		</div>
+	</div>
 </header>
 
 <div class="container-fluid">
+	<div class="row">
+	<!-- Méthode pour mettre un élément au milieu grâce au colonne -->
+	<div class="col-md-8 col-md-offset-4">
 		<form class="form-horizontal">
-			
-			<div class="dropdown">
-			<label>Votre recherche :</label>
-				<button class="btn btn-purple dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-			    Votre choix
-			    <span class="caret"></span>
-			  </button>
-			  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-				    <li>
-				    	<a href="#"><i class="fa fa-home" aria-hidden="true"></i> Etablissements</a>
-				    </li>
-				    <li>
-				    	<a href="#"><i class="fa fa-user-md" aria-hidden="true"></i> Médecins</a>
-				    </li>
-				    <li>
-				    	<a href="#"><i class="fa fa-child" aria-hidden="true"></i> Ecoles</a>
-				    </li>
-				
-				</ul>
-			</div>
-			<br>
-
-			<div class="dropdown">
-			<label>Région :</label>
-				<button class="btn btn-purple dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-			    Votre choix
-			    <span class="caret"></span>
-			  </button>
-			  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-			    <li><a href="#"><i class="fa fa-home" aria-hidden="true"></i> Etablissements</a></li>
-			    <li><a href="#"><i class="fa fa-user-md" aria-hidden="true"></i> Médecins</a></li>
-			    <li><a href="#"><i class="fa fa-child" aria-hidden="true"></i> Ecoles</a></li>
-			    
-			  </ul>
-			</div>
+			<input type="text" name="search">
+			<button class="btn btn-purple">Envoyer</button>
 		</form>
+	</div>
 	</div>
 </div>
 
-<div class="container">
+<div class="container-fluid">
 	<h2 class="text-center regions">Derniers éléments ajoutés :</h2><br>
 	<a class="afficher" href="#">Afficher</a>
 		<figure class="zoomarticle">
@@ -60,7 +35,7 @@
 				</div>
 
 				<div class="col-md-3">
-					<img class="img-responsive" src="https://previews.123rf.com/images/spawn101/spawn1010905/spawn101090500016/4913803-Mignon-dessin-anim-recherche-d-un-m-decin-Banque-d'images.jpg">
+					<img class="img-responsive beau" src="https://previews.123rf.com/images/spawn101/spawn1010905/spawn101090500016/4913803-Mignon-dessin-anim-recherche-d-un-m-decin-Banque-d'images.jpg">
 					<a href="#"><h4>docteur j-m, Paris(75), Ile-De-France</h4></a>
 				</div>
 

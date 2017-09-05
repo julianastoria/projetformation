@@ -1,5 +1,7 @@
+/* layout et home.php */
+
 html, body {
-	font-family: Consolas, monaco, monospace;
+	font-family: 'Estrangelo Edessa', cursive;
 	color: #F8F8F2;
 	background-color: #F2E4D1;
 }
@@ -16,7 +18,8 @@ a {
 }
 
 a:hover {
-	color: #F92672;
+	color: #8845e0;
+	text-decoration: none;
 
 }
 
@@ -27,23 +30,35 @@ h1 {
 }
 
 h2 {
-	color: #66D9EF;
+	color:  #8845e0;
+	font-family: 'Estrangelo Edessa', cursive;
 }
 
 /* navbar */
 .navbar, .navbar-default, .navbar-static-top{
-	background-color: #00d8ff;
+	background: linear-gradient(#0072ff, #00c6ff);
+	margin: 0 -15px;
 	font-family: 'Estrangelo Edessa', cursive;
 }
 
 .navbar-default .navbar-brand {
 	color: #fff;
 	font-size: 25px;
+
+}
+
+.navbar-default .navbar-brand:hover {
+	color: #8845e0;
 }
 
 .navbar-default .navbar-nav > li > a {
 	color: #fff;
 	font-size: 20px;
+	
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+	color: #8845e0;
 }
 
 .dropdown-menu, .fa, i{
@@ -52,6 +67,10 @@ h2 {
 }
 
 
+.dropdown-menu > li > a {
+	color: #8845e0;
+
+}
 
 /* header */
 header h2 {
@@ -63,33 +82,65 @@ header {
 	/* moyen pour ajuster une image à sa hauteur */
 	background-image: url(../img/water-1330252_1920.jpg);
 	background-size:cover;
-    margin:0;
+    margin:0 -15px;
 }
 
-label {
-	color: #00cdf2;
+.jumbotron h1 {
+	font-family: 'Estrangelo Edessa', cursive;
+	font-size: 80px;
 }
 
 footer {
-	background-color: #00d8ff;
+	
+	padding: 13px 0 5px 0;
+	background: linear-gradient(#00c6ff, #0072ff);
 }
 
-.regions {
+.footer {
+	margin: 0 -30px 0 -25px;
+
+}
+
+
+
+.btn-blue {
+	background: linear-gradient(#0072ff, #00c6ff);
+	color: #fff;
+	border: none;
+	font-size: 10px;
+	padding-top: 12px;
+
+}
+
+.btn-purple:hover {
+	color: #00d8ff;
+}
+
+.btn-blue:hover {
 	color: #8845e0;
 }
 
-.btn-blue {
-	background-color: #00d8ff;
-	border-color: #00d8ff;
+.btn-purple {
+	background: linear-gradient(#9D50BB, #6E48AA);
 	color: #fff;
-	font-size: 15px;
+	font-family: 'Estrangelo Edessa', cursive;
+	padding: 15px 10px 15px 10px;
+	border-radius: 8px;
 }
 
-.btn-purple {
-	background-color: #8845e0;
-	border-color: #8845e0;
-	color: #fff;
-	
+#savoir {
+	padding: 15px 10px 15px 10px;
+	font-size: 28px;
+}
+
+input {
+	color: #000;
+}
+
+/* régler l'image en responsive */
+.beau {
+	height: 160px;
+	width: 220px;
 }
 
 /* responsive design */
@@ -97,25 +148,39 @@ footer {
 	/* méthode pour afficher les éléments dans le navbar */
 	.btn-blue{
 		float: left;
-		display: inline;
+		display: inline;	
 
 	}
 
-.navbar-default, .navbar-nav > li > a {
+.navbar-default .navbar-nav > li > a {
 		float: left;
 		display: block;
+		font-size: 17px;
+		
 	}
 
 .btn-blue a {
-	font-size: 28px;
+	font-size: 17px;
+
 }
 
-.dropdown-menu {
+/* pour afficher la couleur du dropdown en blanc */
+.navbar-default .navbar-nav .open .dropdown-menu > li > a{
 	color: #fff;
+	font-size: 18px;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #fff;
+}
+
+.navbar-default .navbar-toggle {
+	border-color: #fff;
 }
 
 
-}
+
+	}
 
 figure a h4 {
 	color: #8845e0;
@@ -126,11 +191,19 @@ figure a {
 	color: #8845e0;
 }
 
-label {
+.afficher {
 	color: #8845e0;
 }
 
-.afficher {
-	color: #8845e0;
+
+
+footer a {
+	font-size: 15px;
+	padding-left: 10px;
+
+}
+
+footer p {
+	padding-left: 12px;
 }
 
