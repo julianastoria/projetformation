@@ -4,7 +4,7 @@ namespace Manager;
 
 use \W\Manager\Manager;
 
-class NotesInstitutionManager extends Manager 
+class InstitutionsNotesManager extends Manager 
 {
 
 }

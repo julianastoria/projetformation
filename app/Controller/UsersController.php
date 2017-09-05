@@ -5,12 +5,14 @@ namespace Controller;
 use \W\Controller\Controller;
 use \W\Manager\UserManager;
 use \W\Security\AuthentificationManager;
+use \Manager\TokensManager;
 
 class UsersController extends Controller 
 {
 
 	private $AuthManager;
 	private $UserManager;
+
 
 	public function __construct()
 	{
@@ -27,7 +29,7 @@ class UsersController extends Controller
 			$email=$_SESSION['user']['email'];
 			$firstname=$_SESSION['user']['firstname'];
 			$lastname=$_SESSION['user']['lastname'];
-			$birthdate=$_SESSION['user']['birthdate'];
+			$birthday=$_SESSION['user']['birthday'];
 			$autism=$_SESSION['user']['autism'];
 
 		} else {
@@ -38,7 +40,7 @@ class UsersController extends Controller
 				'email'=>$email,
 				'firstname'=>$firstname,
 				'lastname'=>$lastname,
-				'birthdate'=>$birthdate,
+				'birthday'=>$birthday,
 				'autism'=>$autism,
 			]);
 	}
@@ -78,7 +80,7 @@ class UsersController extends Controller
 		$email=null;
 		$firstname=null;
 		$lastname=null;
-		$birthdate=null;
+		$birthday=null;
 		$state=null;
 		$situation=null;
 		$autism=null;
@@ -94,7 +96,7 @@ class UsersController extends Controller
  			$repeat_password=strip_tags(trim($_POST['repeat_password']));
 			$firstname=strip_tags(trim($_POST['firstname']));
 			$lastname=strip_tags(trim($_POST['lastname']));
-			$birthdate=strip_tags(trim($_POST['birthdate']));
+			$birthday=strip_tags(trim($_POST['birthday']));
 			$departement=strip_tags(trim($_POST['departement']));
 			$situation=strip_tags(trim($_POST['situation']));
 			$autism=strip_tags(trim($_POST['autism']));
@@ -141,41 +143,29 @@ class UsersController extends Controller
 				$save=false;
 				$error="le champ nom est vide";
 			}
-			if (empty($birthdate))
+			if (empty($birthday))
 			{
 				$save=false;
 				$error="le champ date de naissance est vide";
-			}
-			if (empty($departement))
-			{
-				$save=false;
-				$error='le champ departement est vide';
-			}
-			if (empty($situation))
-			{
-				$save=false;
-				$error='le champ situation est vide';
-			}
-			if (empty($autism))
-			{
-				$save=false;
-				$error='le champs autisme est vide';
 			}
 			if ($save)
 			{
 				//Haschage du password
 				$password=password_hash($password,PASSWORD_DEFAULT);
+				
 				//introduction des données dans la BDD
-				$user=$this->AuthManager->insert([
-						'email'=>$email,
-						'password'=>$password,
+				$user=$this->UserManager->insert([
 						'firstname'=>$firstname,
 						'lastname'=>$lastname,
-						'birthdate'=>$birthdate,
-						'departement'=>$departement,
-						'situation'=>$situation,
-						'autism'=>$autism,
+						'email'=>$email,
+						'password'=>$password,
+						'birthday'=>$birthday,
+						'id_departement'=>$departement,
+						'roles'=>'user',
+						'situations'=>$situation,
+						'id_autism'=>$autism,
 					]);
+
 				//Ajouter l'utilisateur dans la session 
 				$this->AuthManager->logUserIn($user);
 				//Rediriger vers la page de profile 
@@ -186,7 +176,7 @@ class UsersController extends Controller
 				'email'=>$email,
 				'firstname'=>$firstname,
 				'lastname'=>$lastname,
-				'birthdate'=>$birthdate,
+				'birthday'=>$birthday,
 				'situation'=>$situation,
 				'autism'=>$autism,
 				'error'=>$error
@@ -202,7 +192,7 @@ class UsersController extends Controller
 			//Recupere les données du post
 			$email=strip_tags(trim($_POST['email']));
 			//Verifie l'existence du mail dans la bdd 
-			if ($user =$this->userManager->getUserByUsernameOrEmail($email))
+			if ($user =$this->UsersManager->getUserByUsernameOrEmail($email))
 			{
 				//Generation du token 
 				$token=array(
@@ -228,7 +218,8 @@ class UsersController extends Controller
 			$password=$_POST['password'];
 			$repeat_password=$_POST['repeat_password'];
 			//Récupere le token 
-			$token_data=$this->UserManager->findByToken($token);
+			$TokensManager= new TokensManager;
+			$token_data=$TokensManager->findByToken($token);
 			//Verifier les mdp 
 			if ($password!==$repeat_password)
 			{
@@ -243,7 +234,7 @@ class UsersController extends Controller
 					//Haschage du nouveau mdp
 					$password=password_hash($password,PASSWORD_DEFAULT);
 					//changer l'ancien mdp par le nouveau 
-					$this->UserManager->update(['password'=>$password],$user['id']);
+					$this->UsersManager->update(['password'=>$password],$user['id']);
 					//redirige vers la page de connexion
 					$this->redirectToRoute('user_signin');
 				} 

@@ -14,12 +14,12 @@
 <body>
 	<div class="container">
 		
-<h1><?= $this->e($title) ?></h1>
+
 		<!--navbar -->
 <nav class="navbar navbar-default navbar-static-top">
 	<div class="container-fluid">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="#">Annautisma</a>
+			<a class="navbar-brand" href="<?= $this->url('home') ?>">Annautisma</a>
 			<button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#annautisma">
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
@@ -76,24 +76,24 @@
 			</ul>
 
 			<ul class=" nav navbar-nav navbar-right">
-				<li class="text-uppercase navbar-right"><a href="#inscription"><i class="fa fa-user-plus" aria-hidden="true"></i></a></li>
-					<li class="text-uppercase navbar-right"><a href="#connexion"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a></li>
+				<li class="text-uppercase navbar-right"><a href="<?= $this->url('user_signup') ?>"><i class="fa fa-user-plus" aria-hidden="true"></i></a></li>
+					<li class="text-uppercase navbar-right"><a href="<?= $this->url('user_signin') ?>"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a></li>
 
 
 					<li>
 					<div class="dropdown">
 						<button class="btn btn-blue dropdown-toggle" type="button" id="dropdownMenu4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-							<li class="text-uppercase navbar-left"><a href="#Ajout">Ajout</a></li>
+							<li class="text-uppercase navbar-left">Ajout</li>
 							 <span class="caret"></span>
 				  		</button>
 				  		 <ul class="dropdown-menu" aria-labelledby="dropdownMenu4">
-						    <li><a href="#">Etablissements</a></li>
-						    <li><a href="#">Médecins</a></li>
+						    <li><a href="<?= $this->url('instution_create')?>">Etablissements</a></li>
+						    <li><a href="<?= $this->url('doctor_create') ?>">Médecins</a></li>
 						</ul>
 				</div>
 			</li>
 		</ul>
-			</div>
+		</div>
 	</div>
 </nav>
 <div class="clearfix"></div>
@@ -111,9 +111,9 @@
 			<div class="row">
 				<div class="col-md-6">
 					<ul class="list-inline">
-						<li class="text-left"><a href="#">Contacts</a></li>
-						<li class="text-left"><a href="#">à propos</a></li>
-						<li class="text-left"><a href="#">Mentions légales</a></li>
+						<li class="text-left"><a href="<?= $this->url('contact') ?>">Contacts</a></li>
+						<li class="text-left"><a href="<?= $this->url('a_propos') ?>">à propos</a></li>
+						<li class="text-left"><a href="<?= $this->url('mentions_legales') ?>">Mentions légales</a></li>
 					</ul>
 				</div>
 

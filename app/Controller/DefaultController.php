@@ -78,4 +78,8 @@ class DefaultController extends Controller
 	{
 		$this->show('default/a_propos');
 	}
+	public function mentions_legales ()
+	{
+		$this->show('default/mentions_legales');
+	}
 }
