@@ -12,4 +12,5 @@
 		</div>
 		<button type="submit">Se connecter</button>
 	</form>
+	<a href="<?= $this->url('lost_pwd') ?>">Mot de passe oublié ?</a>
 <?php $this->stop('main_content') ?>

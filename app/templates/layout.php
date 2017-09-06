@@ -37,23 +37,23 @@
 							 <span class="caret"></span>
 				  		</button>
 				  		<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-						    <li><a href="#">IME</a></li>
-						    <li><a href="#">SESSAD</a></li>
-						    <li><a href="#">ULIS</a></li>
+						    <li><a href="<?= $this->url('institutions_index',['type'=>'ime']) ?>">IME</a></li>
+						    <li><a href="<?= $this->url('institutions_index',['type'=>'sessad']) ?>">SESSAD</a></li>
+						    <li><a href="<?= $this->url('institutions_index',['type'=>'ulis']) ?>">ULIS</a></li>
 						</ul>
 					</div>
 				</li>
 
 			<li>
 				<div class="dropdown">
-					<button class="btn btn-blue dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+					<button class="btn btn-blue dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 							<li class="text-uppercase navbar-left"><a href="#Medecins"><i class="fa fa-user-md visible-xs" aria-hidden="true"></i><p class="hidden-xs">Médecins</p></a></li>
 							 <span class="caret"></span>
 				  		</button>
-				  		 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-						    <li><a href="#">Généraliste</a></li>
-						    <li><a href="#">Psychologue/Psychiatre</a></li>
-						    <li><a href="#">Dentiste</a></li>
+				  		 <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+						    <li><a href="<?= $this->url('doctors_index',['type'=>'generaliste']) ?>">Généraliste</a></li>
+						    <li><a href="<?= $this->url('doctors_index',['type'=>'psychiatre']) ?>">Psychologue/Psychiatre</a></li>
+						    <li><a href="<?= $this->url('doctors_index',['type'=>'dentiste']) ?>">Dentiste</a></li>
 						</ul>
 					</div>
 				</li>
@@ -61,15 +61,15 @@
 
 				<li>
 					<div class="dropdown">
-						<button class="btn btn-blue dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						<button class="btn btn-blue dropdown-toggle" type="button" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 							<li class="text-uppercase navbar-left"><a href="#Ecoles"><i class="fa fa-child visible-xs" aria-hidden="true"></i><p class="hidden-xs">Ecoles</p></a></li>
 							 <span class="caret"></span>
 				  		</button>
-				  		 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-						    <li><a href="#">Maternelle</a></li>
-						    <li><a href="#">Primaire</a></li>
-						    <li><a href="#">Collège</a></li>
-						    <li><a href="#">Lycée</a></li>
+				  		 <ul class="dropdown-menu" aria-labelledby="dropdownMenu3">
+						    <li><a href="<?= $this->url('institutions_index',['type'=>'maternelle']) ?>">Maternelle</a></li>
+						    <li><a href="<?= $this->url('institutions_index',['type'=>'primaire']) ?>">Primaire</a></li>
+						    <li><a href="<?= $this->url('institutions_index',['type'=>'college']) ?>">Collège</a></li>
+						    <li><a href="<?= $this->url('institutions_index',['type'=>'lycee']) ?>">Lycée</a></li>
 						</ul>
 				</div>
 			</li>
@@ -87,7 +87,7 @@
 							 <span class="caret"></span>
 				  		</button>
 				  		 <ul class="dropdown-menu" aria-labelledby="dropdownMenu4">
-						    <li><a href="<?= $this->url('instution_create')?>">Etablissements</a></li>
+						    <li><a href="<?= $this->url('institution_create')?>">Etablissements</a></li>
 						    <li><a href="<?= $this->url('doctor_create') ?>">Médecins</a></li>
 						</ul>
 				</div>
@@ -125,6 +125,7 @@
 	</div>
 
 	<script src="<?= $this->assetUrl('js/jquery.js') ?>" charset="utf-8"></script>
+	<script type="text/javascript" src="<?= $this->assetUrl('js/jquery.barrating.min.js') ?>"></script>
 	<script src="<?= $this->assetUrl('js/bootstrap.js') ?>" charset="utf-8"></script>
 </body>
 </html>

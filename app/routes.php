@@ -9,11 +9,11 @@
 
 
 		//Users Routes 
-		['GET|POST', '/signin', 'Users#signin', 'user_signin'],
-		['GET|POST', '/signup', 'Users#signup', 'user_signup'],
-		['GET', '/logout', 'Users#logout', 'logout'],
-		['GET|POST', '/lost_pwd', 'Users#lost_pwd', 'lost_pwd'],
-		['GET|POST', '/reset_pwd/[a:token]', 'Users#reset_pwd', 'reset_pwd'],
+		['GET|POST', '/connexion', 'Users#signin', 'user_signin'],
+		['GET|POST', '/inscription', 'Users#signup', 'user_signup'],
+		['GET', '/deconnexion', 'Users#logout', 'logout'],
+		['GET|POST', '/mdp_perdu', 'Users#lost_pwd', 'lost_pwd'],
+		['GET|POST', '/reinitilation_mdp/[a:token]', 'Users#reset_pwd', 'reset_pwd'],
 		['GET', '/profile', 'Users#profile', 'profile'],
 
 		//Doctors Routes
@@ -24,11 +24,11 @@
 		['GET', '/medecin/[i:id]/delete', 'Doctors#delete', 'doctor_delete'],
 
 		//Institutions Routes
-		['GET', '/etablissement/[a:type]/liste', 'Institutions#index', 'instutions_index'],
-		['GET', '/etablissement/[i:id]/details', 'Institutions#read', 'instution_details'],
-		['GET|POST', '/etablissement/create', 'Institutions#create', 'instution_create'],
-		['GET|POST', '/etablissement/[i:id]/edit', 'Institutions#update', 'instution_update'],
-		['GET', '/etablissement/[i:id]/delete', 'Institutions#delete', 'instution_delete'],
+		['GET', '/etablissement/[a:type]/liste', 'Institutions#index', 'institutions_index'],
+		['GET', '/etablissement/[i:id]/details', 'Institutions#read', 'institution_details'],
+		['GET|POST', '/etablissement/create', 'Institutions#create', 'institution_create'],
+		['GET|POST', '/etablissement/[i:id]/edit', 'Institutions#update', 'institution_update'],
+		['GET', '/etablissement/[i:id]/delete', 'Institutions#delete', 'institution_delete'],
 
 		//InstitutionNotes Routes
 		['GET|POST', '/etablissement/note/[i:id]/add', 'InstitutionsNotes#create', 'create_institution_note'],

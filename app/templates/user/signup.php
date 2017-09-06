@@ -1,6 +1,13 @@
 <?php $this->layout('layout', ['title' => $title]) ?>
 
 <?php $this->start('main_content') ?>
+	<div class="alert-danger">
+		<?php foreach ($errors as $error): ?>
+			<ul>
+				<li><?= $error ?></li>
+			</ul>
+		<?php endforeach ?>
+	</div>
 	<form method="post" action="<?= $this->url('user_signup') ?>">
 		<div class="form-group">
 			<label for="email">Identifiant (Adresse Mail) : </label>
@@ -29,8 +36,8 @@
 		<div class="form-group">
 			<label for="departement">Departement</label>
 			<select name="departement" id="departement">
-				<option value="nord">Nord</option>
-				<option value="pas de calais">Pas De Calais</option>
+				<option value="Nord">Nord</option>
+				<option value="Pas De Calais">Pas De Calais</option>
 			</select><br/>
 		</div>
 		<div class="form-group">

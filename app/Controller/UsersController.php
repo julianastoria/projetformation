@@ -7,6 +7,7 @@ use \W\Manager\UserManager;
 use \W\Security\AuthentificationManager;
 use \Manager\TokensManager;
 
+
 class UsersController extends Controller 
 {
 
@@ -81,11 +82,12 @@ class UsersController extends Controller
 		$firstname=null;
 		$lastname=null;
 		$birthday=null;
-		$state=null;
+		$departement=null;
 		$situation=null;
 		$autism=null;
-		$error=null;
-
+		$error=array();
+		$id_autism=null;
+		$id_departement=null;
 		//Si la requete HTTP est POST
 		if ($_SERVER['REQUEST_METHOD'] === "POST")
 		{
@@ -97,9 +99,14 @@ class UsersController extends Controller
 			$firstname=strip_tags(trim($_POST['firstname']));
 			$lastname=strip_tags(trim($_POST['lastname']));
 			$birthday=strip_tags(trim($_POST['birthday']));
-			$departement=strip_tags(trim($_POST['departement']));
+
 			$situation=strip_tags(trim($_POST['situation']));
 			$autism=strip_tags(trim($_POST['autism']));
+
+			//Département : recuperer l'id 
+			$departement=strip_tags(trim($_POST['departement']));
+			$departementmanager= new \Manager\DepartementsManager;
+			$id_departement=$departementmanager->findByName($departement)['id'];
 
 			//Controle des données 
 
@@ -107,49 +114,58 @@ class UsersController extends Controller
 			if (empty($email))
 			{
 				$save=false;
-				$error="le champ email est vide";
+				$error['email']="le champ email est vide";
 			}
 
 			else if (!filter_var($email,FILTER_VALIDATE_EMAIL))
 			{
 				$save=false;
-				$error="l'email n'est pas valide";
+				$error['email']="l'email n'est pas valide";
 			} 
 			else if ($this->UserManager->emailExists($email))
 			{
 				$save=false;
-				$error="l'email a déjà été utilisée";
+				$error['email']="l'email a déjà été utilisée";
 			} 
 
 			// ---- Mot de passe ------
 			if (empty($password))
 			{
 				$save=false;
-				$error="le champ mot de passe est vide";
+				$error['password']="le champ mot de passe est vide";
 			}
 			
 			else if ($password!==$repeat_password)
 			{
 				$save=false;
-				$error="";
+				$error['password']="";
 			}
 			if (empty($firstname))
 			{
 				$save=false;
-				$error="le champ prenom est vide";
+				$error['firstname']="le champ prenom est vide";
 			}
 			if (empty($lastname))
 			{
 				$save=false;
-				$error="le champ nom est vide";
+				$error['lastname']="le champ nom est vide";
 			}
 			if (empty($birthday))
 			{
 				$save=false;
-				$error="le champ date de naissance est vide";
+				$error['birthday']="le champ date de naissance est vide";
 			}
+			// Récupere l'id de l'autisme si il est spécifié
+			if (!empty($autism))
+			{
+				//Récupere l'id de l'autisme 
+				$autismsmanager=new \Manager\AutismsManager;
+				$id_autism=$autismsmanager->findByName($autism)['id'];
+			}
+
 			if ($save)
 			{
+				
 				//Haschage du password
 				$password=password_hash($password,PASSWORD_DEFAULT);
 				
@@ -160,12 +176,13 @@ class UsersController extends Controller
 						'email'=>$email,
 						'password'=>$password,
 						'birthday'=>$birthday,
-						'id_departement'=>$departement,
+						'id_departement'=>$id_departement,
 						'roles'=>'user',
 						'situations'=>$situation,
-						'id_autism'=>$autism,
+						'id_autism'=>$id_autism,
 					]);
-
+				var_dump($user);
+				exit;
 				//Ajouter l'utilisateur dans la session 
 				$this->AuthManager->logUserIn($user);
 				//Rediriger vers la page de profile 
@@ -179,7 +196,7 @@ class UsersController extends Controller
 				'birthday'=>$birthday,
 				'situation'=>$situation,
 				'autism'=>$autism,
-				'error'=>$error
+				'errors'=>$error
 			]);
 	}
 	public function lost_pwd ()
@@ -204,12 +221,15 @@ class UsersController extends Controller
 				$url=$this->generateUrl('reset_pwd',['token'=>$token['token']]);
 			}
 		}
-		$this->show('user/lost_pwd');
+		$this->show('user/lost_pwd',[
+				'error'=>$error,
+			]);
 	}
 	public function reset_pwd ($token)
 	{
 		$password=null;
 		$repeat_password=null;
+		$error=null;
 		// Verifie si la requete HTTP est POST
 		if ($_SERVER['REQUEST_METHOD'] === "POST")
 		{

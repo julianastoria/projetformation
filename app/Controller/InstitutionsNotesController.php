@@ -35,7 +35,7 @@ class InstitutionsNotesController extends Controller
 		$average=null;
 		$title=null;
 		$comment=null;
-		$error=null;
+		$error=array();
 		//Verifie si l'utilisateur est connecte 
 		/*if (isset($_SESSION))
 		{*/
@@ -111,6 +111,7 @@ class InstitutionsNotesController extends Controller
 					
 			}
 			$this->show('institution_note/create',[
+					'id'=>$id,
 					'title'=>"Création d'une note",
 					'sub_notes1'=>$sub_notes1,
 					'sub_notes2'=>$sub_notes2,

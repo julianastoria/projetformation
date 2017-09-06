@@ -35,7 +35,7 @@ class DoctorsNotesController extends Controller
 		$average=null;
 		$title=null;
 		$comment=null;
-		$error=null;
+		$error=array();
 		//Verifie si l'utilisateur est connecte 
 		/*if (isset($_SESSION))
 		{*/
@@ -62,22 +62,27 @@ class DoctorsNotesController extends Controller
 				if (empty($title))
 				{
 					$save=false;
-					$error='le champ titre est vide';
+					$error['title']='le champ titre est vide';
 				}
 				if (empty($comment))
 				{
 					$save=false;
-					$error='le champ commentaire est vide';
+					$error['comment']='le champ commentaire est vide';
 				}
 				else if (strlen($comment) < 200)
 				{
 					$save=false;
-					$error='le commentaire est trop court';
+					$error['comment']='le commentaire est trop court';
 				}
 				if (empty($sub_notes1) || empty($sub_notes2) || empty($sub_notes3))
 				{
 					$save=false;
-					$error='les 3 notes doivent etre notés';
+					$error['sub_notes']='les 3 notes doivent etre notés';
+				}
+				else if (is_numeric($sub_notes1) && is_numeric($sub_notes2) && is_numeric($sub_notes3))
+				{
+					$save=false;
+					$error['sub_notes']='les notes doivent etre des nombres';
 				}
 				
 				//Verifie les données sont correcte
@@ -98,11 +103,12 @@ class DoctorsNotesController extends Controller
 					
 			}
 			$this->show('doctor_note/create',[
+					'id'=>$id,
 					'title'=>"Création d'une note",
 					'sub_notes1'=>$sub_notes1,
 					'sub_notes2'=>$sub_notes2,
 					'sub_notes3'=>$sub_notes3,
-					'error'=>$error
+					'errors'=>$error
 				]);
 		/*} else {
 			$this->redirectToRoute('user_signin');
