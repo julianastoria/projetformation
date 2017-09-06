@@ -71,6 +71,7 @@ h2 {
 
 .dropdown-menu > li > a {
 	color: #8845e0;
+	font-family: 'Sorts Mill Goudy', serif;
 
 }
 
@@ -201,6 +202,7 @@ footer p {
 .navbar-default .navbar-nav .open .dropdown-menu > li > a{
 	color: #fff;
 	font-size: 18px;
+
 }
 
 .navbar-default .navbar-toggle .icon-bar {
