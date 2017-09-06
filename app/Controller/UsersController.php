@@ -56,8 +56,6 @@ class UsersController extends Controller
 			//Recupere les données du POST
  			$email=$_POST['email'];
  			$password=$_POST['password'];
- 			var_dump($this->authManager->isValidLoginInfo($email, $password));
- 			exit;
 			//Controller les identifications 
  			if ($id=$this->authManager->isValidLoginInfo($email, $password))
       		{		

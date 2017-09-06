@@ -10,14 +10,14 @@ use \Manager\UsersManager;
 class InstitutionsNotesController extends Controller 
 {
 
-	private $InstutionsNotesManager;
+	private $InstitutionsNotesManager;
 	private $UsersManager;
 
 	
 	public function __construct()
 	{
 
-		$this->InstitionsNotesManager= new InstitutionsNotesManager;
+		$this->InstitutionsNotesManager= new InstitutionsNotesManager;
 
 		$this->UsersManager= new UsersManager;
 	}
@@ -44,7 +44,7 @@ class InstitutionsNotesController extends Controller
 			$sub_notes2=null;
 			$sub_notes3=null;
 			$title_comment=null;
-			$comment=null;
+			$comment="";
 			$error=array();
 			//Recupere le type de l'etablissement
 			$InstitutionsManager= new InstitutionsManager;
@@ -70,14 +70,14 @@ class InstitutionsNotesController extends Controller
 				$sub_notes1=$_POST['sub_notes1'];				
 				$sub_notes2=$_POST['sub_notes2'];				
 				$sub_notes3=$_POST['sub_notes3'];								
-				$title=$_POST['title'];
-				$comment=$_POST['commentaire'];
+				$title_comment=$_POST['title_comment'];
+				$comment=$_POST['comment'];
 
 				//Controle les données 
-				if (empty($title))
+				if (empty($title_comment))
 				{
 					$save=false;
-					$error['title']='le champ titre est vide';
+					$error['title_comment']='le champ titre est vide';
 				}
 				if (empty($comment))
 				{
@@ -100,18 +100,22 @@ class InstitutionsNotesController extends Controller
 				{
 					//Récupere l'id de l'utilisateur 
 					$id_user=$_SESSION['user']['id'];
+					//Réunit tous les sous note 
+					$sub_notes="$sub_notes1 ; $sub_notes2 ; $sub_notes3";
 					//Introduit les données vers la BDD
-					$this->InstitutionsNotesManager->insert([
-							'sub_note1'=>$sub_note1,
-							'sub_note2'=>$sub_note2,
-							'sub_note3'=>$sub_note3,
-							'title_comment'=>$title,
+					$note_data=[
+							'sub_notes'=>$sub_notes,
+							'title_comment'=>$title_comment,
+							'comment'=>$comment,
 							'post_date'=>date('d-M-Y'),
 							'id_institution'=>$Institution['id'],
-							'comment'=>$comment
-						]);
+							'id_user'=>$id_user,
+							'nb_like'=>0,
+							'nb_dislike'=>0
+						];
+					$this->InstitutionsNotesManager->insert($note_data);
 					//Redirige vers la page de la note 
-					$this->redirectToRoute('note_read');
+					$this->redirectToRoute('doctor_details',['id'=>$id]);
 				}
 					
 			}
@@ -119,6 +123,7 @@ class InstitutionsNotesController extends Controller
 					'id'=>$id,
 					'title'=>"Création d'une note",
 					'title_comment'=>$title_comment,
+					'comment'=>$comment,
 					'title_sub_notes1'=>$title_sub_notes1,
 					'title_sub_notes2'=>$title_sub_notes2,
 					'title_sub_notes3'=>$title_sub_notes3,
