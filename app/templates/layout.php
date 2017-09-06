@@ -15,7 +15,8 @@
 
 	<div class="container-fluid">
 		
-
+	
+		
 		<!--navbar -->
 <nav class="navbar navbar-default navbar-static-top">
 	<div class="container-fluid">
@@ -97,6 +98,7 @@
 			</div>
 	</div>
 </nav>
+
 
 
 

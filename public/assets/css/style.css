@@ -37,7 +37,7 @@ h2 {
 /* navbar */
 .navbar, .navbar-default, .navbar-static-top{
 	background: linear-gradient(#0072ff, #00c6ff);
-	margin: 0 -15px;
+	margin: 0 -15px 0 -15px;
 	font-family: 'Estrangelo Edessa', cursive;
 }
 
@@ -64,6 +64,7 @@ h2 {
 .dropdown-menu, .fa, i{
 	color: #fff;
 	font-size: 15px;
+
 }
 
 
@@ -90,25 +91,13 @@ header {
 	font-size: 80px;
 }
 
-footer {
-	
-	padding: 13px 0 5px 0;
-	background: linear-gradient(#00c6ff, #0072ff);
-}
-
-.footer {
-	margin: 0 -30px 0 -25px;
-
-}
-
-
-
 .btn-blue {
 	background: linear-gradient(#0072ff, #00c6ff);
 	color: #fff;
 	border: none;
 	font-size: 10px;
 	padding-top: 12px;
+	background: transparent;
 
 }
 
@@ -124,7 +113,7 @@ footer {
 	background: linear-gradient(#9D50BB, #6E48AA);
 	color: #fff;
 	font-family: 'Estrangelo Edessa', cursive;
-	padding: 15px 10px 15px 10px;
+	padding: 10px 8px 10px 8px;
 	border-radius: 8px;
 }
 
@@ -133,15 +122,54 @@ footer {
 	font-size: 25px;
 }
 
-input {
-	color: #000;
+
+/* footer */
+footer {
+	
+	padding: 13px 0 5px 0;
+	background: linear-gradient(#00c6ff, #0072ff);
+
 }
+
+.footer {
+	margin: 20px -30px 0 -25px;
+
+}
+
 
 /* régler l'image en responsive */
 .beau {
 	height: 160px;
 	width: 220px;
 }
+
+/* écriture à côté des photos */
+figure a h4 {
+	color: #8845e0;
+
+}
+
+figure a {
+	color: #8845e0;
+}
+
+.afficher {
+	color: #8845e0;
+}
+
+/* lien et paragraphe du footer */
+footer a {
+	font-size: 15px;
+	padding-left: 10px;
+
+}
+
+footer p {
+	padding-left: 12px;
+}
+
+
+
 
 /* responsive design */
 @media screen and (max-width: 767px) {
@@ -185,28 +213,18 @@ input {
 
 	}
 
-figure a h4 {
+
+/* create_medecin.php avec un include de form.php */
+label {
 	color: #8845e0;
-
-}
-
-figure a {
-	color: #8845e0;
-}
-
-.afficher {
-	color: #8845e0;
-}
-
-
-
-footer a {
+	font-weight: normal;
 	font-size: 15px;
-	padding-left: 10px;
-
 }
 
-footer p {
-	padding-left: 12px;
+input {
+	color: #000;
 }
 
+.checkbox {
+	font-size: 13px;
+}
