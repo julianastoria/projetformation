@@ -1,0 +1,5 @@
+New-Item -ItemType SymbolicLink -Path C:\xampp\htdocs\projetformation\public\assets\css\bootstrap.css -Target "C:\xampp\htdocs\projetformation\vendor\bower_components\bootstrap\dist\css\bootstrap.css"
+
+New-Item -ItemType SymbolicLink -Path C:\xampp\htdocs\projetformation\public\assets\js\bootstrap.js -Target "C:\xampp\htdocs\projetformation\vendor\bower_components\bootstrap\dist\js\bootstrap.js"
+
+New-Item -ItemType SymbolicLink -Path C:\xampp\htdocs\projetformation\public\assets\js\jquery.js -Target "C:\xampp\htdocs\projetformation\vendor\bower_components\jquery\dist\jquery.js"
