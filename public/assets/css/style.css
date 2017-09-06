@@ -129,8 +129,8 @@ footer {
 }
 
 #savoir {
-	padding: 15px 10px 15px 10px;
-	font-size: 28px;
+	padding: 10px 8px 10px 8px;
+	font-size: 25px;
 }
 
 input {
@@ -148,8 +148,9 @@ input {
 	/* méthode pour afficher les éléments dans le navbar */
 	.btn-blue{
 		float: left;
-		display: inline;	
-
+		display: inline;
+		/* méthode pour enlever les traces du linear-gradient */	
+		background: transparent;
 	}
 
 .navbar-default .navbar-nav > li > a {
@@ -178,7 +179,9 @@ input {
 	border-color: #fff;
 }
 
-
+.jumbotron h1 {
+	font-size: 53px;
+}
 
 	}
 
