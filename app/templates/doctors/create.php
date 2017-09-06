@@ -11,8 +11,8 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#postal_code").on("focusout", function() {
-			alert("$(this).val()");
-			console.log("$(this).val()");
+			var postal_c = $(this).val();
+			$("#departement").val().append();
 		});
 	});
 </script>

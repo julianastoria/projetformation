@@ -38,4 +38,6 @@
 		['GET[POST'	, '/etablissement/note/[i:id]/edit', 'InstitutionsNotes#update', 'edit_institution_note'],
 		['GET'		, '/etablissement/note/[i:id]/delete', 'InstitutionsNotes#delete', 'delete_institution_note'],
 		
+		// AJAX - Département Route
+		['GET'		, '/ajax/departement/', 'Doctors#ajaxDepartement', 'ajax_departement']
 	);
