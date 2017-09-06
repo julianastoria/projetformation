@@ -1,0 +1,101 @@
+<br/>
+<form method="POST">
+
+
+	<div class="form-group">
+		<label for="firstname">Prénom : </label>
+		<input type="text" id="firstname" name="firstname" class="form-control" value=""/>
+	</div>
+
+
+	<div class="form-group">
+		<label for="lastname">Nom de famille : </label>
+		<input type="text" id="lastname" name="lastname" class="form-control" value=""/>
+	</div>
+	<br/>
+	<br/>
+
+
+	<div class="form-group">
+		<label for="address">Adresse postale : </label>
+		<input type="text" id="address" name="address" class="form-control" value=""/>
+	</div>
+
+
+	<div class="form-group">
+		<label for="postal_code">Code postal : </label>
+		<input type="text" id="postal_code" name="postal_code" class="form-control" value=""/>
+	</div>
+
+
+	<div class="form-group">
+		<label for="city">Ville : </label>
+		<input type="text" id="city" name="city" class="form-control" value=""/>
+	</div>
+
+
+	<!-- À faire entrer par l'utilisateur ou à faire faire automatiquement à la machine ? Est-ce possible ? -->
+	<div class="form-group">
+		<label for="departement">Département : </label>
+		<input type="text" id="departement" name="departement" class="form-control" value=""/>
+	</div>
+	<br/>
+	<br/>
+
+
+	<div class="form-group">
+		<label for="tel">Téléphone : </label>
+		<input type="tel" id="tel" name="tel" class="form-control" value=""/>
+	</div>
+
+
+	<div class="form-group">
+		<label for="email">Adresse email : </label>
+		<input type="email" id="email" name="email" class="form-control" value=""/>
+	</div>
+
+
+	<div class="form-group">
+		<label for="site">Site web : </label>
+		<input type="url" id="site" name="site" class="form-control" value="http://"/>
+	</div>
+	<br/>
+	<br/>
+
+
+	<div class="form-group">
+		<label for="category">Catégorie : </label>
+		<select id="category" name="category" class="form-control">
+			<option value="psychologue">Psychologue</option>
+			<option value="generaliste">Généraliste</option>
+			<option value="dentiste">Dentiste</option>
+		</select>
+	</div>
+
+		
+	<label>Les autismes connus : </label>
+
+	<div class="checkbox">
+		<label>
+			<input type="checkbox" id="haut_niveau" name="haut_niveau"/>
+				Haut Niveau
+		</label>
+	</div>
+
+	<div class="checkbox">
+		<label>
+			<input type="checkbox" id="asperger" name="asperger"/>
+			Asperger
+		</label>
+	</div>
+
+	<div class="checkbox">
+		<label>
+			<input type="checkbox" id="atypique" name="atypique"/>
+			Atypique
+		</label>
+	</div>
+
+	<button type="submit">Envoyer</button>
+
+</form>
