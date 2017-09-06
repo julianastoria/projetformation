@@ -1,7 +1,7 @@
 <?php $this->layout('layout', ['title' => 'Liste des médecins']) ?>
 
 <?php $this->start('main_content') ?>
-	<h2>Liste des médecins</h2>
+	<h2 class="text-center">Liste des médecins</h2>
 
 	<?php foreach ($doctors as $key => $doctor) : ?>
 		<div class="row">
