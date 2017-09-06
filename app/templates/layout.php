@@ -12,11 +12,7 @@
 	
 </head>
 <body>
-<<<<<<< HEAD
-	<div class="container">
-		<header>
-		</header>
-=======
+
 	<div class="container-fluid">
 		
 
@@ -105,7 +101,6 @@
 
 
 		
->>>>>>> develop
 
 		<section>
 			<?= $this->section('main_content') ?>
@@ -128,15 +123,10 @@
 		</footer>
 	</div>
 
-<<<<<<< HEAD
-	<script src="<?= $this->assetUrl('js/jquery.js'); ?>" type="text/javascript" charset="utf-8"></script>
-	<script src="<?= $this->assetUrl('js/bootstrap.js'); ?>" type="text/javascript" charset="utf-8"></script>
-	
-=======
+
 
 	<script src="<?= $this->assetUrl('js/jquery.js') ?>" charset="utf-8"></script>
 	<script src="<?= $this->assetUrl('js/bootstrap.js') ?>" charset="utf-8"></script>
->>>>>>> develop
 	<?= $this->section('main_script') ?>
 </body>
 </html>
