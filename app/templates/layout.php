@@ -10,6 +10,10 @@
 	<link rel="stylesheet" href="<?= $this->assetUrl('css/style.css') ?>">
 	<link rel="stylesheet" href="<?= $this->assetUrl('css/font-awesome.css') ?>">
 	
+	<link href="https://fonts.googleapis.com/css?family=Julius+Sans+One" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Sorts+Mill+Goudy" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+	
 </head>
 <body>
 	<div class="container-fluid">
@@ -77,7 +81,7 @@
 			</ul>
 
 			<ul class=" nav navbar-nav navbar-right">
-				<li class="text-uppercase navbar-right"><a href="#inscription"><i class="fa fa-user-plus" aria-hidden="true"></i></a></li>
+				<li class="navbar-right"><a href="#inscription"><i class="fa fa-user-plus" aria-hidden="true"></i></a></li>
 					<li class="navbar-right"><a href="#connexion"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a></li>
 
 
