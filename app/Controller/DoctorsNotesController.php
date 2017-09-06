@@ -32,31 +32,33 @@ class DoctorsNotesController extends Controller
 
 	public function create ($id)
 	{
-		$average=null;
-		$title=null;
-		$comment=null;
-		$error=array();
+		
 		//Verifie si l'utilisateur est connecte 
-		/*if (isset($_SESSION))
-		{*/
+		if (isset($_SESSION))
+		{
+			$sub_notes1=null;
+			$sub_notes2=null;
+			$sub_notes3=null;
+			$title_comment=null;
+			$comment=null;
+			$error=array();
 			//Recupere les données de l'etablissement
 			$DoctorsManager= new DoctorsManager;
 			$Doctor=$DoctorsManager->find($id);
-			$sub_notes1='Accueil';
-			$sub_notes2='Qualité d’écoute';
-			$sub_notes3='Inspire confiance';
+			$title_sub_notes1='Accueil';
+			$title_sub_notes2='Qualité d’écoute';
+			$title_sub_notes3='Inspire confiance';
 			$user=$_SESSION['user'];
 			//verifie si la requete HTTP est POST
 			if ($_SERVER['REQUEST_METHOD'] === "POST")
 			{
 				$save=true;
 				//Recupere les données du POST
-				$average=$_POST['average'];
 				$sub_notes1=$_POST['sub_notes1'];				
 				$sub_notes2=$_POST['sub_notes2'];				
 				$sub_notes3=$_POST['sub_notes3'];								
 				$title=$_POST['title'];
-				$comment=$_POST['commentaire'];
+				$comment=$_POST['comment'];
 
 				//Controle les données 
 				if (empty($title))
@@ -89,7 +91,7 @@ class DoctorsNotesController extends Controller
 				if ($save)
 				{
 					//Introduit les données vers la BDD
-					$this->NotesInstitutionManager->insert([
+					$this->DoctorsNotesManager->insert([
 							'average'=>$average,
 							'sub_note'=>$sub_note,
 							'title_comment'=>$title,
@@ -105,14 +107,18 @@ class DoctorsNotesController extends Controller
 			$this->show('doctor_note/create',[
 					'id'=>$id,
 					'title'=>"Création d'une note",
+					'title_comment'=>$title_comment,
+					'title_sub_notes1'=>$title_sub_notes1,
+					'title_sub_notes2'=>$title_sub_notes2,
+					'title_sub_notes3'=>$title_sub_notes3,
 					'sub_notes1'=>$sub_notes1,
 					'sub_notes2'=>$sub_notes2,
 					'sub_notes3'=>$sub_notes3,
 					'errors'=>$error
 				]);
-		/*} else {
+		} else {
 			$this->redirectToRoute('user_signin');
-		}*/
+		}
 	}
 	public function read ($id)
 	{

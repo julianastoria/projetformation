@@ -31,19 +31,19 @@
 		</div>
 		<div class="form-group">
 			<label for="birthday">Date de naissance : </label>
-		<input type="text" name="birthday" id="birthday" value="<?= $birthday ?>"><br/>
+		<input type="date" name="birthday" id="birthday" value="<?= $birthday ?>"><br/>
 		</div>
 		<div class="form-group">
 			<label for="departement">Departement</label>
 			<select name="departement" id="departement">
-				<option value="Nord">Nord</option>
-				<option value="Pas De Calais">Pas De Calais</option>
+				<option value="59">Nord</option>
+				<option value="62">Pas De Calais</option>
 			</select><br/>
 		</div>
 		<div class="form-group">
-			<label for="autism">Autismes</label>
-			<select name="autism" id="autism">
-				<option></option>
+			<label for="id_autism">Autismes</label>
+			<select name="id_autism" id="id_autism">
+				<option value="1">Aucun</option>
 			</select><br/>
 		</div>
 		<div class="form-group">

@@ -5,17 +5,21 @@ namespace Controller;
 use \W\Controller\Controller;
 use \Manager\InstitutionsNotesManager;
 use \Manager\InstitutionsManager;
+use \Manager\UsersManager;
 
 class InstitutionsNotesController extends Controller 
 {
 
 	private $InstutionsNotesManager;
+	private $UsersManager;
 
 	
 	public function __construct()
 	{
 
 		$this->InstitionsNotesManager= new InstitutionsNotesManager;
+
+		$this->UsersManager= new UsersManager;
 	}
 
 	private function averageNotes ($arraynotes)
@@ -32,38 +36,37 @@ class InstitutionsNotesController extends Controller
 
 	public function create ($id)
 	{
-		$average=null;
-		$title=null;
-		$comment=null;
-		$error=array();
+		
 		//Verifie si l'utilisateur est connecte 
-		/*if (isset($_SESSION))
-		{*/
+		if (isset($_SESSION))
+		{
+			$sub_notes1=null;
+			$sub_notes2=null;
+			$sub_notes3=null;
+			$title_comment=null;
+			$comment=null;
+			$error=array();
 			//Recupere le type de l'etablissement
 			$InstitutionsManager= new InstitutionsManager;
 			$Institution=$InstitutionsManager->find($id);
 			$type_institution=$Institution['type_institution'];
-			$sub_notes1='Accueil';
-			var_dump($Institution);
+			$title_sub_notes1='Accueil';
 			if ($type_institution === 'École')
 			{
 				
-				$sub_notes2='Inclusion sociale';
-				$sub_notes3='Adaptation envers l’autisme';
+				$title_sub_notes2='Inclusion sociale';
+				$title_sub_notes3='Adaptation envers l’autisme';
 			} 
 			else 
 			{
-				$sub_notes2='Prise en charge';
-				$sub_notes3='Inspire confiance';
+				$title_sub_notes2='Prise en charge';
+				$title_sub_notes3='Inspire confiance';
 			}
-
-			$user=$_SESSION['user'];
 			//verifie si la requete HTTP est POST
 			if ($_SERVER['REQUEST_METHOD'] === "POST")
 			{
 				$save=true;
 				//Recupere les données du POST
-				$average=$_POST['average'];
 				$sub_notes1=$_POST['sub_notes1'];				
 				$sub_notes2=$_POST['sub_notes2'];				
 				$sub_notes3=$_POST['sub_notes3'];								
@@ -95,11 +98,13 @@ class InstitutionsNotesController extends Controller
 				//Verifie les données sont correcte
 				if ($save)
 				{
-					$average=
+					//Récupere l'id de l'utilisateur 
+					$id_user=$_SESSION['user']['id'];
 					//Introduit les données vers la BDD
-					$this->NotesInstitutionManager->insert([
-							'average'=>$average,
-							'sub_note'=>$sub_note,
+					$this->InstitutionsNotesManager->insert([
+							'sub_note1'=>$sub_note1,
+							'sub_note2'=>$sub_note2,
+							'sub_note3'=>$sub_note3,
 							'title_comment'=>$title,
 							'post_date'=>date('d-M-Y'),
 							'id_institution'=>$Institution['id'],
@@ -113,14 +118,18 @@ class InstitutionsNotesController extends Controller
 			$this->show('institution_note/create',[
 					'id'=>$id,
 					'title'=>"Création d'une note",
+					'title_comment'=>$title_comment,
+					'title_sub_notes1'=>$title_sub_notes1,
+					'title_sub_notes2'=>$title_sub_notes2,
+					'title_sub_notes3'=>$title_sub_notes3,
 					'sub_notes1'=>$sub_notes1,
 					'sub_notes2'=>$sub_notes2,
 					'sub_notes3'=>$sub_notes3,
 					'errors'=>$error
 				]);
-		/*} else {
+		} else {
 			$this->redirectToRoute('user_signin');
-		}*/
+		}
 	}
 	public function read ($id)
 	{

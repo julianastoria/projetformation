@@ -46,13 +46,10 @@
 
 			<li>
 				<div class="dropdown">
-<<<<<<< HEAD
-					<button class="btn btn-blue dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-							<li class="text-uppercase navbar-left"><a href="#Medecins"><i class="fa fa-user-md visible-xs" aria-hidden="true"></i><p class="hidden-xs">Médecins</p></a></li>
-=======
+
 					<button class="btn btn-blue dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 							<li class="navbar-left"><a href="#Medecins"><i class="fa fa-user-md visible-xs" aria-hidden="true"></i><p class="hidden-xs">Médecins</p></a></li>
->>>>>>> develop
+
 							 <span class="caret"></span>
 				  		</button>
 				  		 <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
@@ -66,13 +63,10 @@
 
 				<li>
 					<div class="dropdown">
-<<<<<<< HEAD
-						<button class="btn btn-blue dropdown-toggle" type="button" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-							<li class="text-uppercase navbar-left"><a href="#Ecoles"><i class="fa fa-child visible-xs" aria-hidden="true"></i><p class="hidden-xs">Ecoles</p></a></li>
-=======
+
 						<button class="btn btn-blue dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 							<li class="navbar-left"><a href="#Ecoles"><i class="fa fa-child visible-xs" aria-hidden="true"></i><p class="hidden-xs">Ecoles</p></a></li>
->>>>>>> develop
+
 							 <span class="caret"></span>
 				  		</button>
 				  		 <ul class="dropdown-menu" aria-labelledby="dropdownMenu3">
@@ -86,23 +80,16 @@
 			</ul>
 
 			<ul class=" nav navbar-nav navbar-right">
-<<<<<<< HEAD
-				<li class="text-uppercase navbar-right"><a href="<?= $this->url('user_signup') ?>"><i class="fa fa-user-plus" aria-hidden="true"></i></a></li>
-					<li class="text-uppercase navbar-right"><a href="<?= $this->url('user_signin') ?>"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a></li>
-=======
+
 				<li class="text-uppercase navbar-right"><a href="#inscription"><i class="fa fa-user-plus" aria-hidden="true"></i></a></li>
 					<li class="navbar-right"><a href="#connexion"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a></li>
->>>>>>> develop
 
 
 					<li>
 					<div class="dropdown">
 						<button class="btn btn-blue dropdown-toggle" type="button" id="dropdownMenu4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-<<<<<<< HEAD
-							<li class="text-uppercase navbar-left">Ajout</li>
-=======
+
 							<li class="navbar-left"><a href="#Ajout">Ajout</a></li>
->>>>>>> develop
 							 <span class="caret"></span>
 				  		</button>
 				  		 <ul class="dropdown-menu" aria-labelledby="dropdownMenu4">
@@ -128,15 +115,10 @@
 			<div class="row">
 				<div class="col-md-6">
 					<ul class="list-inline">
-<<<<<<< HEAD
-						<li class="text-left"><a href="<?= $this->url('contact') ?>">Contacts</a></li>
-						<li class="text-left"><a href="<?= $this->url('a_propos') ?>">à propos</a></li>
-						<li class="text-left"><a href="<?= $this->url('mentions_legales') ?>">Mentions légales</a></li>
-=======
+
 						<li class="text-left contact"><a href="#">Contacts</a></li>
 						<li class="text-left"><a href="#">à propos</a></li>
 						<li class="text-left"><a href="#">Mentions légales</a></li>
->>>>>>> develop
 					</ul>
 				</div>
 
@@ -149,7 +131,6 @@
 
 
 	<script src="<?= $this->assetUrl('js/jquery.js') ?>" charset="utf-8"></script>
-	<script type="text/javascript" src="<?= $this->assetUrl('js/jquery.barrating.min.js') ?>"></script>
 	<script src="<?= $this->assetUrl('js/bootstrap.js') ?>" charset="utf-8"></script>
 	<?= $this->section('main_script') ?>
 </body>
