@@ -14,6 +14,17 @@ class DoctorsController extends Controller
 		$this->departements_m = new DepartementsManager;
 	}
 
+	public function ajaxDepartement()
+	{
+		$pc = isset($_GET['pc']) ? $_GET['pc'] : null;
+		if ($pc) {
+			$departement = substr($pc, 0, 2);
+			$data = $this->departements_m->findByNumber($departement);
+
+			$this->showJson($data);
+		}
+	}
+
 	public function index()
 	{
 		$this->show('doctors/index', [
