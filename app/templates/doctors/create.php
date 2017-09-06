@@ -1,7 +1,7 @@
 <?php $this->layout('layout', ['title' => 'Ajouter un médecin']) ?>
 
 <?php $this->start('main_content') ?>
-	<h2>Ajouter un médecin</h2>
+	<h2 class="text-center">Ajouter un médecin :</h2>
 	<?php include_once('form.php'); ?>
 <?php $this->stop('main_content') ?>
 
