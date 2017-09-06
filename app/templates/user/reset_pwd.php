@@ -1,15 +1,23 @@
 <?php $this->layout('layout', ['title' => $title]) ?>
 
 <?php $this->start('main_content') ?>
+
+	<h2 class="text-center">Résolution du mot de passe :</h2><br>
+	<div class="row">
+		<div class="col-md-4 col-md-offset-4">
+
 	<form method="post">
 		<div class="form-group">
-			<label for="password"></label>
+			<label for="password">Nouveau mot de passe :</label>
 			<input type="password" name="password" id="password">
 		</div>
 		<div class="form-group">
-			<label for="repeat_password"></label>
+			<label for="repeat_password">Répéter le mot de passe :</label>
 			<input type="password" name="repeat_password" id="repeat_password">
 		</div>
-		<button type="submit">Envoyer</button>
+		<button class="btn btn-purple" type="submit">Envoyer</button>
 	</form>
+
+		</div>
+	</div>
 <?php $this->stop('main_content') ?>

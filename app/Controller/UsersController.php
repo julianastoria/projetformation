@@ -106,7 +106,7 @@ class UsersController extends Controller
 			//Département : recuperer l'id 
 			$departement=strip_tags(trim($_POST['departement']));
 			$departementmanager= new \Manager\DepartementsManager;
-			$id_departement=$departementmanager->findByName($departement)['id'];
+			$id_departement=$departementmanager->findByNumber($departement)['id'];
 
 			//Controle des données 
 

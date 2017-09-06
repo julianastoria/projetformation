@@ -37,7 +37,6 @@ h2 {
 /* navbar */
 .navbar, .navbar-default, .navbar-static-top{
 	background: linear-gradient(#0072ff, #00c6ff);
-	margin: 0 -30px 0 -15px;
 	padding-right: 25px;
 	
 }
@@ -85,12 +84,15 @@ header {
 	/* moyen pour ajuster une image à sa hauteur */
 	background-image: url(../img/water-1330252_1920.jpg);
 	background-size:cover;
-    margin: 0 -30px 0 -15px;
+    margin: 0 -30px -24px -15px;
 }
+
+
 
 .jumbotron h1 {
 	font-family: 'Roboto', sans-serif;
 	font-size: 80px;
+
 }
 
 .btn-blue {
@@ -224,14 +226,34 @@ footer p {
 label {
 	color: #8845e0;
 	font-weight: normal;
-	font-size: 15px;
+	font-size: 17px;
 	font-family: 'Sorts Mill Goudy', serif;
 }
 
 input {
 	color: #000;
+
 }
 
 .checkbox {
 	font-size: 13px;
 }
+
+/* users signup */
+option {
+	color: #000;
+	font-family: 'Sorts Mill Goudy', serif;
+}
+
+.alert {
+	font-family: 'Sorts Mill Goudy', serif;
+	font-size: 17px;
+}
+
+/* signin */
+.pwd {
+	color: #8845e0;
+	font-family: 'Sorts Mill Goudy', serif;
+}
+
+/* reset_pwd */

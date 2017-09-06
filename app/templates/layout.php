@@ -15,11 +15,11 @@
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 	
 </head>
-<body>
+	<body>
 	<div class="container-fluid">
 		
 	
-		
+<header>
 		<!--navbar -->
 <nav class="navbar navbar-default navbar-static-top">
 	<div class="container-fluid">
@@ -81,8 +81,8 @@
 			</ul>
 
 			<ul class=" nav navbar-nav navbar-right">
-				<li class="navbar-right"><a href="#inscription"><i class="fa fa-user-plus" aria-hidden="true"></i></a></li>
-					<li class="navbar-right"><a href="#connexion"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a></li>
+				<li class="navbar-right"><a href="<?= $this->url('user_signup') ?>"><i class="fa fa-user-plus" aria-hidden="true"></i></a></li>
+					<li class="navbar-right"><a href="<?= $this->url('user_signin') ?>"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a></li>
 
 
 					<li>
@@ -101,6 +101,8 @@
 			</div>
 	</div>
 </nav>
+</header>
+<br>
 
 
 
@@ -132,5 +134,5 @@
 	<script src="<?= $this->assetUrl('js/jquery.js') ?>" charset="utf-8"></script>
 	<script src="<?= $this->assetUrl('js/bootstrap.js') ?>" charset="utf-8"></script>
 	<?= $this->section('main_script') ?>
-</body>
+	</body>
 </html>
