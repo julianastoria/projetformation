@@ -10,7 +10,7 @@
 			<label><?= $sub_notes1 ?> :</label>
 		</div>
 		<div class="form-group">
-			<label><?= $sub_notes2 ?> :</labe1l>
+			<label><?= $sub_notes2 ?> :</label>
 		</div>
 		<div class="form-group">
 			<label><?= $sub_notes3 ?> :</label>
@@ -19,6 +19,6 @@
 			<label id="comment">Commentaires :</label>
 			<textarea name="comment" id="comment"></textarea>
 		</div>
-		<button type="submit">Envoyer</button>
+		<button class="btn btn-purple" type="submit">Envoyer</button>
 	</form>
 <?php $this->stop('main_content') ?>

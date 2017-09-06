@@ -8,7 +8,11 @@
 			</ul>
 		<?php endforeach ?>
 	</div>
-	<h2><?= $title ?></h2>
+	<h2 class="text-center"><?= $title ?></h2><br>
+
+	<div class="row">
+		<div class="col-md-4 col-md-offset-4">
+
 	<form method="POST" action="<?= $this->url('create_institution_note',['id'=>$id]) ?>">
 		<div class="form-group">
 			<label><?= $sub_notes1 ?> :</label>
@@ -26,6 +30,9 @@
 			<label id="comment">Commentaires :</label>
 			<textarea name="comment" id="comment" rows="20" cols="50"></textarea>
 		</div>
-		<button type="submit" class="btn btn-default">Envoyer</button>
+		<button type="submit" class="btn btn-purple">Envoyer</button>
 	</form>
+
+		</div>
+	</div>
 <?php $this->stop('main_content') ?>

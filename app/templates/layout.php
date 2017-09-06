@@ -117,7 +117,7 @@
 			<div class="row">
 				<div class="col-md-6">
 					<ul class="list-inline">
-						<li class="text-left contact"><a href="#">Contacts</a></li>
+						<li class="text-left contact"><a href="<?= $this->url('contact') ?>">Contacts</a></li>
 						<li class="text-left"><a href="#">à propos</a></li>
 						<li class="text-left"><a href="#">Mentions légales</a></li>
 					</ul>

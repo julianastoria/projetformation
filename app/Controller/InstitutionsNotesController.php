@@ -106,7 +106,7 @@ class InstitutionsNotesController extends Controller
 							'comment'=>$comment
 						]);
 					//Redirige vers la page de la note 
-					$this->redirectToRoute('note_read');
+					$this->redirectToRoute('note/read');
 				}
 					
 			}
@@ -124,17 +124,17 @@ class InstitutionsNotesController extends Controller
 	}
 	public function read ($id)
 	{
-		$this->show('note/read',[
+		$this->show('institution_note/read',[
 				'notes'=>$notes
 			]);
 	}
 	public function update ($id)
 	{
-		$this->show('note/update');
+		$this->show('institution_note/update');
 	}
 	public function delete ($id)
 	{
-		$this->show('note/delete');
+		$this->show('institution_note/delete');
 	}
 
 }

@@ -35,7 +35,7 @@
 		['GET'		, '/etablissement/[i:id]/delete'	, 'Institutions#delete', 'institution_delete'],
 		//InstitutionNotes Routes
 		['GET|POST'	, '/etablissement/note/[i:id]/add', 'InstitutionsNotes#create', 'create_institution_note'],
-		['GET[POST'	, '/etablissement/note/[i:id]/edit', 'InstitutionsNotes#update', 'edit_institution_note'],
+		['GET|POST'	, '/etablissement/note/[i:id]/edit', 'InstitutionsNotes#update', 'edit_institution_note'],
 		['GET'		, '/etablissement/note/[i:id]/delete', 'InstitutionsNotes#delete', 'delete_institution_note'],
 		
 	);

@@ -1,3 +1,9 @@
+/* garder le footer en bas */
+
+
+
+
+
 /* layout et home.php */
 
 html, body {
@@ -245,7 +251,7 @@ option {
 	font-family: 'Sorts Mill Goudy', serif;
 }
 
-.alert {
+.alert-danger {
 	font-family: 'Sorts Mill Goudy', serif;
 	font-size: 17px;
 }
@@ -256,4 +262,9 @@ option {
 	font-family: 'Sorts Mill Goudy', serif;
 }
 
-/* reset_pwd */
+/* doctors_notes*/
+textarea {
+	color: #000;
+}
+
+/* contact */
