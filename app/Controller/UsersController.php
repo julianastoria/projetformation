@@ -28,6 +28,7 @@ class UsersController extends Controller
 			//redirige vers la page login
 			$this->redirectToRoute('user_signin');
 		} 
+		var_dump($_SESSION['user']);
 		$this->show('user/profile',[
 			'title'=>'Profile de '. $_SESSION['user']['firstname'],
 			'user'=>$_SESSION['user']
@@ -93,8 +94,8 @@ class UsersController extends Controller
 			
 			//Récupere l'id de l'autisme 
 			
-			/*$id_autism=strip_tags(trim($_POST['id_autism']));
-			
+			$id_autism=strip_tags(trim($_POST['id_autism']));
+			/*
 			$autismsManager=new \Manager\AutismsManager;
 			$id_autism=$autismsManager->findByName($autism);*/
 

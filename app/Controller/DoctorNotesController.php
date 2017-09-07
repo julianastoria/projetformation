@@ -19,8 +19,9 @@ class DoctorNotesController extends Controller
 		$this->DoctorNotesManager->setTable('doctor_notes');
 	}
 
-	private function averageNotes ($arraynotes)
+	private function averageNotes ($stringnotes)
 	{
+		$notes=$this->DoctorNotesManager->findAll()['sub_notes']
 		$max=0;
 		$i=0;
 		foreach ($arraynotes as $note)
