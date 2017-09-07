@@ -6,20 +6,15 @@
 <?php $this->stop('main_content') ?>
 
 
-<!-- AJAX pour récupérer le département -->
 <?php $this->start('main_script') ?>
 <script type="text/javascript">
 	$(document).ready(function()
 	{
+		// AJAX pour récupérer le département
 		$("#postal_code").on("blur", function()
 		{
 			var pc = $(this).val();
 			var url = "<?= $this->url('ajax_departement'); ?>";
-
-			
-			//a/lert(postal_c);
-			// $("#departement").val().append();
-
 
 			// On charge l'adresse /ajax/departements/
 			$.ajax(url, {
@@ -33,11 +28,22 @@
 					} else {
 						$('[name="departement"]').val('');
 					}
-					//console.log(response);
-
-					// sendToHTML(response);
 				}
 			});
+		});
+
+
+		// AJAX pour afficher/cacher les checbox type_autisme
+		$("#category").on("change", function()
+		{
+			// alert($(this).val());
+
+			if ($(this).val() == 'psychologue')
+			{
+				$("#types_autisme").removeClass("hidden");
+			} else {
+				$("#types_autisme").addClass("hidden");
+			}
 		});
 	});
 </script>
