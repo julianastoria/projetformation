@@ -76,28 +76,31 @@
 				</select>
 			</div>
 
-				
-			<label>Les types d'autismes : </label>
+			<div id="types_autisme" class="form-group hidden">
 
-			<div class="checkbox">
-				<label>
-					<input type="checkbox" id="haut_niveau" name="haut_niveau"/>
+				<label>Les types d'autisme : </label>
+
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" id="haut_niveau" name="haut_niveau"/>
 						Haut Niveau
-				</label>
-			</div>
+					</label>
+				</div>
 
-			<div class="checkbox">
-				<label>
-					<input type="checkbox" id="asperger" name="asperger"/>
-					Asperger
-				</label>
-			</div>
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" id="asperger" name="asperger"/>
+						Asperger
+					</label>
+				</div>
 
-			<div class="checkbox">
-				<label>
-					<input type="checkbox" id="atypique" name="atypique"/>
-					Atypique
-				</label>
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" id="atypique" name="atypique"/>
+						Atypique
+					</label>
+				</div>
+
 			</div>
 
 			<button class="btn btn-purple" type="submit">Envoyer</button>

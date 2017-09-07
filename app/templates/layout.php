@@ -15,18 +15,9 @@
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 	
 </head>
-<<<<<<< HEAD
 	<body>
-<<<<<<< HEAD
-=======
-<body>
-
->>>>>>> b5d880dcbff29c2fb4e653525c7ae0daf4ffddca
-	<div class="container-fluid">
-=======
 	<div class="container-fluid demo">
->>>>>>> juliana
-		
+	
 	
 <header>
 		<!--navbar -->
