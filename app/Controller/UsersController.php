@@ -22,28 +22,15 @@ class UsersController extends Controller
 	}
 	public function profile ()
 	{
-		var_dump($_SESSION);
 		//Verifie si l'existence de la session 
-		if (isset($_SESSION))
+		if (empty($_SESSION))
 		{
-			// Recupere les données de la session 
-			$email=$_SESSION['user']['email'];
-			$firstname=$_SESSION['user']['firstname'];
-			$lastname=$_SESSION['user']['lastname'];
-			$birthday=$_SESSION['user']['birthday'];
-			$autism=$_SESSION['user']['id_autism'];
-
-		} else {
 			//redirige vers la page login
 			$this->redirectToRoute('user_signin');
-		}
+		} 
 		$this->show('user/profile',[
-				'title'=>'profil de '.$firstname,
-				'email'=>$email,
-				'firstname'=>$firstname,
-				'lastname'=>$lastname,
-				'birthday'=>$birthday,
-				'autism'=>$autism,
+			'title'=>'Profile de '. $_SESSION['user']['firstname'],
+			'user'=>$_SESSION['user']
 			]);
 	}
 	public function signin ()
@@ -106,11 +93,11 @@ class UsersController extends Controller
 			
 			//Récupere l'id de l'autisme 
 			
-			$id_autism=strip_tags(trim($_POST['id_autism']));
-			/*
+			/*$id_autism=strip_tags(trim($_POST['id_autism']));
+			
 			$autismsManager=new \Manager\AutismsManager;
-			$id_autism=$autismsManager->findByName($autism);
-			var_dump($id_autism);*/
+			$id_autism=$autismsManager->findByName($autism);*/
+
 			//Département : recuperer l'id 
 			$departement=strip_tags(trim($_POST['departement']));
 			$departementManager= new \Manager\DepartementsManager;
@@ -231,7 +218,7 @@ class UsersController extends Controller
 			}
 		}
 		$this->show('user/lost_pwd',[
-				'title'=>'Mot de passe perdu'
+				'title'=>'Mot de passe perdu',
 				'error'=>$error,
 			]);
 	}

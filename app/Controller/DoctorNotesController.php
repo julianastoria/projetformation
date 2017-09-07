@@ -21,14 +21,13 @@ class DoctorNotesController extends Controller
 
 	private function averageNotes ($arraynotes)
 	{
-		$max=null;
-		$i=null;
+		$max=0;
+		$i=0;
 		foreach ($arraynotes as $note)
 		{
 			$max+=int($note);
 			$i++;
 		}
-		return $max/$i;
 	}
 
 	public function create ($id)
