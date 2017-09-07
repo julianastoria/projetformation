@@ -38,6 +38,7 @@ class UsersController extends Controller
 			$this->redirectToRoute('user_signin');
 		}
 		$this->show('user/profile',[
+				'title'=>'profil de '.$firstname,
 				'email'=>$email,
 				'firstname'=>$firstname,
 				'lastname'=>$lastname,
@@ -72,6 +73,7 @@ class UsersController extends Controller
  			}
  		}	
 		$this->show('user/signin',[
+				'title'=>'connexion',
 				'email'=>$email,
 				'error'=>$error,
 			]);
@@ -196,6 +198,7 @@ class UsersController extends Controller
 			}
 		}
 		$this->show('user/signup',[
+				'title'=>'Inscription',
 				'email'=>$email,
 				'firstname'=>$firstname,
 				'lastname'=>$lastname,
@@ -228,6 +231,7 @@ class UsersController extends Controller
 			}
 		}
 		$this->show('user/lost_pwd',[
+				'title'=>'Mot de passe perdu'
 				'error'=>$error,
 			]);
 	}
@@ -271,6 +275,7 @@ class UsersController extends Controller
 			}		
 		}
 		$this->show('user/reset_pwd',[
+			'title'=>'reinitialisation mot de passe',
 			'error'=>$error
 			]);
 	}

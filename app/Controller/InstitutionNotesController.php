@@ -3,19 +3,23 @@
 namespace Controller;
 
 use \W\Controller\Controller;
-use \Manager\DoctorsNotesManager;
-use \Manager\DoctorsManager;
+use \Manager\InstitutionNotesManager;
+use \Manager\InstitutionsManager;
+use \Manager\UsersManager;
 
-class DoctorsNotesController extends Controller 
+class InstitutionNotesController extends Controller 
 {
 
-	private $DoctorsNotesManager;
+	private $InstitutionNotesManager;
+	private $UsersManager;
 
 	
 	public function __construct()
 	{
 
-		$this->DoctorsNotesManager= new DoctorsNotesManager;
+		$this->InstitutionNotesManager= new InstitutionNotesManager;
+
+		$this->UsersManager= new UsersManager;
 	}
 
 	private function averageNotes ($arraynotes)
@@ -40,15 +44,24 @@ class DoctorsNotesController extends Controller
 			$sub_notes2=null;
 			$sub_notes3=null;
 			$title_comment=null;
-			$comment=null;
+			$comment="";
 			$error=array();
-			//Recupere les données de l'etablissement
-			$DoctorsManager= new DoctorsManager;
-			$Doctor=$DoctorsManager->find($id);
+			//Recupere le type de l'etablissement
+			$InstitutionsManager= new InstitutionsManager;
+			$Institution=$InstitutionsManager->find($id);
+			$type_institution=$Institution['type_institution'];
 			$title_sub_notes1='Accueil';
-			$title_sub_notes2='Qualité d’écoute';
-			$title_sub_notes3='Inspire confiance';
-			$user=$_SESSION['user'];
+			if ($type_institution === 'École')
+			{
+				
+				$title_sub_notes2='Inclusion sociale';
+				$title_sub_notes3='Adaptation envers l’autisme';
+			} 
+			else 
+			{
+				$title_sub_notes2='Prise en charge';
+				$title_sub_notes3='Inspire confiance';
+			}
 			//verifie si la requete HTTP est POST
 			if ($_SERVER['REQUEST_METHOD'] === "POST")
 			{
@@ -57,14 +70,14 @@ class DoctorsNotesController extends Controller
 				$sub_notes1=$_POST['sub_notes1'];				
 				$sub_notes2=$_POST['sub_notes2'];				
 				$sub_notes3=$_POST['sub_notes3'];								
-				$title=$_POST['title'];
+				$title_comment=$_POST['title_comment'];
 				$comment=$_POST['comment'];
 
 				//Controle les données 
-				if (empty($title))
+				if (empty($title_comment))
 				{
 					$save=false;
-					$error['title']='le champ titre est vide';
+					$error['title_comment']='le champ titre est vide';
 				}
 				if (empty($comment))
 				{
@@ -81,33 +94,37 @@ class DoctorsNotesController extends Controller
 					$save=false;
 					$error['sub_notes']='les 3 notes doivent etre notés';
 				}
-				else if (is_numeric($sub_notes1) && is_numeric($sub_notes2) && is_numeric($sub_notes3))
-				{
-					$save=false;
-					$error['sub_notes']='les notes doivent etre des nombres';
-				}
 				
 				//Verifie les données sont correcte
 				if ($save)
 				{
+					//Récupere l'id de l'utilisateur 
+					$id_user=$_SESSION['user']['id'];
+					//Réunit tous les sous note 
+					$sub_notes="$sub_notes1;$sub_notes2;$sub_notes3";
 					//Introduit les données vers la BDD
-					$this->DoctorsNotesManager->insert([
-							'average'=>$average,
-							'sub_note'=>$sub_note,
-							'title_comment'=>$title,
+					$note_data=[
+							'sub_notes'=>$sub_notes,
+							'average'=>0,
+							'title_comment'=>$title_comment,
+							'comment'=>$comment,
 							'post_date'=>date('d-M-Y'),
-							'id_doctor'=>$Doctor['id'],
-							'comment'=>$comment
-						]);
+							'id_institution'=>$Institution['id'],
+							'id_user'=>$id_user,
+							'nb_like'=>0,
+							'nb_dislike'=>0
+						];
+					$this->InstitutionNotesManager->insert($note_data);
 					//Redirige vers la page de la note 
-					$this->redirectToRoute('note_read');
+					$this->redirectToRoute('institution_details',['id'=>$Institution['id']]);
 				}
 					
 			}
-			$this->show('doctor_note/create',[
+			$this->show('institution_note/create',[
 					'id'=>$id,
 					'title'=>"Création d'une note",
 					'title_comment'=>$title_comment,
+					'comment'=>$comment,
 					'title_sub_notes1'=>$title_sub_notes1,
 					'title_sub_notes2'=>$title_sub_notes2,
 					'title_sub_notes3'=>$title_sub_notes3,
@@ -120,19 +137,13 @@ class DoctorsNotesController extends Controller
 			$this->redirectToRoute('user_signin');
 		}
 	}
-	public function read ($id)
-	{
-		$this->show('doctor_note/read',[
-				'notes'=>$notes
-			]);
-	}
 	public function update ($id)
 	{
-		$this->show('doctor_note/update');
+		$this->show('institution_note/update');
 	}
 	public function delete ($id)
 	{
-		$this->show('doctor_note/delete');
+		$this->show('institution_note/delete');
 	}
 
 }

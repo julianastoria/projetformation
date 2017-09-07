@@ -23,9 +23,9 @@
 		['GET|POST'	, '/medecin/[i:id]/edit'	, 'Doctors#update', 'doctor_update'],
 		['GET'		, '/medecin/[i:id]/delete'	, 'Doctors#delete', 'doctor_delete'],
 		//DoctorsNotes Routes
-		['GET|POST'	, '/medecin/note/[i:id]/add'	, 'DoctorsNotes#create', 'create_doctor_note'],
-		['GET[POST'	, '/medecin/note/[i:id]/edit'	, 'DoctorsNotes#update', 'edit_doctor_note'],
-		['GET'		, '/medecin/note/[i:id]/delete'	, 'DoctorsNotes#delete', 'delete_doctor_note'],
+		['GET|POST'	, '/medecin/note/[i:id]/add'	, 'DoctorNotes#create', 'create_doctor_note'],
+		['GET[POST'	, '/medecin/note/[i:id]/edit'	, 'DoctorNotes#update', 'edit_doctor_note'],
+		['GET'		, '/medecin/note/[i:id]/delete'	, 'DoctorNotes#delete', 'delete_doctor_note'],
 
 		//Institutions Routes
 		['GET'		, '/etablissement/[a:type]/liste'	, 'Institutions#index', 'institutions_index'],
@@ -34,8 +34,8 @@
 		['GET|POST'	, '/etablissement/[i:id]/edit'		, 'Institutions#update', 'institution_update'],
 		['GET'		, '/etablissement/[i:id]/delete'	, 'Institutions#delete', 'institution_delete'],
 		//InstitutionNotes Routes
-		['GET|POST'	, '/etablissement/note/[i:id]/add', 'InstitutionsNotes#create', 'create_institution_note'],
-		['GET[POST'	, '/etablissement/note/[i:id]/edit', 'InstitutionsNotes#update', 'edit_institution_note'],
-		['GET'		, '/etablissement/note/[i:id]/delete', 'InstitutionsNotes#delete', 'delete_institution_note'],
+		['GET|POST'	, '/etablissement/note/[i:id]/add', 'InstitutionNotes#create', 'create_institution_note'],
+		['GET[POST'	, '/etablissement/note/[i:id]/edit', 'InstitutionsNote#update', 'edit_institution_note'],
+		['GET'		, '/etablissement/note/[i:id]/delete', 'InstitutionsNote#delete', 'delete_institution_note'],
 		
 	);
