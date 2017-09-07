@@ -241,7 +241,6 @@ class InstitutionNotesController extends Controller
 			$note=$this->InstitutionNotesManager->find($id);
 			$id_user=$note['id_user'];
 			$id_institution=$note['id_institution'];
-			var_dump($id_user);
 			//Verifie si l'utilisateur est propriétaire de la note ou si il est modo ou admin 
 			if ($id_user===$_SESSION['user']['id'] || $_SESSION['user']['roles'] === 'moderator' || $_SESSION['user']['roles'] === 'administrator') 
 			{
