@@ -18,6 +18,7 @@ class InstitutionNotesController extends Controller
 	{
 
 		$this->InstitutionNotesManager= new InstitutionNotesManager;
+		$this->InstitutionNotesManager->setTable('institution_notes');
 
 		$this->UsersManager= new UsersManager;
 	}
@@ -108,11 +109,11 @@ class InstitutionNotesController extends Controller
 							'average'=>0,
 							'title_comment'=>$title_comment,
 							'comment'=>$comment,
-							'post_date'=>date('d-M-Y'),
+							'post_date'=>date('d:M:Y'),
 							'id_institution'=>$Institution['id'],
 							'id_user'=>$id_user,
-							'nb_like'=>0,
-							'nb_dislike'=>0
+							'nb_likes'=>0,
+							'nb_dislikes'=>0
 						];
 					$this->InstitutionNotesManager->insert($note_data);
 					//Redirige vers la page de la note 
@@ -139,11 +140,124 @@ class InstitutionNotesController extends Controller
 	}
 	public function update ($id)
 	{
-		$this->show('institution_note/update');
+		//Récupere les données du docteur
+		$id_institution=$this->InstitutionNotesManager->find($id)['id_institution'];
+		//Verifie si l'utilisateur est connecté
+		if (isset($_SESSION))
+		{
+			// Récupere l'id de l'utilisateur qui a cree la note 
+			$user=$this->InstitutionNotesManager->find($id);
+			$id_user=$user['id_user'];
+			//Definir les criteres des sous notes
+			$title_sub_notes1='Accueil';
+			$title_sub_notes2='Qualité d’écoute';
+			$title_sub_notes3='Inspire confiance';
+			//Verifie si l'utilisateur est propriétaire de la note 
+			if ($id_user===$_SESSION['user']['id'])
+			{
+				$error=array();
+				$sub_notes1=null;
+				$sub_notes2=null;
+				$sub_notes3=null;
+				$title_comment=null;
+				$comment="";
+				//Verifie si la requete http est post 
+				if ($_SERVER['REQUEST_METHOD'] === "POST")
+				{
+					$save=true;
+
+					//recupere les données du post 
+					$title_comment=$_POST['title_comment'];
+					$comment=$_POST['comment'];
+					$sub_notes1=$_POST['sub_notes1'];				
+					$sub_notes2=$_POST['sub_notes2'];				
+					$sub_notes3=$_POST['sub_notes3'];
+					//Controle les données
+					if (empty($title_comment))
+					{
+						$save=false;
+						$error['title_comment']='le champ titre est vide';
+					}
+					if (empty($comment))
+					{
+						$save=false;
+						$error['comment']='le champ commentaire est vide';
+					}
+					else if (strlen($comment) < 200)
+					{
+						$save=false;
+						$error['comment']='le commentaire est trop court';
+					}
+					if (empty($sub_notes1) || empty($sub_notes2) || empty($sub_notes3))
+					{
+						$save=false;
+						$error['sub_notes']='les 3 notes doivent etre notés';
+					}
+
+					//Verifie les données 
+					if ($save)
+					{
+						//Réunit tous les sous note 
+						$sub_notes="$sub_notes1;$sub_notes2;$sub_notes3";
+						//Introduit les données vers la BDD
+						$note_data=[
+								'sub_notes'=>$sub_notes,
+								'title_comment'=>$title_comment,
+								'comment'=>$comment,
+								'post_date'=>date('d:M:Y'),
+							];
+						$this->InstitutionNotesManager->update($note_data,$id);
+						//Redirige vers la page de la note 
+						$this->redirectToRoute('institution_details',['id'=>$id_institution]);
+					}
+				}
+				$this->show('institution_note/update',[
+						'id'=>$id,
+						'errors'=>$error,
+						'title'=>"Création d'une note",
+						'title_sub_notes1'=>$title_sub_notes1,
+						'title_sub_notes2'=>$title_sub_notes2,
+						'title_sub_notes3'=>$title_sub_notes3,
+						'sub_notes1'=>$sub_notes1,
+						'sub_notes2'=>$sub_notes2,
+						'sub_notes3'=>$sub_notes3,
+						'title_comment'=>$title_comment,
+						'comment'=>$comment
+
+					]);
+			}
+		} else {
+			//Redirige vers la page de connexion
+			$this->redirectToRoute('user_signin');
+		}
+		
 	}
 	public function delete ($id)
 	{
-		$this->show('institution_note/delete');
+		//Verifie si l'utilisateur est connecte 
+		if (isset($_SESSION))
+		{
+			// Récupere l'id de l'utilisateur qui a cree la note 
+			$note=$this->InstitutionNotesManager->find($id);
+			$id_user=$note['id_user'];
+			$id_institution=$note['id_institution'];
+			var_dump($id_user);
+			//Verifie si l'utilisateur est propriétaire de la note ou si il est modo ou admin 
+			if ($id_user===$_SESSION['user']['id'] || $_SESSION['user']['roles'] === 'moderator' || $_SESSION['user']['roles'] === 'administrator') 
+			{
+				$this->InstitutionNotesManager->delete($id);
+				
+			} else {
+			//Récupere les données du docteur
+			$id_institution=$this->InstitutionNotesManager->find($id)['id_institution'];
+			//Redirige de details du medecin
+			$this->redirectToRoute('institution_details',['id'=>$id_institution]);
+			}
+		}
+		else 
+		{
+		$this->redirectToRoute('user_signin');
+		}
 	}
 
 }

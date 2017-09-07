@@ -25,11 +25,11 @@
 		['GET'		, '/medecin/[i:id]/delete'	, 'Doctors#delete', 'doctor_delete'],
 		//DoctorsNotes Routes
 		['GET|POST'	, '/medecin/note/[i:id]/add'	, 'DoctorNotes#create', 'create_doctor_note'],
-		['GET[POST'	, '/medecin/note/[i:id]/edit'	, 'DoctorNotes#update', 'edit_doctor_note'],
+		['GET|POST'	, '/medecin/note/[i:id]/edit'	, 'DoctorNotes#update', 'edit_doctor_note'],
 		['GET'		, '/medecin/note/[i:id]/delete'	, 'DoctorNotes#delete', 'delete_doctor_note'],
 
 		//Institutions Routes
-		['GET'		, '/etablissement'				, 'Institutions#index', 'institutions_index'],
+		['GET'		, '/etablissements'				, 'Institutions#index', 'institutions_index'],
 		//['GET'		, '/etablissements/[a:type]/liste'	, 'Institutions#list', 'institutions_list'],
 		['GET'		, '/etablissement/[i:id]/details'	, 'Institutions#read', 'institution_details'],
 		['GET|POST'	, '/etablissement/create'			, 'Institutions#create', 'institution_create'],

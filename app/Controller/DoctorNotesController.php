@@ -16,6 +16,7 @@ class DoctorNotesController extends Controller
 	{
 
 		$this->DoctorNotesManager= new DoctorNotesManager;
+		$this->DoctorNotesManager->setTable('doctor_notes');
 	}
 
 	private function averageNotes ($arraynotes)
@@ -42,11 +43,8 @@ class DoctorNotesController extends Controller
 			$title_comment=null;
 			$comment='';
 			$error=array();
-			//Recupere les données du medecin
-			$DoctorsManager= new DoctorsManager;
-			$Doctor=$DoctorsManager->find($id);
 
-			//
+			//Critères des sous notes
 			$title_sub_notes1='Accueil';
 			$title_sub_notes2='Qualité d’écoute';
 			$title_sub_notes3='Inspire confiance';
@@ -92,19 +90,19 @@ class DoctorNotesController extends Controller
 					//Réunit tous les sous note 
 					$sub_notes="$sub_notes1;$sub_notes2;$sub_notes3";
 					//Introduit les données vers la BDD
-					$this->DoctorNotesManager->insert([
+					$note_data=[
 							'sub_notes'=>$sub_notes,
-							'average'=>0,
 							'title_comment'=>$title_comment,
 							'comment'=>$comment,
-							'post_date'=>date('d-M-Y'),
-							'id_doctor'=>$Doctor['id'],
-							'id_user'=>$id_user,
-							'nb_like'=>0,
-							'nb_dislike'=>0
-						]);
+							'post_date'=>date('d:M:Y'),
+							'id_doctor'=>intval($id),
+							'id_user'=>intval($id_user),
+							'nb_likes'=>0,
+							'nb_dislikes'=>0
+						];
+					$this->DoctorNotesManager->insert($note_data);
 					//Redirige vers la page de la note 
-					$this->redirectToRoute('doctor_details',['id'=>$Doctor['id'],]);
+					$this->redirectToRoute('doctor_details',['id'=>$id,]);
 				}
 					
 			}
@@ -134,8 +132,12 @@ class DoctorNotesController extends Controller
 		{
 			// Récupere l'id de l'utilisateur qui a cree la note 
 			$user=$this->DoctorNotesManager->find($id);
-			$id_user=$user['id'];
-			//Verifie si l'utilisateur est propriétaire de la note ou si il est modo ou admin 
+			$id_user=$user['id_user'];
+			//Definir les criteres des sous notes
+			$title_sub_notes1='Accueil';
+			$title_sub_notes2='Qualité d’écoute';
+			$title_sub_notes3='Inspire confiance';
+			//Verifie si l'utilisateur est propriétaire de la note 
 			if ($id_user===$_SESSION['user']['id'])
 			{
 				$error=array();
@@ -187,7 +189,7 @@ class DoctorNotesController extends Controller
 								'sub_notes'=>$sub_notes,
 								'title_comment'=>$title_comment,
 								'comment'=>$comment,
-								'post_date'=>date('d-M-Y'),
+								'post_date'=>date('d:M:Y'),
 							];
 						$this->DoctorNotesManager->update($note_data,$id);
 						//Redirige vers la page de la note 
@@ -195,12 +197,23 @@ class DoctorNotesController extends Controller
 					}
 				}
 				$this->show('doctor_note/update',[
+						'id'=>$id,
 						'errors'=>$error,
+						'title'=>"Création d'une note",
+						'title_sub_notes1'=>$title_sub_notes1,
+						'title_sub_notes2'=>$title_sub_notes2,
+						'title_sub_notes3'=>$title_sub_notes3,
+						'sub_notes1'=>$sub_notes1,
+						'sub_notes2'=>$sub_notes2,
+						'sub_notes3'=>$sub_notes3,
+						'title_comment'=>$title_comment,
+						'comment'=>$comment
+
 					]);
 			}
 		} else {
-			//Redirige de details du medecin
-			$this->redirectToRoute('doctor_read',['id'=>$id_doctor]);
+			//Redirige vers la page de connexion
+			$this->redirectToRoute('user_signin');
 		}
 		
 	}
@@ -210,20 +223,25 @@ class DoctorNotesController extends Controller
 		if (isset($_SESSION))
 		{
 			// Récupere l'id de l'utilisateur qui a cree la note 
-			$user=$this->DoctorNotesManager->find($id);
-			$id_user=$user['id'];
-
+			$note=$this->DoctorNotesManager->find($id);
+			$id_user=$note['id_user'];
+			$id_doctor=$note['id_doctor'];
+			var_dump($id_user);
 			//Verifie si l'utilisateur est propriétaire de la note ou si il est modo ou admin 
 			if ($id_user===$_SESSION['user']['id'] || $_SESSION['user']['roles'] === 'moderator' || $_SESSION['user']['roles'] === 'administrator') 
 			{
 				$this->DoctorNotesManager->delete($id);
-			}	
-		} else {
+				
+			} else {
 			//Récupere les données du docteur
 			$id_doctor=$this->DoctorNotesManager->find($id)['id_doctor'];
 			//Redirige de details du medecin
-			$this->redirectToRoute('doctor_read',['id'=>$id_doctor]);
+			$this->redirectToRoute('doctor_details',['id'=>$id_doctor]);
+			}
+		}
+		else 
+		{
+		$this->redirectToRoute('user_signin');
 		}
 	}
-
 }
