@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Lun 04 Septembre 2017 à 14:06
+-- Généré le :  Jeu 07 Septembre 2017 à 16:58
 -- Version du serveur :  10.1.21-MariaDB
 -- Version de PHP :  5.6.30
 
@@ -40,10 +40,19 @@ CREATE TABLE `autisms` (
 
 CREATE TABLE `departements` (
   `id` int(10) UNSIGNED NOT NULL,
-  `numero` varchar(3) NOT NULL,
+  `number` varchar(3) NOT NULL,
   `name` varchar(64) NOT NULL,
   `region` varchar(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+
+--
+-- Contenu de la table `departements`
+--
+
+INSERT INTO `departements` (`id`, `number`, `name`, `region`) VALUES
+(1, '59', 'Nord', 'Hauts-de-France'),
+(2, '62', 'Pas-de-Calais', 'Hauts-de-France'),
+(3, '02', 'Aisne', 'Hauts-de-France');
 
 -- --------------------------------------------------------
 
@@ -60,9 +69,18 @@ CREATE TABLE `doctors` (
   `email` varchar(64) DEFAULT NULL,
   `site` varchar(255) DEFAULT NULL,
   `id_departement` int(10) UNSIGNED NOT NULL,
-  `average` decimal(3,2) NOT NULL,
+  `average` decimal(3,2) NOT NULL DEFAULT '0.00',
   `id_doctor_category` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `doctors`
+--
+
+INSERT INTO `doctors` (`id`, `firstname`, `lastname`, `address`, `tel`, `email`, `site`, `id_departement`, `average`, `id_doctor_category`) VALUES
+(6, 'Toto', 'Pingouin', '15 rue de la Clémentine 62487 Arras', '645789513', 'toto.pingouin@gmail.com', NULL, 2, '2.58', 1),
+(7, 'Denis', 'Forage', '154 rue de la République 59456 Lille', '684751352', 'denis@forage.outlook.fr', NULL, 1, '4.56', 3),
+(8, 'Jason', 'Colynaire', '25 rue de Père Noël 59153 Lille', '748561237', 'jason.colynaire@gmail.com', NULL, 1, '3.24', 2);
 
 -- --------------------------------------------------------
 
@@ -86,6 +104,15 @@ CREATE TABLE `doctor_categories` (
   `name` varchar(64) NOT NULL,
   `description` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `doctor_categories`
+--
+
+INSERT INTO `doctor_categories` (`id`, `name`, `description`) VALUES
+(1, 'psychologue', 'Je veux bien avoir sa vie, si il arrive à supporter les problèmes des autres.'),
+(2, 'generaliste', 'Ou autrement dit, un flemmard.'),
+(3, 'dentiste', 'Le rapport avec l\'autisme ? No idea, sorry.');
 
 -- --------------------------------------------------------
 
@@ -121,7 +148,7 @@ CREATE TABLE `institutions` (
   `site` varchar(255) DEFAULT NULL,
   `id_departement` int(10) UNSIGNED NOT NULL,
   `photos` text,
-  `average` decimal(3,2) NOT NULL,
+  `average` decimal(3,2) NOT NULL DEFAULT '0.00',
   `type_institution` enum('École','Établissement spécialisé') NOT NULL,
   `id_institution_category` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -264,17 +291,17 @@ ALTER TABLE `autisms`
 -- AUTO_INCREMENT pour la table `departements`
 --
 ALTER TABLE `departements`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT pour la table `doctors`
 --
 ALTER TABLE `doctors`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT pour la table `doctor_categories`
 --
 ALTER TABLE `doctor_categories`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT pour la table `doctor_notes`
 --
