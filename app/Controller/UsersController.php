@@ -24,25 +24,14 @@ class UsersController extends Controller
 	public function profile ()
 	{
 		//Verifie si l'existence de la session 
-		if (isset($_SESSION))
+		if (empty($_SESSION))
 		{
-			// Recupere les données de la session 
-			$email=$_SESSION['user']['email'];
-			$firstname=$_SESSION['user']['firstname'];
-			$lastname=$_SESSION['user']['lastname'];
-			$birthday=$_SESSION['user']['birthday'];
-			$autism=$_SESSION['user']['autism'];
-
-		} else {
 			//redirige vers la page login
 			$this->redirectToRoute('user_signin');
-		}
+		} 
 		$this->show('user/profile',[
-				'email'=>$email,
-				'firstname'=>$firstname,
-				'lastname'=>$lastname,
-				'birthday'=>$birthday,
-				'autism'=>$autism,
+			'title'=>'Profile de '. $_SESSION['user']['firstname'],
+			'user'=>$_SESSION['user']
 			]);
 	}
 	public function signin ()
@@ -106,7 +95,7 @@ class UsersController extends Controller
 			//Département : recuperer l'id 
 			$departement=strip_tags(trim($_POST['departement']));
 			$departementmanager= new \Manager\DepartementsManager;
-			$id_departement=$departementmanager->findByName($departement)['id'];
+			$id_departement=$departementmanager->findByNumber($departement)['id'];
 
 			//Controle des données 
 
