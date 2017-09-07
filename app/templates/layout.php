@@ -16,7 +16,7 @@
 	
 </head>
 	<body>
-	<div class="container-fluid">
+	<div class="container-fluid demo">
 		
 	
 <header>
@@ -35,19 +35,39 @@
 
 
 			<ul class="nav navbar-nav navbar-left">
-				<li>
-					<div class="dropdown">
-						<button class="btn btn-blue dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-							<li class="navbar-left"><a href="#Etablissements"><i class="fa fa-home visible-xs" aria-hidden="true"></i><p class="hidden-xs">Etablissements</p></a></li>
-							 <span class="caret"></span>
-				  		</button>
-				  		<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-						    <li><a href="<?= $this->url('institutions_index',['type'=>'ime']) ?>">IME</a></li>
-						    <li><a href="<?= $this->url('institutions_index',['type'=>'sessad']) ?>">SESSAD</a></li>
-						    <li><a href="<?= $this->url('institutions_index',['type'=>'ulis']) ?>">ULIS</a></li>
-						</ul>
-					</div>
-				</li>
+				
+			<li>
+				<div class="dropdown">
+					<button class="btn btn-blue dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						<li class="navbar-left"><a href="#Etablissements"><i class="fa fa-home visible-xs" aria-hidden="true"></i><p class="hidden-xs">Etablissements</p></a></li>
+						 <span class="caret"></span>
+					</button>
+							<ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu1">
+								 <li class="dropdown-submenu">
+								 	<a class="dropdown-toggle" data-toggle="dropdown" href="<?= $this->url('institutions_index',['type'=>'etablissementsspe']) ?>">Etablissements spécialisés</a>
+										 <ul class="dropdown-menu">
+									 		<li><a class="eta" href="<?= $this->url('institutions_index',['type'=>'ime']) ?>">IME</a></li>
+									 		<li><a class="eta" href="<?= $this->url('institutions_index',['type'=>'sessad']) ?>">SESSAD</a></li>
+									 		<li><a class="eta" href="<?= $this->url('institutions_index',['type'=>'ulis']) ?>">ULIS</a></li>
+									 		
+										</ul>
+								</li>	 		
+							
+
+								<li class="dropdown-submenu"><a href="<?= $this->url('institutions_index',['type'=>'ecoles']) ?>">Ecoles</a>
+						    		 <ul class="dropdown-menu">
+									 		<li><a class="eta" tabindex="-1" href="<?= $this->url('institutions_index',['type'=>'maternelle']) ?>">Maternelle</a></li>
+									 		<li><a class="eta" href="<?= $this->url('institutions_index',['type'=>'primaire']) ?>">Primaire</a></li>
+									 		<li><a class="eta" href="<?= $this->url('institutions_index',['type'=>'college']) ?>">Collège</a></li>
+									 		<li><a class="eta" href="<?= $this->url('institutions_index',['type'=>'lycee']) ?>">Lycée</a></li>
+										</ul>
+						    	</li>
+							</ul>
+					
+				</div>
+			</li>
+			
+
 
 			<li>
 				<div class="dropdown">
@@ -62,22 +82,6 @@
 						</ul>
 					</div>
 				</li>
-
-
-				<li>
-					<div class="dropdown">
-						<button class="btn btn-blue dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-							<li class="navbar-left"><a href="#Ecoles"><i class="fa fa-child visible-xs" aria-hidden="true"></i><p class="hidden-xs">Ecoles</p></a></li>
-							 <span class="caret"></span>
-				  		</button>
-				  		 <ul class="dropdown-menu" aria-labelledby="dropdownMenu3">
-						    <li><a href="<?= $this->url('institutions_index',['type'=>'maternelle']) ?>">Maternelle</a></li>
-						    <li><a href="<?= $this->url('institutions_index',['type'=>'primaire']) ?>">Primaire</a></li>
-						    <li><a href="<?= $this->url('institutions_index',['type'=>'college']) ?>">Collège</a></li>
-						    <li><a href="<?= $this->url('institutions_index',['type'=>'lycee']) ?>">Lycée</a></li>
-						</ul>
-				</div>
-			</li>
 			</ul>
 
 			<ul class=" nav navbar-nav navbar-right">
@@ -88,8 +92,8 @@
 					<li>
 					<div class="dropdown">
 						<button class="btn btn-blue dropdown-toggle" type="button" id="dropdownMenu4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-							<li class="navbar-left"><a href="#Ajout">Ajout</a></li>
-							 <span class="caret"></span>
+							<li class="navbar-left"><a class="ajout" href="#Ajout">Ajout</a></li>
+							 <span class=" ajout caret"></span>
 				  		</button>
 				  		 <ul class="dropdown-menu" aria-labelledby="dropdownMenu4">
 						    <li><a href="<?= $this->url('institution_create')?>">Etablissements</a></li>
@@ -105,7 +109,7 @@
 <br>
 
 
-
+	
 
 		
 
