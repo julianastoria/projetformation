@@ -2,6 +2,7 @@
 html {
   height: 100%;
   box-sizing: border-box;
+ 
 }
 
 body {
@@ -9,6 +10,7 @@ body {
   margin: 0;
   padding-bottom: 6rem;
   min-height: 100%;
+
  
 }
 
@@ -351,4 +353,14 @@ textarea {
 	color: #000;
 }
 
-/* contact */
+/* profil */
+.profile {
+	font-size: 40px;
+
+}
+
+.user {
+	color: #000;
+	font-size: 23px;
+
+}

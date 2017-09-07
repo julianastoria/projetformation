@@ -51,8 +51,8 @@
 				</div>
 				<div class="form-group">
 					<label for="autism">Autismes</label>
-					<select class="form-control" name="autism" id="autism">
-						<option></option>
+					<select class="form-control" name="id_autism" id="autism">
+						<option value="id_1"></option>
 					</select><br/>
 				</div>
 				<div class="form-group">
