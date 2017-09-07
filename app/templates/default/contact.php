@@ -4,15 +4,15 @@
 	<h2 class="text-center">Contacts :</h2>
 
 	<div class="row">
-		<div class="col-md-4 col-md-offset-4">
+		<div class="col-md-3 col-md-offset-4">
 	<form method="post">
 		<div class="form-group">
 			<label for="email">Email :</label>
-			<input type="email" name="email" id="email">
+			<input class="form-control" type="email" name="email" id="email">
 		</div>
 		<div class="form-group">
 			<label id="message">Message :</label>
-			<textarea name="message" id="message"></textarea>
+			<textarea class="form-control" name="message" id="message"></textarea>
 		</div>
 		<button class="btn btn-purple" type="submit">Envoyer</button>
 	</form>
