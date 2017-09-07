@@ -18,6 +18,7 @@
 
 		//Doctors Routes
 		['GET'		, '/medecins'				, 'Doctors#index', 'doctors_index'],
+		//['GET'		, '/medecins/[a:type]/liste', 'Doctors#list', 'doctors_list'],
 		['GET'		, '/medecin/[i:id]/details'	, 'Doctors#read', 'doctor_details'],
 		['GET|POST'	, '/medecin/create'			, 'Doctors#create', 'doctor_create'],
 		['GET|POST'	, '/medecin/[i:id]/edit'	, 'Doctors#update', 'doctor_update'],
@@ -28,7 +29,8 @@
 		['GET'		, '/medecin/note/[i:id]/delete'	, 'DoctorNotes#delete', 'delete_doctor_note'],
 
 		//Institutions Routes
-		['GET'		, '/etablissement/[a:type]/liste'	, 'Institutions#index', 'institutions_index'],
+		['GET'		, '/etablissement'				, 'Institutions#index', 'institutions_index'],
+		//['GET'		, '/etablissements/[a:type]/liste'	, 'Institutions#list', 'institutions_list'],
 		['GET'		, '/etablissement/[i:id]/details'	, 'Institutions#read', 'institution_details'],
 		['GET|POST'	, '/etablissement/create'			, 'Institutions#create', 'institution_create'],
 		['GET|POST'	, '/etablissement/[i:id]/edit'		, 'Institutions#update', 'institution_update'],
