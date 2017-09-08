@@ -70,9 +70,9 @@
 				<select id="category" name="category" class="form-control">
 				<!-- La classe hidden permet de masquer dans une catégorie les champs après avoir saisi une option -->
 					<option class="hidden" value="nothing">--</option>
-					<option value="psychologue">Psychologue</option>
-					<option value="generaliste">Généraliste</option>
-					<option value="dentiste">Dentiste</option>
+					<option value="Psychologue">Psychologue</option>
+					<option value="Généraliste">Généraliste</option>
+					<option value="Dentiste">Dentiste</option>
 				</select>
 			</div>
 

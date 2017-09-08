@@ -38,7 +38,7 @@
 		{
 			// alert($(this).val());
 
-			if ($(this).val() == 'psychologue')
+			if ($(this).val() == 'Psychologue')
 			{
 				$("#types_autisme").removeClass("hidden");
 			} else {

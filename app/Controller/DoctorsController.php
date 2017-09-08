@@ -44,31 +44,102 @@ class DoctorsController extends Controller
 		]);
 	}
 
-	public function read()
+	public function read($id)
 	{
-		$this->show('doctors/read');
+		// Récupération du médecin
+		$doctor = $this->doctors_m->find($id);
+		$doctor_dp = $this->doctors_m->findWithDepartement($id);
+		$doctor_cat = $this->doctors_m->findWithCategory($id);
+
+		$doctor['name_departement'] = $doctor_dp['name'];
+		$doctor['name_doctor_category'] = $doctor_cat['name'];
+		var_dump($doctor);
+
+		// Appel de la vue avec passage des données du médecin
+		$this->show('doctors/read', [
+			'doctor' => $doctor
+		]);
 	}
 
 	public function create()
-	{
+	{	
+		$firstname 	 = null;
+		$lastname 	 = null;
+
+		$address 	 = null;
 		$postal_code = null;
+		$city		 = null;
+		$departement = null;
+
+		$tel 		 = null;
+		$email 		 = null;
+		$site		 = null;
+
+		$category 	 = null;
+		$haut_niveau = null;
+		$asperger 	 = null;
+		$atypique 	 = null;
+
 
 		$save = true;
 
 		if ($_SERVER['REQUEST_METHOD'] === "POST")
 		{
+			$firstname 	 = $_POST['firstname'];
+			$lastname	 = $_POST['lastname'];
+
+			$address 	 = $_POST['address'];
 			$postal_code = $_POST['postal_code'];
+			$city		 = $_POST['city'];
+			$departement = $_POST['departement'];
+
+			$tel 		 = $_POST['tel'];
+			$email 		 = $_POST['email'];
+			$site 		 = $_POST['site'];
+
+			$category 	 = $_POST['category'];
+			$haut_niveau = $_POST['haut_niveau'];
+			$asperger 	 = $_POST['asperger'];
+			$atypique 	 = $_POST['atypique'];
+
+			var_dump($haut_niveau);
+			var_dump($asperger);
+			var_dump($atypique);
 
 			// Vérification des données
-
-			// Récupération du département en fonction du code postal
+				// Récupération du département en fonction du code postal
 			$departement = substr($postal_code, 0, 2);
-
-			var_dump($postal_code, $departement);
 
 			$departement = $this->departements_m->findByNumber($departement);
 
-			var_dump($departement);
+
+			if ($save)
+			{
+				// Enregistrement des données dans la BdD
+					// Table 'doctors'
+				// $doctor = $this->doctors_m->insert([
+				// 	"firstname"   => $firstname,
+				// 	"lastname" 	  => $lastname,
+
+				// 	"address" 	  => $address,
+				// 	"postal_code" => $postal_code,
+				// 	"city" 		  => $city,
+				// 	"departement" => $departement,
+
+				// 	"tel" 		  => $tel,
+				// 	"email" 	  => $email,
+				// 	"site" 		  => $site,
+
+				// 	"category"	  => $category
+				// ]);
+
+					// Table 'doctors_categories'
+				// $this->doctors_categories_m->insert([
+
+				// ]);
+
+				// Redirection vers la page des infos du produit avec l'id du produit enregistré
+			}
 		}
 
 		$this->show('doctors/create');
