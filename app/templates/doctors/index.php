@@ -23,11 +23,35 @@
 
 						<p><?= $doctor['average']; ?></p>
 
+
+
 					</div>
 				</div>
 			</div>
+
 		
 	<?php endforeach; ?>
-			
+
 		</div>
-<?php $this->stop('main_content') ?>
+
+	<div class="text-center">
+		<nav aria-label="Page navigation">
+  <ul class="pagination">
+    <li>
+      <a href="<?= $this->url('doctors_index', ['page' => $page - 1]); ?>" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+     <?php for($i = 1; $i <= $max_pages; $i++) { ?>
+    <li><a href="<?= $this->url('doctors_index', ['page' => $page + 1]) ?>">1</a></li>
+    <?php } ?>
+    <li>
+      <a href="<?= $this->url('doctors_index', ['page' => $i]); ?>" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+   				 </li>
+  			</ul>
+		</nav>
+	</div>
+ 
+ <?php $this->stop('main_content') ?>

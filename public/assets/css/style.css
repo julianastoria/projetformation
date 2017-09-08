@@ -337,6 +337,13 @@ select {
 	background-color: #fff9f2;
 }
 
+.pagination > li > a, .pagination > li > span {
+	color: #8845e0; 
+}
+
+.pagination > li > a:hover {
+	background-color: #fff9f2;
+}
 
 
 /* users signup */
