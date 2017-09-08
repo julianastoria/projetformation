@@ -169,18 +169,20 @@ class UsersController extends Controller
 						'id_autism'=>$id_autism,
 					];
 				//introduction des données dans la BDD
-				$this->userManager->insert($user_data);
+				$user=$this->userManager->insert($user_data);
 				//Ajouter l'utilisateur dans la session 
-				$_SESSION['user']=[
-					'firstname'=>$user_data['firstname'],
-					'lastname'=>$user_data['lastname'],
-					'email'=>$user_data['email'],
-					'birthday'=>$user_data['birthday'],
-					'id_departement'=>$user_data['id_departement'],
-					'roles'=>$user_data['roles'],
-					'situation'=>$user_data['situations'],
-					'id_autism'=>$user_data['id_autism']
-				];
+				var_dump($user);
+
+				$_SESSION['user']= array (
+					'id'=>$user['id'],
+					'firstname'=>$user['firstname'],
+					'lastname'=>$user['lastname'],
+					'birthday'=>$user['birthday'],
+					'id_departement'=>$user['id_departement'],
+					'roles'=>$user['roles'],
+					'situations'=>$user['situation'],
+					'id_autism'=>$user['id_autism'],
+				);
 				//Rediriger vers la page de profile 
 				$this->redirectToRoute('profile'); 				
 			}

@@ -19,18 +19,6 @@ class DoctorNotesController extends Controller
 		$this->DoctorNotesManager->setTable('doctor_notes');
 	}
 
-	private function averageNotes ($stringnotes)
-	{
-		$notes=$this->DoctorNotesManager->findAll()['sub_notes']
-		$max=0;
-		$i=0;
-		foreach ($arraynotes as $note)
-		{
-			$max+=int($note);
-			$i++;
-		}
-	}
-
 	public function create ($id)
 	{
 		
@@ -43,7 +31,6 @@ class DoctorNotesController extends Controller
 			$title_comment=null;
 			$comment='';
 			$error=array();
-
 			//Critères des sous notes
 			$title_sub_notes1='Accueil';
 			$title_sub_notes2='Qualité d’écoute';
@@ -59,7 +46,9 @@ class DoctorNotesController extends Controller
 				$sub_notes3=$_POST['sub_notes3'];								
 				$title_comment=$_POST['title_comment'];
 				$comment=$_POST['comment'];
-
+				//Récupere l'id de l'utilisateur 
+				$id_user=$_SESSION['user']['id'];
+				var_dump($id_user);
 				//Controle les données 
 				if (empty($title_comment))
 				{
@@ -81,20 +70,21 @@ class DoctorNotesController extends Controller
 					$save=false;
 					$error['sub_notes']='les 3 notes doivent etre notés';
 				}
-				
+							
 				//Verifie les données sont correcte
 				if ($save)
 				{
-					//Récupere l'id de l'utilisateur 
-					$id_user=$_SESSION['user']['id'];
-					//Réunit tous les sous note 
-					$sub_notes="$sub_notes1;$sub_notes2;$sub_notes3";
+					//Créer la note principale
+					$main_note=($sub_notes1+$sub_notes2+$sub_notes3)/3;
+					//Réunir les sous notes en un tableau de notes
+					$sub_notes="$sub_notes1:$sub_notes2:$sub_notes3";
 					//Introduit les données vers la BDD
 					$note_data=[
 							'sub_notes'=>$sub_notes,
+							'main_note'=>$main_note,
 							'title_comment'=>$title_comment,
 							'comment'=>$comment,
-							'post_date'=>date('d:M:Y'),
+							'post_date'=>date('d-m-Y G:i:s'),
 							'id_doctor'=>intval($id),
 							'id_user'=>intval($id_user),
 							'nb_likes'=>0,
@@ -102,7 +92,7 @@ class DoctorNotesController extends Controller
 						];
 					$this->DoctorNotesManager->insert($note_data);
 					//Redirige vers la page de la note 
-					$this->redirectToRoute('doctor_details',['id'=>$id,]);
+					$this->redirectToRoute('doctor_details',['id'=>$id]);
 				}
 					
 			}
@@ -182,11 +172,16 @@ class DoctorNotesController extends Controller
 					//Verifie les données 
 					if ($save)
 					{
+						//Créer la note principale
+						$main_note=($sub_notes1+$sub_notes2+$sub_notes3)/3;
+						//Réunir les sous notes en un tableau de notes
+						$sub_notes=array($sub_notes1,$sub_notes2,$sub_notes3);
 						//Réunit tous les sous note 
 						$sub_notes="$sub_notes1;$sub_notes2;$sub_notes3";
 						//Introduit les données vers la BDD
 						$note_data=[
 								'sub_notes'=>$sub_notes,
+								'main_note'=>$main_note,
 								'title_comment'=>$title_comment,
 								'comment'=>$comment,
 								'post_date'=>date('d:M:Y'),

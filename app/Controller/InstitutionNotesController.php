@@ -95,18 +95,27 @@ class InstitutionNotesController extends Controller
 					$save=false;
 					$error['sub_notes']='les 3 notes doivent etre notés';
 				}
-				
+				//Controle si l'utilisateur a deja noté 
+				var_dump($this->InstitutionNotesManager->hasNoted($id_user));
+				exit;
+				if($this->InstitutionNotesManager->hasNoted($id_user))
+				{
+					$save=false;
+					$error['user']="l'utilisateur a deja noté cet etablissement";
+				}
 				//Verifie les données sont correcte
 				if ($save)
 				{
-					//Récupere l'id de l'utilisateur 
-					$id_user=$_SESSION['user']['id'];
-					//Réunit tous les sous note 
-					$sub_notes="$sub_notes1;$sub_notes2;$sub_notes3";
-					//Introduit les données vers la BDD
-					$note_data=[
+						//Créer la note principale
+						$main_note=($sub_notes1+$sub_notes2+$sub_notes3)/3;
+						//Réunir les sous notes en un tableau de notes
+						$sub_notes=array($sub_notes1,$sub_notes2,$sub_notes3);
+						//Récupere l'id de l'utilisateur 
+						$id_user=$_SESSION['user']['id'];	
+						//Introduit les données vers la BDD
+						$note_data=[
 							'sub_notes'=>$sub_notes,
-							'average'=>0,
+							'main_note'=>$main_note,
 							'title_comment'=>$title_comment,
 							'comment'=>$comment,
 							'post_date'=>date('d:M:Y'),
@@ -197,11 +206,16 @@ class InstitutionNotesController extends Controller
 					//Verifie les données 
 					if ($save)
 					{
+						//Créer la note principale
+						$main_note=($sub_notes1+$sub_notes2+$sub_notes3)/3;
+						//Réunir les sous notes en un tableau de notes
+						$sub_notes=array($sub_notes1,$sub_notes2,$sub_notes3);
 						//Réunit tous les sous note 
 						$sub_notes="$sub_notes1;$sub_notes2;$sub_notes3";
 						//Introduit les données vers la BDD
 						$note_data=[
 								'sub_notes'=>$sub_notes,
+								'main_note'=>$main_note,
 								'title_comment'=>$title_comment,
 								'comment'=>$comment,
 								'post_date'=>date('d:M:Y'),
