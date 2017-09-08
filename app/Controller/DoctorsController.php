@@ -56,7 +56,6 @@ class DoctorsController extends Controller
 
 		$doctor['name_departement'] = $doctor_dp['name'];
 		$doctor['name_doctor_category'] = $doctor_cat['name'];
-		var_dump($doctor);
 
 		// Appel de la vue avec passage des données du médecin
 		$this->show('doctors/read', [
