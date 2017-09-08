@@ -369,6 +369,15 @@ option {
 /* doctors_notes*/
 textarea {
 	color: #000;
+
+}
+
+.notes {
+	font-size: 17px;
+}
+
+.note {
+	font-size: 18px;
 }
 
 /* profil */

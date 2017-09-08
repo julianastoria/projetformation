@@ -42,11 +42,11 @@
         <span aria-hidden="true">&laquo;</span>
       </a>
     </li>
-     <?php for($i = 1; $i <= $max_pages; $i++) { ?>
-    <li><a href="<?= $this->url('doctors_index', ['page' => $page + 1]) ?>">1</a></li>
+     <?php for($i = 1; $i <= 5; $i++) { ?>
+    <li><a href="<?= $this->url('doctors_index', ['page' => $i]) ?>"><?= $i ?></a></li>
     <?php } ?>
     <li>
-      <a href="<?= $this->url('doctors_index', ['page' => $i]); ?>" aria-label="Next">
+      <a href="<?= $this->url('doctors_index', ['page' => $page + 1]); ?>" aria-label="Next">
         <span aria-hidden="true">&raquo;</span>
       </a>
    				 </li>

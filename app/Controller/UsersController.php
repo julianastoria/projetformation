@@ -1,36 +1,48 @@
 <?php
+
 namespace Controller;
+
 use \W\Controller\Controller;
 use \W\Manager\UserManager;
 use \W\Security\AuthentificationManager;
+
 class UsersController extends Controller 
 {
+
 	private $authManager;
 	private $userManager;
+
+
 	public function __construct()
 	{
 		$this->authManager= new AuthentificationManager;
+
 		$this->userManager= new UserManager;
 		$this->userManager->setTable('users');
 	}
 	public function profile ()
 	{
-		
 		//Verifie si l'existence de la session 
 		if (empty($_SESSION))
 		{
 			//redirige vers la page login
 			$this->redirectToRoute('user_signin');
 		} 
+		$UsersManager=new \Manager\UsersManager;
+		$departement=$UsersManager->findDepartement($_SESSION['user']['id_departement']);
+		$autism=$UsersManager->findAutism($_SESSION['user']['id_autism']);
 		$this->show('user/profile',[
-			'title'=>'Profil de '. $_SESSION['user']['firstname'],
-			'user'=>$_SESSION['user']
+			'title'=>'Profile de '. $_SESSION['user']['firstname'],
+			'user'=>$_SESSION['user'],
+			'departement'=>$departement['name'],
+			'autism'=>$autism['name']
 			]);
 	}
 	public function signin ()
 	{
 		$email=null;
 		$error=null;
+
 		// Si la requete HTTP est POST
 		if ($_SERVER['REQUEST_METHOD'] === "POST")
 		{
@@ -40,7 +52,7 @@ class UsersController extends Controller
 			//Controller les identifications 
  			if ($id=$this->authManager->isValidLoginInfo($email, $password))
       		{		
-				//récupere les données de l'identfiant dans la bdd
+				//récupere les données de l'identifiant dans la bdd
       			$user=$this->userManager->find($id);
 				//Ajoute l'identifiant a la session 
       			$this->authManager->logUserIn($user);
@@ -81,6 +93,7 @@ class UsersController extends Controller
 			$firstname=strip_tags(trim($_POST['firstname']));
 			$lastname=strip_tags(trim($_POST['lastname']));
 			$birthday=strip_tags(trim($_POST['birthday']));
+
 			$situation=strip_tags(trim($_POST['situation']));
 			
 			//Récupere l'id de l'autisme 
@@ -89,17 +102,21 @@ class UsersController extends Controller
 			/*
 			$autismsManager=new \Manager\AutismsManager;
 			$id_autism=$autismsManager->findByName($autism);*/
+
 			//Département : recuperer l'id 
 			$departement=strip_tags(trim($_POST['departement']));
 			$departementManager= new \Manager\DepartementsManager;
 			$id_departement=$departementManager->findByNumber($departement)['id'];
+
 			//Controle des données 
+
 			// ------ Email ------
 			if (empty($email))
 			{
 				$save=false;
 				$error['email']="le champ email est vide";
 			}
+
 			else if (!filter_var($email,FILTER_VALIDATE_EMAIL))
 			{
 				$save=false;
@@ -110,6 +127,7 @@ class UsersController extends Controller
 				$save=false;
 				$error['email']="l'email a déjà été utilisée";
 			} 
+
 			// ---- Mot de passe ------
 			if (empty($password))
 			{
@@ -141,8 +159,6 @@ class UsersController extends Controller
 				
 			if ($save)
 			{
-
-				
 				//Haschage du password
 				$password=password_hash($password,PASSWORD_DEFAULT);
 				$user_data=[
@@ -157,18 +173,18 @@ class UsersController extends Controller
 						'id_autism'=>$id_autism,
 					];
 				//introduction des données dans la BDD
-				$this->userManager->insert($user_data);
+				$user=$this->userManager->insert($user_data);
 				//Ajouter l'utilisateur dans la session 
-				$_SESSION['user']=[
-					'firstname'=>$user_data['firstname'],
-					'lastname'=>$user_data['lastname'],
-					'email'=>$user_data['email'],
-					'birthday'=>$user_data['birthday'],
-					'id_departement'=>$user_data['id_departement'],
-					'roles'=>$user_data['roles'],
-					'situation'=>$user_data['situations'],
-					'id_autism'=>$user_data['id_autism']
-				];
+				$_SESSION['user']= array (
+					'id'=>$user['id'],
+					'firstname'=>$user['firstname'],
+					'lastname'=>$user['lastname'],
+					'birthday'=>$user['birthday'],
+					'id_departement'=>$user['id_departement'],
+					'roles'=>$user['roles'],
+					'situations'=>$user['situation'],
+					'id_autism'=>$user['id_autism'],
+				);
 				//Rediriger vers la page de profile 
 				$this->redirectToRoute('profile'); 				
 			}
@@ -179,7 +195,7 @@ class UsersController extends Controller
 				'firstname'=>$firstname,
 				'lastname'=>$lastname,
 				'birthday'=>$birthday,
-				'situation'=>$situation,
+				'situations'=>$situation,
 				'autism'=>$autism,
 				'errors'=>$error
 			]);
@@ -224,7 +240,7 @@ class UsersController extends Controller
 			$password=$_POST['password'];
 			$repeat_password=$_POST['repeat_password'];
 			//Récupere le token 
-			$tokensManager= new \Manager\TokensManager;
+			$tokensManager= new \Manager\UsersManager;
 			$token_data=$tokensManager->findByToken($token);
 			//Verifier les mdp 
 			if ($password!==$repeat_password)
@@ -236,6 +252,7 @@ class UsersController extends Controller
 				//Verifie la validite du token 
 				if (time()<$token['timeout'])
 				{
+
 					//Haschage du nouveau mdp
 					$password=password_hash($password,PASSWORD_DEFAULT);
 					//changer l'ancien mdp par le nouveau 

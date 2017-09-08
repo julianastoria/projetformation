@@ -52,7 +52,7 @@ class InstitutionsController extends Controller
 	public function create()
 	{
 
-		//$this->allowTo('moderator');
+		//$this->allowTo(['moderator','administrator']);
 		$error=null;
 		$name=null;
 		$address=null;
@@ -156,7 +156,7 @@ class InstitutionsController extends Controller
 
 	public function update($id)
 	{
-		//$this->allowTo('moderator');
+		$this->allowTo(['moderator','administrator']);
 		$error=null;
 		$name=null;
 		$address=null;
@@ -262,7 +262,7 @@ class InstitutionsController extends Controller
 
 	public function delete($id)
 	{
-		$this->allowTo('moderator');
+		$this->allowTo(['moderator','administrator']);
 		$this->InstitutionsManager->delete($id);
 		$this->show('institutions/delete');
 	}
