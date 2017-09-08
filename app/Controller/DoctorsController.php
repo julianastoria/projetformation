@@ -4,6 +4,7 @@ namespace Controller;
 
 use \W\Controller\Controller;
 use \Manager\DoctorsManager;
+use \Manager\DoctorCategoriesManager;
 use \Manager\DepartementsManager;
 
 class DoctorsController extends Controller
@@ -11,6 +12,8 @@ class DoctorsController extends Controller
 	function __construct()
 	{
 		$this->doctors_m = new DoctorsManager;
+		$this->doctor_categories_m = new DoctorCategoriesManager;
+		$this->doctor_categories_m->setTable('doctor_categories');
 		$this->departements_m = new DepartementsManager;
 	}
 
