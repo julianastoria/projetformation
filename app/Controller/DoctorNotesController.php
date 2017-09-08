@@ -260,8 +260,10 @@ class DoctorNotesController extends Controller
 					$max+=intval($main_note['main_note']);
 				}
 				$average=$max/$i;
+				
 				//Mettre a jour la moyenne dans la bdd 
 				$this->DoctorsManager->update(['average'=>$average],$id_doctor);
+
 				//Redirige vers la page de details du medecin
 				$this->redirectToRoute('doctor_details',['id'=>$id_doctor]);
 			} else {

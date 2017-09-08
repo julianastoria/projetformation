@@ -53,24 +53,19 @@ class DoctorsController extends Controller
 	public function create()
 	{
 		$postal_code = null;
-
 		$save = true;
-
 		if ($_SERVER['REQUEST_METHOD'] === "POST")
 		{
 			$postal_code = $_POST['postal_code'];
-			
+
 			// Vérification des données
 
 			// Récupération du département en fonction du code postal
 			$departement = substr($postal_code, 0, 2);
-
 			$departement = $this->departements_m->findByNumber($departement);
 		}
-
 		$this->show('doctors/create');
 	}
-
 	public function update()
 	{
 		$this->show('doctors/update');

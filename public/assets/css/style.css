@@ -298,9 +298,6 @@ footer p {
 	margin-bottom: 100px;
 }
 
-	}
-
-
 /* create_medecin.php avec un include de form.php */
 label {
 	color: #8845e0;
@@ -345,7 +342,6 @@ select {
 	background-color: #fff9f2;
 }
 
-
 /* users signup */
 option {
 	color: #000;
@@ -369,7 +365,6 @@ option {
 /* doctors_notes*/
 textarea {
 	color: #000;
-
 }
 
 .notes {

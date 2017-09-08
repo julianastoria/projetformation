@@ -57,6 +57,5 @@
 
 		</div>
 	</div>
-
 	</form>
 <?php $this->stop('main_content') ?>

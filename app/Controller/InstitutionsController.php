@@ -51,8 +51,8 @@ class InstitutionsController extends Controller
 
 	public function create()
 	{
-
 		//$this->allowTo(['moderator','administrator']);
+
 		$error=null;
 		$name=null;
 		$address=null;

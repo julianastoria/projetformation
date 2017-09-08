@@ -18,7 +18,6 @@
 	<body>
 	<div class="container-fluid demo">
 	
-	
 <header>
 		<!--navbar -->
 <nav class="navbar navbar-default navbar-static-top">

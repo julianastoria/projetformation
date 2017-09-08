@@ -8,7 +8,6 @@
 			</ul>
 		<?php endforeach ?>
 	</div>
-
 	
 	<div class="row">
 	<div class="col-md-3 col-md-offset-4">
@@ -66,7 +65,6 @@
 				</div>
 				<button class="btn btn-purple" type="submit">S'inscrire</button>
 			</form>
-
 		</div>
 	</div>
 	

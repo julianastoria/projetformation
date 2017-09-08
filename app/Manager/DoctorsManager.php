@@ -29,6 +29,7 @@ class DoctorsManager extends Manager
 		if (!is_numeric($id)){
 			return false;
 		}
+
 		$sql = "SELECT departements.name FROM " . $this->table . " LEFT JOIN departements ON id_departement = departements.id WHERE " . $this->table . ".id = :doctor_id";
 		
 		$sth = $this->dbh->prepare($sql);
@@ -42,6 +43,7 @@ class DoctorsManager extends Manager
 		if (!is_numeric($id)){
 			return false;
 		}
+
 		$sql = "SELECT doctor_categories.name FROM " . $this->table . " LEFT JOIN doctor_categories ON id_doctor_category = doctor_categories.id WHERE " . $this->table . ".id = :doctor_id";
 		
 		$sth = $this->dbh->prepare($sql);

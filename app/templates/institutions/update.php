@@ -2,4 +2,5 @@
 
 <?php $this->start('main_content') ?>
 	<h2>Modifier l'établissement</h2>
+	<?php var_dump($institution); ?>
 <?php $this->stop('main_content') ?>
