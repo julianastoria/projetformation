@@ -2,29 +2,32 @@
 
 <?php $this->start('main_content') ?>
 	<h2 class="text-center">Liste des médecins</h2>
-
-	<?php foreach ($doctors as $key => $doctor) : ?>
 		<div class="row">
-			<div class="col-sm-6 col-md-4">
+			
+		
+	<?php foreach ($doctors as $key => $doctor) : ?>
+			
+			<div class="col-md-3">
 				<div class="thumbnail">
 					<!-- <img src="..." alt="..."> -->
 
 					<div class="caption">
 
-						<!-- <a href="<?= $this->url('doctor_details', ['id' => $id]); ?>"> -->
-						<a href="#">
-							<h3><?= "Dr. ".$doctor['lastname']; ?></h3>
+						<a href="<?= $this->url('doctor_details', ['id' => $doctor['id']]); ?>">
+							<h3 class="index"><?= "Dr. ".$doctor['lastname']; ?></h3>
 						</a>
 
-						<p><?= $doctor['id_doctor_category']; ?></p>
+						<p><?= $doctor['name_doctor_category']; ?></p>
 
-						<p><?= $doctor['id_departement'] ?></p>
+						<p><?= $doctor['name_departement'] ?></p>
 
-						<p>Ici figurera la note (la forme de cette dernière ?)</p>
+						<p><?= $doctor['average']; ?></p>
 
 					</div>
 				</div>
 			</div>
+		
+	<?php endforeach; ?>
+			
 		</div>
-	<?php endforeach;
-$this->stop('main_content') ?>
+<?php $this->stop('main_content') ?>
