@@ -28,10 +28,14 @@ class UsersController extends Controller
 			//redirige vers la page login
 			$this->redirectToRoute('user_signin');
 		} 
-		var_dump($_SESSION['user']);
+		$UsersManager=new \Manager\UsersManager;
+		$departement=$UsersManager->findDepartement($_SESSION['user']['id_departement']);
+		$autism=$UsersManager->findAutism($_SESSION['user']['id_autism']);
 		$this->show('user/profile',[
 			'title'=>'Profile de '. $_SESSION['user']['firstname'],
-			'user'=>$_SESSION['user']
+			'user'=>$_SESSION['user'],
+			'departement'=>$departement['name'],
+			'autism'=>$autism['name']
 			]);
 	}
 	public function signin ()
@@ -48,7 +52,7 @@ class UsersController extends Controller
 			//Controller les identifications 
  			if ($id=$this->authManager->isValidLoginInfo($email, $password))
       		{		
-				//récupere les données de l'identfiant dans la bdd
+				//récupere les données de l'identifiant dans la bdd
       			$user=$this->userManager->find($id);
 				//Ajoute l'identifiant a la session 
       			$this->authManager->logUserIn($user);
@@ -191,7 +195,7 @@ class UsersController extends Controller
 				'firstname'=>$firstname,
 				'lastname'=>$lastname,
 				'birthday'=>$birthday,
-				'situation'=>$situation,
+				'situations'=>$situation,
 				'autism'=>$autism,
 				'errors'=>$error
 			]);
@@ -236,7 +240,7 @@ class UsersController extends Controller
 			$password=$_POST['password'];
 			$repeat_password=$_POST['repeat_password'];
 			//Récupere le token 
-			$tokensManager= new \Manager\TokensManager;
+			$tokensManager= new \Manager\UsersManager;
 			$token_data=$tokensManager->findByToken($token);
 			//Verifier les mdp 
 			if ($password!==$repeat_password)

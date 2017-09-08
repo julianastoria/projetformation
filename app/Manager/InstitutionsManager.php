@@ -21,7 +21,7 @@ class InstitutionsManager extends Manager
 	}
 	public function findWithDepartement($id)
 	{
-		$sql = "SELECT departements.name FROM " . $this->table .  " LEFT JOIN departements ON :id_departement = departements.id ORDER BY " . $this->table . ".id";
+		$sql = "SELECT departements.name FROM " . $this->table .  " LEFT JOIN departements ON :id_departement = departements.id";
 		
 		$sth = $this->dbh->prepare($sql);
 		$sth->bindValue(":id_departement", $id);
@@ -30,7 +30,7 @@ class InstitutionsManager extends Manager
 	}
 	public function findWithCategory($id)
 	{
-		$sql = "SELECT institution_categories.name FROM " . $this->table . " LEFT JOIN institution_categories ON :id_institution_category = institution_categories.id ORDER BY " . $this->table . ".id";
+		$sql = "SELECT institution_categories.name FROM " . $this->table . " LEFT JOIN institution_categories ON :id_institution_category = institution_categories.id";
 		
 		$sth = $this->dbh->prepare($sql);
 		$sth->bindValue(":id_institution_category", $id);
