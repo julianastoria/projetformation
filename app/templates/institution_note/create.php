@@ -8,28 +8,43 @@
 			</ul>
 		<?php endforeach ?>
 	</div>
-	<h2><?= $title ?></h2>
-	<form method="POST" action="<?= $this->url('create_institution_note',['id'=>$id]) ?>">
+	<form method="POST">
 		<div class="form-group">
-			<label id="sub_notes1"><?= $title_sub_notes1 ?> :</label>
-			<input type="number" name="sub_notes1" id="sub_notes1" value="<?= $sub_notes1 ?>">
+			<label for="note"></label>
+			<input type="number" name="note" id="note">
 		</div>
 		<div class="form-group">
-			<label id="sub_notes2"><?= $title_sub_notes2 ?> :</label>
-			<input type="number" name="sub_notes2" id="sub_notes2" value="<?= $sub_notes2 ?>">
+			<label><?= $title_sub_notes1 ?> :</label>
+			<select name="sub_notes1" id="sub_notes1">
+				<?php for ($i=1;$i<6;$i++) : ?>
+					<option value="<?= $i ?>"><?= $i ?></option>
+				<?php endfor; ?>
+			</select>
 		</div>
 		<div class="form-group">
-			<label id="sub_notes3"><?= $title_sub_notes3 ?> :</label>
-			<input type="number" name="sub_notes3" id="sub_notes3" value="<?= $sub_notes3 ?>">
+			<label><?= $title_sub_notes2 ?> :</label>
+			<select name="sub_notes1" id="sub_notes2">
+				<?php for ($i=1;$i<6;$i++) : ?>
+					<option value="<?= $i ?>"><?= $i ?></option>
+				<?php endfor; ?>
+			</select>
 		</div>
 		<div class="form-group">
-			<label for="title_comment">Titre</label>
+			<label><?= $title_sub_notes3 ?> :</label>
+			<select name="sub_notes1" id="sub_notes3">
+				<?php for ($i=1;$i<6;$i++) : ?>
+					<option value="<?= $i ?>"><?= $i ?></option>
+				<?php endfor; ?>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="title_comment">Titre :</label>
 			<input type="text" name="title_comment" id="title_comment" value="<?= $title_comment ?>">
 		</div>
 		<div class="form-group">
 			<label id="comment">Commentaires :</label>
-			<textarea name="comment" id="comment" rows="20" cols="50"><?= $comment ?></textarea>
+			<textarea name="comment" id="comment"><?= $comment ?></textarea>
 		</div>
-		<button type="submit" class="btn btn-default">Envoyer</button>
+		<button class="btn btn-purple" type="submit">Envoyer</button>
 	</form>
 <?php $this->stop('main_content') ?>

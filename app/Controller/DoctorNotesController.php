@@ -200,6 +200,19 @@ class DoctorNotesController extends Controller
 								'post_date'=>date('d:M:Y'),
 							];
 						$this->DoctorNotesManager->update($note_data,$id);
+						//Recalculer la note moyenne
+						$main_notes=$this->DoctorNotesManager->findAllMainNotes($id);
+						$i=0;
+						$max=0;
+						foreach ($main_notes as $main_note) {
+							$i+=1;
+							$max+=intval($main_note['main_note']);
+						}
+						$average=$max/$i;
+
+						$this->DoctorsManager->update([
+							'average'=>$average
+						],$id);
 						//Redirige vers la page de la note 
 						$this->redirectToRoute('doctor_details',['id'=>$id_doctor]);
 					}
@@ -238,10 +251,21 @@ class DoctorNotesController extends Controller
 			if ($id_user===$_SESSION['user']['id'] || $_SESSION['user']['roles'] === 'moderator' || $_SESSION['user']['roles'] === 'administrator') 
 			{
 				$this->DoctorNotesManager->delete($id);
-				
+				//Recalculer la note moyenne
+				$main_notes=$this->DoctorNotesManager->findAllMainNotes($id_doctor);
+				$i=0;
+				$max=0;
+				foreach ($main_notes as $main_note) {
+					$i+=1;
+					$max+=intval($main_note['main_note']);
+				}
+				$average=$max/$i;
+				//Mettre a jour la moyenne dans la bdd 
+				$this->DoctorsManager->update(['average'=>$average],$id_doctor)
+				//Redirige vers la page de details du medecin
+				$this->redirectToRoute('doctor_details',['id'=>$id_doctor]);
 			} else {
-			//Récupere les données du docteur
-			$id_doctor=$this->DoctorNotesManager->find($id)['id_doctor'];
+			
 			//Redirige de details du medecin
 			$this->redirectToRoute('doctor_details',['id'=>$id_doctor]);
 			}

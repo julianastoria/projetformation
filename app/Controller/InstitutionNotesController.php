@@ -140,7 +140,6 @@ class InstitutionNotesController extends Controller
 					
 			}
 			$this->show('institution_note/create',[
-					'id'=>$id,
 					'title'=>"Création d'une note",
 					'title_comment'=>$title_comment,
 					'comment'=>$comment,
@@ -159,13 +158,14 @@ class InstitutionNotesController extends Controller
 	public function update ($id)
 	{
 		//Récupere les données du docteur
-		$id_institution=$this->InstitutionNotesManager->find($id)['id_institution'];
+		$note=$this->InstitutionNotesManager->find($id);
+		$id_institution=$note['id_institution'];
 		//Verifie si l'utilisateur est connecté
 		if (isset($_SESSION))
 		{
 			// Récupere l'id de l'utilisateur qui a cree la note 
-			$user=$this->InstitutionNotesManager->find($id);
-			$id_user=$user['id_user'];
+			
+			$id_user=$note['id_user'];
 			//Definir les criteres des sous notes
 			$title_sub_notes1='Accueil';
 			$title_sub_notes2='Qualité d’écoute';
@@ -230,12 +230,24 @@ class InstitutionNotesController extends Controller
 								'post_date'=>date('d:M:Y'),
 							];
 						$this->InstitutionNotesManager->update($note_data,$id);
+						//Recalculer la note moyenne
+						$main_notes=$this->InstitutionNotesManager->findAllMainNotes($id);
+						$i=0;
+						$max=0;
+						foreach ($main_notes as $main_note) {
+							$i+=1;
+							$max+=intval($main_note['main_note']);
+						}
+						$average=$max/$i;
+						var_dump($average);
+						$this->InstitutionsManager->update([
+								'average'=>$average
+							],$id_institution);
 						//Redirige vers la page de la note 
 						$this->redirectToRoute('institution_details',['id'=>$id_institution]);
 					}
 				}
 				$this->show('institution_note/update',[
-						'id'=>$id,
 						'errors'=>$error,
 						'title'=>"Création d'une note",
 						'title_sub_notes1'=>$title_sub_notes1,
@@ -248,6 +260,8 @@ class InstitutionNotesController extends Controller
 						'comment'=>$comment
 
 					]);
+			}else {
+				$this->redirectToRoute('institution_details',['id'=>$id_institution]);
 			}
 		} else {
 			//Redirige vers la page de connexion
@@ -268,10 +282,20 @@ class InstitutionNotesController extends Controller
 			if ($id_user===$_SESSION['user']['id'] || $_SESSION['user']['roles'] === 'moderator' || $_SESSION['user']['roles'] === 'administrator') 
 			{
 				$this->InstitutionNotesManager->delete($id);
-				
+				//Recalculer la note moyenne
+				$main_notes=$this->DoctorNotesManager->findAllMainNotes($id_doctor);
+				$i=0;
+				$max=0;
+				foreach ($main_notes as $main_note) {
+					$i+=1;
+					$max+=intval($main_note['main_note']);
+				}
+				$average=$max/$i;
+				$this->InstitutionsManager->update(['average'=>$average],$id_institution);
+				//Rediriger vers la page de details de l'etablissement
+				$this->redirectToRoute('institution_details',['id'=>$id_institution]);
 			} else {
-			//Récupere les données du docteur
-			$id_institution=$this->InstitutionNotesManager->find($id)['id_institution'];
+			
 			//Redirige de details du medecin
 			$this->redirectToRoute('institution_details',['id'=>$id_institution]);
 			}

@@ -12,15 +12,27 @@
 	<form method="POST" action="<?= $this->url('create_doctor_note',['id'=>$id]) ?>">
 		<div class="form-group">
 			<label id="sub_notes1"><?= $title_sub_notes1 ?> :</label>
-			<input type="number" name="sub_notes1" id="sub_notes1" value="<?= $sub_notes1 ?>">
+			<select name="sub_notes1" id="sub_notes1">
+				<?php for ($i=1;$i<6;$i++) : ?>
+					<option value="<?= $i ?>"><?= $i ?></option>
+				<?php endfor; ?>
+			</select>
 		</div>
 		<div class="form-group">
 			<label id="sub_notes2"><?= $title_sub_notes2 ?> :</label>
-			<input type="number" name="sub_notes2" id="sub_notes2" value="<?= $sub_notes2 ?>">
+			<select name="sub_notes2" id="sub_notes2">
+				<?php for ($i=1;$i<6;$i++) : ?>
+					<option value="<?= $i ?>"><?= $i ?></option>
+				<?php endfor; ?>
+			</select>
 		</div>
 		<div class="form-group">
 			<label id="sub_notes3"><?= $title_sub_notes3 ?> :</label>
-			<input type="number" name="sub_notes3" id="sub_notes3" value="<?= $sub_notes3 ?>">
+			<select name="sub_notes3" id="sub_notes3">
+				<?php for ($i=1;$i<6;$i++) : ?>
+					<option value="<?= $i ?>"><?= $i ?></option>
+				<?php endfor; ?>
+			</select>
 		</div>
 		<div class="form-group">
 			<label for="title_comment">Titre</label>
