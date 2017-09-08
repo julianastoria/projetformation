@@ -171,8 +171,6 @@ class UsersController extends Controller
 				//introduction des données dans la BDD
 				$user=$this->userManager->insert($user_data);
 				//Ajouter l'utilisateur dans la session 
-				var_dump($user);
-
 				$_SESSION['user']= array (
 					'id'=>$user['id'],
 					'firstname'=>$user['firstname'],
