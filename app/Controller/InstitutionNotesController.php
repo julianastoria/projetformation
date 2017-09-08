@@ -16,7 +16,7 @@ class InstitutionNotesController extends Controller
 	
 	public function __construct()
 	{
-
+		$this->InstitutionsManager=new InstitutionsManager;
 		$this->InstitutionNotesManager= new InstitutionNotesManager;
 		$this->InstitutionNotesManager->setTable('institution_notes');
 
@@ -48,8 +48,7 @@ class InstitutionNotesController extends Controller
 			$comment="";
 			$error=array();
 			//Recupere le type de l'etablissement
-			$InstitutionsManager= new InstitutionsManager;
-			$Institution=$InstitutionsManager->find($id);
+			$Institution=$this->InstitutionsManager->find($id);
 			$type_institution=$Institution['type_institution'];
 			$title_sub_notes1='Accueil';
 			if ($type_institution === 'École')
@@ -58,10 +57,12 @@ class InstitutionNotesController extends Controller
 				$title_sub_notes2='Inclusion sociale';
 				$title_sub_notes3='Adaptation envers l’autisme';
 			} 
-			else 
+			else if ($type_institution === 'Établissement spécialisé')
 			{
 				$title_sub_notes2='Prise en charge';
 				$title_sub_notes3='Inspire confiance';
+			} else {
+				$this->redirectToRoute('institutions_index');
 			}
 			//verifie si la requete HTTP est POST
 			if ($_SERVER['REQUEST_METHOD'] === "POST")
@@ -96,22 +97,17 @@ class InstitutionNotesController extends Controller
 					$error['sub_notes']='les 3 notes doivent etre notés';
 				}
 				//Controle si l'utilisateur a deja noté 
-				var_dump($this->InstitutionNotesManager->hasNoted($id_user));
-				exit;
-				if($this->InstitutionNotesManager->hasNoted($id_user))
-				{
-					$save=false;
-					$error['user']="l'utilisateur a deja noté cet etablissement";
-				}
+				
 				//Verifie les données sont correcte
 				if ($save)
 				{
 						//Créer la note principale
 						$main_note=($sub_notes1+$sub_notes2+$sub_notes3)/3;
 						//Réunir les sous notes en un tableau de notes
-						$sub_notes=array($sub_notes1,$sub_notes2,$sub_notes3);
+						$sub_notes="$sub_notes1:$sub_notes2:$sub_notes3";
 						//Récupere l'id de l'utilisateur 
-						$id_user=$_SESSION['user']['id'];	
+						$id_user=$_SESSION['user']['id'];
+							
 						//Introduit les données vers la BDD
 						$note_data=[
 							'sub_notes'=>$sub_notes,
@@ -124,9 +120,22 @@ class InstitutionNotesController extends Controller
 							'nb_likes'=>0,
 							'nb_dislikes'=>0
 						];
-					$this->InstitutionNotesManager->insert($note_data);
+					//$this->InstitutionNotesManager->insert($note_data);
+					//Recalculer la note moyenne
+					$main_notes=$this->InstitutionNotesManager->findAllMainNotes($id);
+					$i=0;
+					$max=0;
+					foreach ($main_notes as $main_note) {
+						$i+=1;
+						$max+=intval($main_note['main_note']);
+					}
+					$average=$max/$i;
+					var_dump($average);
+					$this->InstitutionsManager->update([
+							'average'=>$average
+						],$id);
 					//Redirige vers la page de la note 
-					$this->redirectToRoute('institution_details',['id'=>$Institution['id']]);
+					$this->redirectToRoute('institution_details',['id'=>$id]);
 				}
 					
 			}

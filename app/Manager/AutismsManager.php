@@ -9,7 +9,7 @@ class AutismsManager extends Manager
 
 	public function findByName($name)
 	{
-		$sql = "SELECT * FROM autisms WHERE $this->name = :name LIMIT 1";
+		$sql = "SELECT * FROM autisms WHERE name = :name LIMIT 1";
 		$sth = $this->dbh->prepare($sql);
 		$sth->bindValue(":name", $name);
 		$sth->execute();

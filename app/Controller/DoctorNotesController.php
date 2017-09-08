@@ -14,7 +14,7 @@ class DoctorNotesController extends Controller
 	
 	public function __construct()
 	{
-
+		$this->DoctorsManager= new DoctorsManager;
 		$this->DoctorNotesManager= new DoctorNotesManager;
 		$this->DoctorNotesManager->setTable('doctor_notes');
 	}
@@ -91,6 +91,19 @@ class DoctorNotesController extends Controller
 							'nb_dislikes'=>0
 						];
 					$this->DoctorNotesManager->insert($note_data);
+					//Recalculer la note moyenne
+					$main_notes=$this->DoctorNotesManager->findAllMainNotes($id);
+					$i=0;
+					$max=0;
+					foreach ($main_notes as $main_note) {
+						$i+=1;
+						$max+=intval($main_note['main_note']);
+					}
+					$average=$max/$i;
+
+					$this->DoctorsManager->update([
+							'average'=>$average
+						],$id);
 					//Redirige vers la page de la note 
 					$this->redirectToRoute('doctor_details',['id'=>$id]);
 				}

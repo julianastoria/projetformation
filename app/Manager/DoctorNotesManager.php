@@ -6,12 +6,12 @@ use \W\Manager\Manager;
 
 class DoctorNotesManager extends Manager 
 {
-	/*public function hasNoted()
+	public function findAllMainNotes($id)
 	{
-		$sql = "SELECT * FROM doctor_notes";
+		$sql = "SELECT main_note FROM institution_notes WHERE id_institution = :id ";
 		$sth = $this->dbh->prepare($sql);
+		$sth->bindValue(':id',$id);
 		$sth->execute();
-		$sth->fetchAll();
-		return $sth;
-	}*/
+		return $sth->fetchAll();
+	}
 }
