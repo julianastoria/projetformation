@@ -13,7 +13,9 @@ class DefaultController extends Controller
 	 */
 	public function home ()
 	{
-		$this->show('default/home');
+		$this->show('default/home',[
+				'title'=>"page d'accueil"
+			]);
 	}
 	public function contact ()
 	{

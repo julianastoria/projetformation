@@ -22,6 +22,7 @@ class DoctorsController extends Controller
 		$pc = isset($_GET['pc']) ? $_GET['pc'] : null;
 		if ($pc) {
 			$departement = substr($pc, 0, 2);
+
 			$data = $this->departements_m->findByNumber($departement);
 
 			$this->showJson($data);
@@ -58,17 +59,13 @@ class DoctorsController extends Controller
 		if ($_SERVER['REQUEST_METHOD'] === "POST")
 		{
 			$postal_code = $_POST['postal_code'];
-
+			
 			// Vérification des données
 
 			// Récupération du département en fonction du code postal
 			$departement = substr($postal_code, 0, 2);
 
-			var_dump($postal_code, $departement);
-
 			$departement = $this->departements_m->findByNumber($departement);
-
-			var_dump($departement);
 		}
 
 		$this->show('doctors/create');
@@ -78,7 +75,6 @@ class DoctorsController extends Controller
 	{
 		$this->show('doctors/update');
 	}
-
 	public function delete()
 	{
 		$this->show('doctors/delete');

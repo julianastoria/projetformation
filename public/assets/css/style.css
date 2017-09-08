@@ -244,7 +244,7 @@ footer p {
 		display: inline;
 		/* méthode pour enlever les traces du linear-gradient */	
 		background: transparent;
-		margin-left: 70px;
+		margin-left: 52px;
 	}
 
 .navbar-default .navbar-nav > li > a {
@@ -295,7 +295,7 @@ footer p {
 
 /* pour régler le formulaire en responsive */
 .demo {
-	margin-bottom: 54px;
+	margin-bottom: 100px;
 }
 
 	}
@@ -328,6 +328,24 @@ select {
 	border-radius: 10px;
 }
 
+/* index.php doctors */
+.index {
+	color: #8845e0; 
+}
+
+.thumbnail:hover {
+	background-color: #fff9f2;
+}
+
+.pagination > li > a, .pagination > li > span {
+	color: #8845e0; 
+}
+
+.pagination > li > a:hover {
+	background-color: #fff9f2;
+}
+
+
 /* users signup */
 option {
 	color: #000;
@@ -351,6 +369,15 @@ option {
 /* doctors_notes*/
 textarea {
 	color: #000;
+
+}
+
+.notes {
+	font-size: 17px;
+}
+
+.note {
+	font-size: 18px;
 }
 
 /* profil */

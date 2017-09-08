@@ -2,28 +2,53 @@
 
 <?php $this->start('main_content') ?>
 	<h2 class="text-center">Liste des médecins</h2>
-
-	<?php foreach ($doctors as $doctor) : ?>
 		<div class="row">
-			<div class="col-sm-6 col-md-4">
+		
+	<?php foreach ($doctors as $key => $doctor) : ?>
+			
+			<div class="col-md-3">
 				<div class="thumbnail">
 					<!-- <img src="..." alt="..."> -->
 
 					<div class="caption">
 
 						<a href="<?= $this->url('doctor_details', ['id' => $doctor['id']]); ?>">
-						<h3><?= "Dr. ".$doctor['lastname']; ?></h3>
+							<h3 class="index"><?= "Dr. ".$doctor['lastname']; ?></h3>
 						</a>
 
 						<p><?= $doctor['name_doctor_category']; ?></p>
 
-						<p><?= $doctor['name_departement']; ?></p>
+						<p><?= $doctor['name_departement'] ?></p>
 
 						<p><?= $doctor['average']; ?></p>
 
 					</div>
 				</div>
 			</div>
+
+		
+	<?php endforeach; ?>
+
 		</div>
-	<?php endforeach;
-$this->stop('main_content') ?>
+
+	<div class="text-center">
+		<nav aria-label="Page navigation">
+  <ul class="pagination">
+    <li>
+      <a href="<?= $this->url('doctors_index', ['page' => $page - 1]); ?>" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+     <?php for($i = 1; $i <= 5; $i++) { ?>
+    <li><a href="<?= $this->url('doctors_index', ['page' => $i]) ?>"><?= $i ?></a></li>
+    <?php } ?>
+    <li>
+      <a href="<?= $this->url('doctors_index', ['page' => $page + 1]); ?>" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+   				 </li>
+  			</ul>
+		</nav>
+	</div>
+ 
+ <?php $this->stop('main_content') ?>

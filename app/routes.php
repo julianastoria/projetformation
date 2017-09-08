@@ -25,7 +25,7 @@
 		['GET'		, '/medecin/[i:id]/delete'	, 'Doctors#delete', 'doctor_delete'],
 		//DoctorsNotes Routes
 		['GET|POST'	, '/medecin/note/[i:id]/add'	, 'DoctorNotes#create', 'create_doctor_note'],
-		['GET[POST'	, '/medecin/note/[i:id]/edit'	, 'DoctorNotes#update', 'edit_doctor_note'],
+		['GET|POST'	, '/medecin/note/[i:id]/edit'	, 'DoctorNotes#update', 'edit_doctor_note'],
 		['GET'		, '/medecin/note/[i:id]/delete'	, 'DoctorNotes#delete', 'delete_doctor_note'],
 
 		//Institutions Routes
@@ -37,8 +37,8 @@
 		['GET'		, '/etablissement/[i:id]/delete'	, 'Institutions#delete', 'institution_delete'],
 		//InstitutionNotes Routes
 		['GET|POST'	, '/etablissement/note/[i:id]/add', 'InstitutionNotes#create', 'create_institution_note'],
-		['GET[POST'	, '/etablissement/note/[i:id]/edit', 'InstitutionNote#update', 'edit_institution_note'],
-		['GET'		, '/etablissement/note/[i:id]/delete', 'InstitutionNote#delete', 'delete_institution_note'],
+		['GET|POST'	, '/etablissement/note/[i:id]/edit', 'InstitutionNotes#update', 'edit_institution_note'],
+		['GET'		, '/etablissement/note/[i:id]/delete', 'InstitutionNotes#delete', 'delete_institution_note'],
 
 		// AJAX - Département Route
 		['GET'		, '/ajax/departement', 'Doctors#ajaxDepartement', 'ajax_departement']
