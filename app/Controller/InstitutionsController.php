@@ -70,8 +70,8 @@ class InstitutionsController extends Controller
 	public function create()
 	{
 
-		$this->allowTo(array('moderator','administrator'));
-		$error=null;
+		//$this->allowTo(array('moderator','administrator'));
+		$error=array();
 		$name=null;
 		$address=null;
 		$postal_code=null;
@@ -135,10 +135,12 @@ class InstitutionsController extends Controller
 				$save=false;
 				$error['id_institution_category']="le champ categorie ne doit pas etre vide";
 			}
+			
 			//controller la validite des données
-			var_dump($_POST);
+			
 			if ($save)
 			{
+				$address="$address $postal_code $city";
 				//Enregistre le docteur dans la bdd
 				$institution=$this->InstitutionsManager->insert([
 					'name'=>$name,

@@ -1,6 +1,13 @@
 <?php $this->layout('layout', ['title' => $title]) ?>
 
 <?php $this->start('main_content') ?>
+	<div class="alert-danger">
+		<?php foreach ($errors as $error): ?>
+			<ul>
+				<li><?= $error ?></li>
+			</ul>
+		<?php endforeach ?>
+	</div>
 	<h2><?= $title ?></h2>
 	<form method="post">
 		<div class="form-group">
@@ -29,11 +36,11 @@
 		</div>
 		<div class="form-group">
 			<label for="site">Site :</label>
-			<input type="text" name="site" id="site" value="http://">
+			<input type="url" name="site" id="site" value="<?= $site ?>" placeholder="http://">
 		</div>
 		<div class="form-group">
 			<label for="photos">photos :</label>
-			<input type="text" name="photos" id="photos" value="http://">
+			<input type="url" name="photos" id="photos" value="<?= $photos ?>" placeholder="http://">
 		</div>
 		<div class="form-group">
 			<label for="type_institution">Institution :</label>
@@ -50,6 +57,6 @@
 				<?php endforeach ?>
 			</select>
 		</div>
-		<button type="submit">Envoyer</button>
+		<button type="submit" class="btn btn-purple">Envoyer</button>
 	</form>
 <?php $this->stop('main_content') ?>

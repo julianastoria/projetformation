@@ -30,6 +30,6 @@ class InstitutionNotesManager extends Manager
 		$sth = $this->dbh->prepare($sql);
 		$sth->bindValue(":id", $id);
 		$sth->execute();
-		return $sth->fetch();
+		return $sth->fetchAll();
 	}
 }

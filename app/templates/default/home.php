@@ -25,90 +25,34 @@
 </div>
 
 <div class="container-fluid">
-	<h2 class="text-center regions">Derniers éléments ajoutés :</h2><br>
+	<h2 class="text-center regions">Derniers établissements ajoutés :</h2><br>
 	<a class="afficher" href="#">Afficher</a>
-		
-			<div class="row">
+		<div class="row">
+			<?php foreach ($institutions as $key => $institution): ?>
 				<div class="col-md-3">
 					<div class="thumbnail">
 						<div class="caption">
-							<img class="img-responsive" src="http://vdenain.etab.ac-lille.fr/wp-content/themes/Villars/jdgallery/slides/2.jpg">
-							<a href="#"><h4>Collège villars Denain(59), Hauts-de-France</h4></a>
+							<img class="img-responsive" src="<$= $institution['photos'] ?>" alt=¨"Photo de <?= $institution['name'] ?>">
+							<a href="<?= $this->url('institution_details',['id'=>$institution['id']]) ?>"><h4><?= $institution['name'] ?></h4></a>
 						</div>
 					</div>
 				</div>
+			<?php endforeach; ?>
 
-						<div class="col-md-3">
-							<div class="thumbnail doc">
-								<div class="caption">
-									<a href="#"><h4>docteur j-m, Paris(75), Ile-De-France</h4></a>
-								</div>
-							</div>	
-						</div>
-
-						<div class="col-md-3">
-							<div class="thumbnail">
-								<div class="caption">
-									<img class="img-responsive" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTp3lwQqIA5Skt7xn4v9NySIWuoG32ZDObuFgdrAb2DFVbdLLOYCA">
-									<a href="#"><h4>SESSAD Saint-Saulve(59), Hauts-de-France</h4></a>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-md-3">
-							<div class="thumbnail">
-								<div class="caption">
-									<img class="img-responsive" src="http://association-makako.fr/wp-content/uploads/2016/11/IMG_7742.jpg">
-									<a href="#"><h4>Ulis du Collège Martin Nadaud, Guéret(23), Nouvelle-Aquitaine</h4></a>
-								</div>
-							</div>
-						
-				</div>
-			</div>
-		
-	
-
-
-	<h2 class="text-center regions">Eléments les plus recommandés :</h2>
+	<h2 class="text-center regions">Derniers médecins ajoutés :</h2>
 	<a class="afficher" href="#">Afficher</a>
-		
 			<div class="row">
-				<div class="col-md-3">
-					<div class="thumbnail doc">
-						<div class="caption">
-							<img class="img-responsive" src="">
-							<a href="#"><h4>Park si on(02), Hauts-de-France</h4></a>
-							
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-3">
+				<?php foreach ($doctors as $key => $doctor): ?>
+					<div class="col-md-3">
 					<div class="thumbnail">
 						<div class="caption">
-							<img class="img-responsive" src="http://www.jds.fr/medias/image/college-pierre-pflimlin-17115-470-0.jpg">
-							<a href="#"><h4>Collège Pierre Pflimlin(68), Alsace</h4></a>
+							<img class="img-responsive" src="<$= $doctor['photos'] ?>" alt=¨"Photo de <?= $doctor['firstname'] ?>">
+							<a href="<?= $this->url('doctor_details',['id'=>$doctor['id']]) ?>"><h4>Dr <?= $doctor['lastname'] ?><?= $doctor['firstname'] ?></h4></a>
 						</div>
 					</div>
 				</div>
-
-				<div class="col-md-3">
-					<div class="thumbnail">
-						<div class="caption">
-							<img class="img-responsive" src="http://www.apeidouai.asso.fr/images/etablissements/ime-de-montigny-en-ostrevent.JPG">
-							<a href="#"><h4>IME Les papillons blancs du douaisis Montigny-en-Ostrevent(59), Hauts-de-France</h4></a>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-3">
-					<div class="thumbnail">
-						<div class="caption">
-							<img class="img-responsive" src="http://www.clg-rosa-parks-marseille.ac-aix-marseille.fr/spip/sites/www.clg-rosa-parks-marseille/spip/local/cache-vignettes/L565xH375/rosa_park_BIS-300a4.jpg">
-							<a href="#"><h4>ULIS du collège Rosa Parks(35), Bretagne</h4></a>
-						</div>
-					</div>
-				</div>
+				<?php endforeach ?>
+				
 			</div>
 
 	

@@ -242,6 +242,7 @@ class InstitutionNotesController extends Controller
 					//Verifie les données 
 					if ($save)
 					{
+						
 						//Créer la note principale
 						$main_note=($sub_notes1+$sub_notes2+$sub_notes3)/3;
 						//Réunir les sous notes en un tableau de notes
