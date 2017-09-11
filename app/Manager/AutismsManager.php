@@ -6,7 +6,6 @@ use \W\Manager\Manager;
 
 class AutismsManager extends Manager 
 {
-
 	public function findByName($name)
 	{
 		$sql = "SELECT * FROM " . $this->table . " WHERE name = :name LIMIT 1";
