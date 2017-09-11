@@ -84,17 +84,17 @@
 			</ul>
 
 			<ul class=" nav navbar-nav navbar-right">
-				<li class="navbar-right"><a href="<?= $this->url('user_signup') ?>"><i class="fa fa-user-plus" aria-hidden="true"></i></a></li>
+				<li class="navbar-right"><a href="<?= $this->url('user_signup') ?>"><i class="fa fa-user-plus bonhomme" aria-hidden="true"></i></a></li>
 					<li class="navbar-right"><a href="<?= $this->url('user_signin') ?>"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a></li>
 
 
 					<li>
 					<div class="dropdown">
-						<button class="btn btn-blue dropdown-toggle" type="button" id="dropdownMenu4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-							<li class="navbar-left"><a class="ajout" href="#Ajout">Ajout</a></li>
-							 <span class=" ajout caret"></span>
+						<button class="btn btn-blue ajout dropdown-toggle" type="button" id="dropdownMenu4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+							<li class="navbar-left"><a href="#Ajout">Ajout</a></li>
+							 <span class="caret"></span>
 				  		</button>
-				  		 <ul class="dropdown-menu" aria-labelledby="dropdownMenu4">
+				  		 <ul class="dropdown-menu ajouts" aria-labelledby="dropdownMenu4">
 						    <li><a href="<?= $this->url('institution_create')?>">Etablissements</a></li>
 						    <li><a href="<?= $this->url('doctor_create') ?>">Médecins</a></li>
 						</ul>
