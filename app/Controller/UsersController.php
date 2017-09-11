@@ -80,8 +80,14 @@ class UsersController extends Controller
 		$situation=null;
 		$autism=null;
 		$error=array();
-		$id_autism=null;
+		
+		//Definir les differents autisme et departement avec la bdd
 		$id_departement=null;
+		$autismsManager=new \Manager\AutismsManager;				
+		$autisms=$autismsManager->findAll();
+		$departementManager= new \Manager\DepartementsManager;
+		$departements=$departementManager->findAll();
+		
 		//Si la requete HTTP est POST
 		if ($_SERVER['REQUEST_METHOD'] === "POST")
 		{
@@ -93,20 +99,9 @@ class UsersController extends Controller
 			$firstname=strip_tags(trim($_POST['firstname']));
 			$lastname=strip_tags(trim($_POST['lastname']));
 			$birthday=strip_tags(trim($_POST['birthday']));
-
 			$situation=strip_tags(trim($_POST['situation']));
-			
-			//Récupere l'id de l'autisme 
-			
 			$id_autism=strip_tags(trim($_POST['id_autism']));
-			/*
-			$autismsManager=new \Manager\AutismsManager;
-			$id_autism=$autismsManager->findByName($autism);*/
-
-			//Département : recuperer l'id 
-			$departement=strip_tags(trim($_POST['departement']));
-			$departementManager= new \Manager\DepartementsManager;
-			$id_departement=$departementManager->findByNumber($departement)['id'];
+			$id_departement=strip_tags(trim($_POST['id_departement']));
 
 			//Controle des données 
 
@@ -177,6 +172,7 @@ class UsersController extends Controller
 				//Ajouter l'utilisateur dans la session 
 				$_SESSION['user']= array (
 					'id'=>$user['id'],
+					'email'=>$user['email'],
 					'firstname'=>$user['firstname'],
 					'lastname'=>$user['lastname'],
 					'birthday'=>$user['birthday'],
@@ -196,7 +192,8 @@ class UsersController extends Controller
 				'lastname'=>$lastname,
 				'birthday'=>$birthday,
 				'situations'=>$situation,
-				'autism'=>$autism,
+				'autisms'=>$autisms,
+				'departements'=>$departements,
 				'errors'=>$error
 			]);
 	}

@@ -8,40 +8,46 @@
 			</ul>
 		<?php endforeach ?>
 	</div>
-	<h2><?= $title ?></h2>
+	<h2 class="text-center"><?= $title ?></h2>
 	<form method="POST">
-		<div class="form-group">
-			<label><?= $title_sub_notes1 ?> :</label>
-			<select name="sub_notes1" id="sub_notes1">
-				<?php for ($i=1;$i<6;$i++) : ?>
-					<option value="<?= $i ?>"><?= $i ?></option>
-				<?php endfor; ?>
-			</select>
+
+		<div class="row">
+			<div class="col-md-4 col-md-offset-4">	
+				
+				<div class="form-group">
+					<label><?= $title_sub_notes1 ?> :</label>
+					<select class="form-control" name="sub_notes1" id="sub_notes1">
+						<?php for ($i=1;$i<6;$i++) : ?>
+							<option value="<?= $i ?>"><?= $i ?></option>
+						<?php endfor; ?>
+					</select>
+				</div>
+				<div class="form-group">
+					<label><?= $title_sub_notes2 ?> :</label>
+					<select class="form-control" name="sub_notes2" id="sub_notes2">
+						<?php for ($i=1;$i<6;$i++) : ?>
+							<option value="<?= $i ?>"><?= $i ?></option>
+						<?php endfor; ?>
+					</select>
+				</div>
+				<div class="form-group">
+					<label><?= $title_sub_notes3 ?> :</label>
+					<select class="form-control" name="sub_notes3" id="sub_notes3">
+						<?php for ($i=1;$i<6;$i++) : ?>
+							<option value="<?= $i ?>"><?= $i ?></option>
+						<?php endfor; ?>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="title_comment">Titre :</label>
+					<input class="form-control" type="text" name="title_comment" id="title_comment" value="<?= $title_comment ?>">
+				</div>
+				<div class="form-group">
+					<label id="comment">Commentaires :</label>
+					<textarea class="form-control" name="comment" id="comment"><?= $comment ?></textarea>
+				</div>
+				<button class="btn btn-purple" type="submit">Envoyer</button>
+			</div>
 		</div>
-		<div class="form-group">
-			<label><?= $title_sub_notes2 ?> :</label>
-			<select name="sub_notes2" id="sub_notes2">
-				<?php for ($i=1;$i<6;$i++) : ?>
-					<option value="<?= $i ?>"><?= $i ?></option>
-				<?php endfor; ?>
-			</select>
-		</div>
-		<div class="form-group">
-			<label><?= $title_sub_notes3 ?> :</label>
-			<select name="sub_notes3" id="sub_notes3">
-				<?php for ($i=1;$i<6;$i++) : ?>
-					<option value="<?= $i ?>"><?= $i ?></option>
-				<?php endfor; ?>
-			</select>
-		</div>
-		<div class="form-group">
-			<label for="title_comment">Titre :</label>
-			<input type="text" name="title_comment" id="title_comment" value="<?= $title_comment ?>">
-		</div>
-		<div class="form-group">
-			<label id="comment">Commentaires :</label>
-			<textarea name="comment" id="comment"><?= $comment ?></textarea>
-		</div>
-		<button class="btn btn-purple" type="submit">Envoyer</button>
 	</form>
 <?php $this->stop('main_content') ?>

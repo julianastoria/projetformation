@@ -51,8 +51,12 @@
 			</div>
 			<div class="form-group">
 				<label for="id_institution_category">Catégorie :</label>
-				<input class="form-control" type="" name="id_institution_category" id="id_institution_category" value="<?= $id_institution_category ?>">
-			</div>
+				<select class="form-control" name="id_institution_category" id="id_institution_category">
+				<?php foreach ($institution_categories as $key => $institution_category): ?>
+					<option value="<?= $institution_category['id'] ?>"><?= $institution_category['name'] ?></option>
+				<?php endforeach ?>
+			</select>
+		</div>
 			<button class="btn btn-purple" type="submit">Envoyer</button>
 
 		</div>

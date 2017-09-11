@@ -342,6 +342,16 @@ header h2 {
 	font-size: 40px;
 }
 
+/* read institutions en responsive */
+
+.readins {
+	margin-left: 3px;
+}
+
+.insread {
+	margin-left: 3px;
+}
+
 /* pour régler le formulaire en responsive */
 .demo {
 	margin-bottom: 100px;
@@ -441,4 +451,10 @@ textarea {
 	color: #000;
 	font-size: 23px;
 	font-family: 'Open Sans', sans-serif;
+}
+
+/* read institutions */
+/* centrer les boutons avec le col-md et row et faire un float left pour séparer les deux boutons */
+.readins {
+	float: right;
 }

@@ -7,6 +7,7 @@ use \Manager\InstitutionsManager;
 use \Manager\InstitutionCategoryManager;
 use \Manager\DepartementsManager;
 
+
 class InstitutionsController extends Controller
 {
 
@@ -25,35 +26,51 @@ class InstitutionsController extends Controller
 		$institutions = $this->InstitutionsManager->findAll();
 		$institutions_dp = $this->InstitutionsManager->findAllWithDepartement();
 		$institutions_cat = $this->InstitutionsManager->findAllWithCategory();
+
 		for ($i = 0; $i < count($institutions); $i++) { 
 			$institutions[$i]['name_departement'] = $institutions_dp[$i]['name'];
 			$institutions[$i]['name_institution_category'] = $institutions_cat[$i]['name'];
+			
 		}
 		$this->show('institutions/index', [
 			'institutions' => $institutions,
-			'title' => 'Liste des établissements'
+			'title'=>'Liste des etablissement',
 		]);
 	}
 
 	public function read($id)
 	{
-		$institutions = $this->InstitutionsManager->find($id);
-		$institutions_dp = $this->InstitutionsManager->findWithDepartement($institutions['id_departement']);
-		$institutions_cat = $this->InstitutionsManager->findWithCategory($institutions['id_institution_category']); 
-		
 
-			$institutions['name_departement'] = $institutions_dp['name'];
-			$institutions['name_institution_category'] = $institutions_cat['name'];
+		$institution = $this->InstitutionsManager->find($id);
+		$institution_dp = $this->InstitutionsManager->findWithDepartement($institution['id_departement']);
+		$institution_cat = $this->InstitutionsManager->findWithCategory($institution['id_institution_category']); 
+		$institution['name_departement'] = $institution_dp['name'];
+		$institution['name_institution_category'] = $institution_cat['name'];
+		
+		if (!isset($institution['name_departement']))
+		{
+			$error="l'etablissement n'existe pas ou a ete supprimée";
+			$title=null;
+		} else {
+			$title='les details sur '.$institution['name'];
+			$error=null;
+		}
+		//Récupere les notes 
+		$InstitutionNotesManager=new \Manager\InstitutionNotesManager;
+		$notes=$InstitutionNotesManager->findByInstitution($institution['id']);
 
 		$this->show('institutions/read', [
-			'institutions' => $institutions
+			'institution' => $institution,
+			'title'=>$title,
+			'error'=>$error,
+			'notes'=>$notes
 		]);
 	}
 
 	public function create()
 	{
-		//$this->allowTo(['moderator','administrator']);
 
+		//$this->allowTo(array('moderator','administrator'));
 		$error=null;
 		$name=null;
 		$address=null;
@@ -62,10 +79,10 @@ class InstitutionsController extends Controller
 		$tel=null;
 		$email=null;
 		$site=null;
-		$id_departement=null;
 		$photos=null;
 		$type_institution=null;
-		$id_institution_category=null;
+		//$departements=$this->DepartementsManager->findAll();
+		$institution_categories=$this->InstitutionCategoryManager->findAll();
 		// Verifier si la requete HTTP est post
 		if ($_SERVER['REQUEST_METHOD'] === "POST")
 		{
@@ -78,11 +95,15 @@ class InstitutionsController extends Controller
 			$tel=$_POST['tel'];
 			$email=$_POST['email'];
 			$site=$_POST['site'];
-			$id_departement=$_POST['id_departement'];
+
 			$photos=$_POST['photos'];
-			$type_institution['type_institution'];
+			$type_institution=$_POST['type_institution'];
 			$id_institution_category=$_POST['id_institution_category'];
 
+			//récuperer le departement via le code postal 
+			$departement=substr($postal_code, 0, 2);
+
+			$id_departement=$this->DepartementsManager->findByNumber($departement)['id'];
 			//controle des données 
 			if (empty($name))
 			{
@@ -104,11 +125,6 @@ class InstitutionsController extends Controller
 				$save=false;
 				$error['tel']="le champ telephone ne doit pas etre vide";
 			}
-			if (empty($id_departement))
-			{
-				$save=false;
-				$error['id_departement']="le champ departement ne doit pas etre vide";
-			}
 			if (empty($type_institution))
 			{
 				$save=false;
@@ -120,6 +136,7 @@ class InstitutionsController extends Controller
 				$error['id_institution_category']="le champ categorie ne doit pas etre vide";
 			}
 			//controller la validite des données
+			var_dump($_POST);
 			if ($save)
 			{
 				//Enregistre le docteur dans la bdd
@@ -128,10 +145,11 @@ class InstitutionsController extends Controller
 					'address'=>$address,
 					'email'=>$email,
 					'site'=>$site,
+					'tel'=>$tel,
 					'id_departement'=>$id_departement,
 					'photos'=>$photos,
 					'type_institution'=>$type_institution,
-					'id_institution_category'=>$id_institution_category
+					'id_institution_category'=>$id_institution_category,
 					]);
 				//Redirige vers la page de details de l'etablissement
 				$this->redirectToRoute('institution_details',['id'=>$institution['id']]);
@@ -147,17 +165,16 @@ class InstitutionsController extends Controller
 				'email'=>$email,
 				'tel'=>$tel,
 				'site'=>$site,
-				'id_departement'=>$id_departement,
 				'photos'=>$photos,
 				'type_institution'=>$type_institution,
-				'id_institution_category'=>$id_institution_category,
-				'errors'=>$error
+				'errors'=>$error,
+				'institution_categories'=>$institution_categories
 			]);
 	}
 
 	public function update($id)
 	{
-		$this->allowTo(['moderator','administrator']);
+		//$this->allowTo(array(0=>'moderator',1=>'administrator'));
 		$error=null;
 		$name=null;
 		$address=null;
@@ -169,7 +186,8 @@ class InstitutionsController extends Controller
 		$id_departement=null;
 		$photos=null;
 		$type_institution=null;
-		$id_institution_category=null;
+		$institution_categories=$this->InstitutionCategoryManager->findAll();
+		$error=array();
 		// Verifier si la requete HTTP est post
 		if ($_SERVER['REQUEST_METHOD'] === "POST")
 		{
@@ -182,11 +200,14 @@ class InstitutionsController extends Controller
 			$tel=$_POST['tel'];
 			$email=$_POST['email'];
 			$site=$_POST['site'];
-			$id_departement=$_POST['id_departement'];
 			$photos=$_POST['photos'];
-			$type_institution['type_institution'];
+			$type_institution=$_POST['type_institution'];
 			$id_institution_category=$_POST['id_institution_category'];
 
+			//récuperer le departement via le code postal 
+			$departement=substr($postal_code, 0, 2);
+
+			$id_departement=$this->DepartementsManager->findByNumber($departement)['id'];
 			//controle des données 
 			if (empty($name))
 			{
@@ -198,7 +219,7 @@ class InstitutionsController extends Controller
 				$save=false;
 				$error['address']="les champs addresse , code postal et ville ne doivent pas etre vide";
 			}
-			if (§filter_var($email,FILTER_VALIDATE_EMAIL))
+			if (!filter_var($email,FILTER_VALIDATE_EMAIL))
 			{
 				$save=false;
 				$error['email']="l'email est incorrecte";
@@ -207,11 +228,6 @@ class InstitutionsController extends Controller
 			{
 				$save=false;
 				$error['tel']="le champ telephone ne doit pas etre vide";
-			}
-			if (empty($id_departement))
-			{
-				$save=false;
-				$error['id_departement']="le champ departement ne doit pas etre vide";
 			}
 			if (empty($type_institution))
 			{
@@ -228,23 +244,26 @@ class InstitutionsController extends Controller
 			{
 				$address="$address $postal_code $city";
 				//Enregistre le docteur dans la bdd
+				
 				$institution=$this->InstitutionsManager->update([
 					'name'=>$name,
 					'address'=>$address,
 					'email'=>$email,
 					'site'=>$site,
+					'tel'=>$tel,
+					'email'=>$email,
 					'id_departement'=>$id_departement,
 					'photos'=>$photos,
 					'type_institution'=>$type_institution,
 					'id_institution_category'=>$id_institution_category
 					],$id);
 				//Redirige vers la page de details de l'etablissement
-				$this->redirectToRoute('institution_details',['id'=>$institution['id']]);
+				$this->redirectToRoute('institution_details',['id'=>$id]);
 			}
 
 		}
 		$this->show('institutions/update',[
-				'title'=>'Ajouter un etablissement',
+				'title'=>'Modifier un etablissement',
 				'name'=>$name,
 				'address'=>$address,
 				'postal_code'=>$postal_code,
@@ -255,7 +274,7 @@ class InstitutionsController extends Controller
 				'id_departement'=>$id_departement,
 				'photos'=>$photos,
 				'type_institution'=>$type_institution,
-				'id_institution_category'=>$id_institution_category,
+				'institution_categories'=>$institution_categories,
 				'errors'=>$error
 			]);
 		
@@ -263,8 +282,8 @@ class InstitutionsController extends Controller
 
 	public function delete($id)
 	{
-		$this->allowTo(['moderator','administrator']);
+		$this->allowTo(array(0=>'moderator',1=>'administrator'));
 		$this->InstitutionsManager->delete($id);
-		$this->show('institutions/delete');
+		$this->redirectToRoute('institutions_index');
 	}
 }

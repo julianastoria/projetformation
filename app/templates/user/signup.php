@@ -19,41 +19,50 @@
 					<label for="email">Identifiant (Adresse Mail) : </label>
 					<input type="email" name="email" class="form-control" id="email" value="<?= $email ?>"><br/>
 				</div>
+
 				<div class="form-group">
 					<label for="password">Mot de passe :</label>
 					<input type="password" class="form-control" name="password" id="password"><br/>
 				</div>
+
 				<div class="form-group">
 					<label for="repeat_password">Répétez le mot de passe :</label>
 					<input type="password" class="form-control" name="repeat_password" id="repeat_password"><br/>
 				</div>
+
 				<div class="form-group">
 					<label for="firstname">Prenom :</label>
 					<input type="text" name="firstname" class="form-control" id="firstname" value="<?= $firstname ?>"><br/>
 				</div>
+
 				<div class="form-group">
 					<label for="lastname">Nom :</label>
 					<input type="text" name="lastname" class="form-control" id="lastname" value="<?= $lastname ?>"><br/>
 				</div>
+
 				<div class="form-group">
 					<label for="birthday">Date de naissance : </label>
-				<input type="text" name="birthday" class="form-control" id="birthday" value="<?= $birthday ?>"><br/>
+				<input type="date" name="birthday" class="form-control" id="birthday" value="<?= $birthday ?>"><br/>
 				</div>
+
 				<div class="form-group">
-					<label for="departement">Departement</label>
-					<select class="form-control" name="departement" id="departement">
-						<option class="hidden" value="nothing">--</option>
-						<option value="Nord">Nord</option>
-						<option value="Pas De Calais">Pas De Calais</option>
-						<option value="Aisne">Aisne</option>
+					<label for="id_departement">Departement</label>
+					<select class="form-control" name="id_departement" id="id_departement">
+					<?php foreach ($departements as $key => $departement): ?>
+						<option value="<?= $departement['id'] ?>"><?= $departement['name'] ?></option>
+					<?php endforeach ?>
 					</select><br/>
 				</div>
+
 				<div class="form-group">
 					<label for="autism">Autismes</label>
-					<select class="form-control" name="id_autism" id="autism">
-						<option value="id_1"></option>
-					</select><br/>
+					<select class="form-control" name="id_autism" id="id_autism">
+						<?php foreach ($autisms as $key => $autism): ?>
+						<option value="<?= $autism['id'] ?>"><?= $autism['name'] ?></option>
+						<?php endforeach ?>
+					</select><br/>						
 				</div>
+
 				<div class="form-group">
 					<label for="situation">Situation</label>
 					<select class="form-control" name="situation">
@@ -63,6 +72,7 @@
 						<option value="medecin">Medecin</option>
 					</select><br/>
 				</div>
+
 				<button class="btn btn-purple" type="submit">S'inscrire</button>
 			</form>
 		</div>

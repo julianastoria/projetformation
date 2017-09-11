@@ -23,6 +23,7 @@
 						<p><?= $doctor['average']; ?></p>
 
 					</div>
+					<a href="<?= $this->url('create_doctor_note', ['id' => $doctor['id']]) ?>">Noter</a>
 				</div>
 			</div>
 
