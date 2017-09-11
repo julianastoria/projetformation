@@ -23,18 +23,6 @@ class InstitutionNotesController extends Controller
 		$this->UsersManager= new UsersManager;
 	}
 
-	private function averageNotes ($arraynotes)
-	{
-		$max=0;
-		$i=0;
-		foreach ($arraynotes as $note)
-		{
-			$max+=int($note);
-			$i++;
-		}
-		return $max/$i;
-	}
-
 	public function create ($id)
 	{
 		
@@ -132,13 +120,23 @@ class InstitutionNotesController extends Controller
 					$this->InstitutionNotesManager->insert($note_data);
 					//Recalculer la note moyenne
 					$main_notes=$this->InstitutionNotesManager->findAllMainNotes($id);
-					$i=0;
-					$max=0;
-					foreach ($main_notes as $main_note) {
-						$i+=1;
-						$max+=intval($main_note['main_note']);
+					if (!empty($main_notes)){
+						$i=0;
+						$max=0;
+						foreach ($main_notes as $main_note) 
+						{
+							$i+=1;
+							$max+=intval($main_note['main_note']);
+						}
+
+						$average=$max/$i;
+						
+					} 
+					else 
+					{
+						
+						$average=$note_data['main_note'];
 					}
-					$average=$max/$i;
 
 					$this->InstitutionsManager->update([
 							'average'=>$average
@@ -260,7 +258,7 @@ class InstitutionNotesController extends Controller
 							];
 						$this->InstitutionNotesManager->update($note_data,$id);
 						//Recalculer la note moyenne
-						$main_notes=$this->InstitutionNotesManager->findAllMainNotes($id_institution);
+						$main_notes=$this->InstitutionNotesManager->findAllMainNotes($id_institution)['main_notes'];
 
 						$i=0;
 						$max=0;
@@ -313,14 +311,23 @@ class InstitutionNotesController extends Controller
 			{
 				$this->InstitutionNotesManager->delete($id);
 				//Recalculer la note moyenne
-				$main_notes=$this->InstitutionNotesManager->findAllMainNotes($id_institutiondoct);
+				$main_notes=$this->InstitutionNotesManager->findAllMainNotes($id_institution)['main_notes'];
 				$i=0;
 				$max=0;
-				foreach ($main_notes as $main_note) {
-					$i+=1;
-					$max+=intval($main_note['main_note']);
-				}
-				$average=$max/$i;
+				if (!empty($main_notes))
+				{
+					foreach ($main_notes as $main_note) 
+					{
+						$i+=1;
+						$max+=intval($main_note['main_note']);
+					}
+					$average=$max/$i;
+				} 
+					else 
+					{
+						$average=0;
+					}
+				
 				$this->InstitutionsManager->update(['average'=>$average],$id_institution);
 				//Rediriger vers la page de details de l'etablissement
 				$this->redirectToRoute('institution_details',['id'=>$id_institution]);

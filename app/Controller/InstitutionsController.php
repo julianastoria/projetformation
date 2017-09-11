@@ -7,6 +7,7 @@ use \Manager\InstitutionsManager;
 use \Manager\InstitutionCategoryManager;
 use \Manager\DepartementsManager;
 
+
 class InstitutionsController extends Controller
 {
 
@@ -39,6 +40,7 @@ class InstitutionsController extends Controller
 
 	public function read($id)
 	{
+
 		$institution = $this->InstitutionsManager->find($id);
 		$institution_dp = $this->InstitutionsManager->findWithDepartement($institution['id_departement']);
 		$institution_cat = $this->InstitutionsManager->findWithCategory($institution['id_institution_category']); 
@@ -53,18 +55,22 @@ class InstitutionsController extends Controller
 			$title='les details sur '.$institution['name'];
 			$error=null;
 		}
-
+		//Récupere les notes 
+		$InstitutionNotesManager=new \Manager\InstitutionNotesManager;
+		$notes=$InstitutionNotesManager->findByInstitution($institution['id']);
+		
 		$this->show('institutions/read', [
 			'institutions' => $institution,
 			'title'=>$title,
-			'error'=>$error
+			'error'=>$error,
+			'notes'=>$notes
 		]);
 	}
 
 	public function create()
 	{
 
-		//$this->allowTo(['moderator','administrator']);
+		$this->allowTo(array('moderator','administrator'));
 		$error=null;
 		$name=null;
 		$address=null;
@@ -169,7 +175,7 @@ class InstitutionsController extends Controller
 
 	public function update($id)
 	{
-		$this->allowTo(['moderator','administrator']);
+		$this->allowTo(array(0=>'moderator',1=>'administrator'));
 		$error=null;
 		$name=null;
 		$address=null;
@@ -277,7 +283,7 @@ class InstitutionsController extends Controller
 
 	public function delete($id)
 	{
-		$this->allowTo(['moderator','administrator']);
+		$this->allowTo(array(0=>'moderator',1=>'administrator'));
 		$this->InstitutionsManager->delete($id);
 		$this->redirectToRoute('institutions_index');
 	}

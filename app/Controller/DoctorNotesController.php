@@ -100,10 +100,11 @@ class DoctorNotesController extends Controller
 						];
 					$this->DoctorNotesManager->insert($note_data);
 					//Recalculer la note moyenne
-					$main_notes=$this->DoctorNotesManager->findAllMainNotes($id);
-					$i=0;
-					$max=0;
+					$main_notes=$this->DoctorNotesManager->findAllMainNotes($id)['main_notes'];
+					
 					if (!empty($main_notes)){
+						$i=0;
+						$max=0;
 						foreach ($main_notes as $main_note) {
 							$i+=1;
 							$max+=intval($main_note['main_note']);
@@ -215,7 +216,7 @@ class DoctorNotesController extends Controller
 							];
 						$this->DoctorNotesManager->update($note_data,$id);
 						//Recalculer la note moyenne
-						$main_notes=$this->DoctorNotesManager->findAllMainNotes($id);
+						$main_notes=$this->DoctorNotesManager->findAllMainNotes($id)['main_notes'];
 						$i=0;
 						$max=0;
 						foreach ($main_notes as $main_note) {
@@ -261,19 +262,26 @@ class DoctorNotesController extends Controller
 			$note=$this->DoctorNotesManager->find($id);
 			$id_user=$note['id_user'];
 			$id_doctor=$note['id_doctor'];
+
 			//Verifie si l'utilisateur est propriétaire de la note ou si il est modo ou admin 
 			if ($id_user===$_SESSION['user']['id'] || $_SESSION['user']['roles'] === 'moderator' || $_SESSION['user']['roles'] === 'administrator') 
 			{
 				$this->DoctorNotesManager->delete($id);
 				//Recalculer la note moyenne
-				$main_notes=$this->DoctorNotesManager->findAllMainNotes($id_doctor);
-				$i=0;
-				$max=0;
-				foreach ($main_notes as $main_note) {
-					$i+=1;
-					$max+=intval($main_note['main_note']);
+				$main_notes=$this->DoctorNotesManager->findAllMainNotes($id_doctor)['main_notes'];	
+				if (!empty($main_notes)){
+					$i=0;
+					$max=0;
+					foreach ($main_notes as $main_note) {
+						$i+=1;
+						$max+=intval($main_note['main_note']);
+					}
+					$average=$max/$i;
+				} 
+				else 
+				{
+					$average=0;
 				}
-				$average=$max/$i;
 				//Mettre a jour la moyenne dans la bdd 
 				$this->DoctorsManager->update(['average'=>$average],$id_doctor);
 				//Redirige vers la page de details du medecin
