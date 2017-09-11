@@ -14,7 +14,7 @@ class DefaultController extends Controller
 	public function home ()
 	{
 		$this->show('default/home',[
-				'title'=>"page d'accueil"
+				'title'=>"Acceuil - Annautisma"
 			]);
 	}
 	public function contact ()

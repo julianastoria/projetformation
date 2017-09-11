@@ -5,15 +5,15 @@
 	<form method="post">
 		<div class="form-group">
 			<label for="name">Nom :</label>
-			<input type="" name="name" id="name" value="<?= $name ?>">
+			<input type="text" name="name" id="name" value="<?= $name ?>">
 		</div>
 		<div class="form-group">
 			<label for="address">Addresse :</label>
-			<input type="" name="address" id="address" value="<?= $address ?>">
+			<input type="text" name="address" id="address" value="<?= $address ?>">
 		</div>
 		<div class="form-group">
 			<label for="postal_code">Code Postal :</label>
-			<input type="" name="postal_code" id="postal_code" value="<?= $postal_code ?>">
+			<input type="text" name="postal_code" id="postal_code" value="<?= $postal_code ?>">
 		</div>
 		<div class="form-group">
 			<label for="city">Ville :</label>
@@ -21,34 +21,34 @@
 		</div>
 		<div class="form-group">
 			<label for="tel">Télephone :</label>
-			<input type="" name="tel" id="tel" value="<?= $tel ?>">
+			<input type="text" name="tel" id="tel" value="<?= $tel ?>">
 		</div>
 		<div class="form-group">
 			<label for="email">Email :</label>
-			<input type="" name="email" id="email" value="<?= $email?>">
+			<input type="email" name="email" id="email" value="<?= $email?>">
 		</div>
 		<div class="form-group">
 			<label for="site">Site :</label>
-			<input type="" name="site" id="site" value="<?= $site ?>">
-		</div>
-		<div class="form-group">
-			<label for="id_departement">Département :</label>
-			<select name="id_departement" id="id_departement">
-				<option value="59">Nord</option>
-				<option value="62">Pas De Calais</option>
-			</select>
+			<input type="text" name="site" id="site" value="http://">
 		</div>
 		<div class="form-group">
 			<label for="photos">photos :</label>
-			<input type="" name="photos" id="photos" value="<?= $photos ?>">
+			<input type="text" name="photos" id="photos" value="http://">
 		</div>
 		<div class="form-group">
 			<label for="type_institution">Institution :</label>
-			<input type="" name="type_institution" id="type_institution" value="<?= $type_institution ?>">
+			<select id="type_institution" name="type_institution">
+				<option value="École">Ecole</option>
+				<option value="Établissement spécialisé">Etablissement Spécialisés</option>
+			</select>
 		</div>
 		<div class="form-group">
 			<label for="id_institution_category">Catégorie :</label>
-			<input type="" name="id_institution_category" id="id_institution_category" value="<?= $id_institution_category ?>">
+			<select name="id_institution_category" id="id_institution_category">
+				<?php foreach ($institution_categories as $key => $institution_category): ?>
+					<option value="<?= $institution_category['id'] ?>"><?= $institution_category['name'] ?></option>
+				<?php endforeach ?>
+			</select>
 		</div>
 		<button type="submit">Envoyer</button>
 	</form>

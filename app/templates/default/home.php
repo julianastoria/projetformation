@@ -1,4 +1,4 @@
-<?php $this->layout('layout') ?>
+<?php $this->layout('layout', ['title' => $title]) ?>
 
 
 <?php $this->start('main_content') ?>
@@ -80,3 +80,4 @@
 			</div>
 
 		</figure>
+<?php $this->stop('main_content') ?>

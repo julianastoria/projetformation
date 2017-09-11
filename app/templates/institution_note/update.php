@@ -8,11 +8,8 @@
 			</ul>
 		<?php endforeach ?>
 	</div>
+	<h2><?= $title ?></h2>
 	<form method="POST">
-		<div class="form-group">
-			<label for="note"></label>
-			<input type="number" name="note" id="note">
-		</div>
 		<div class="form-group">
 			<label><?= $title_sub_notes1 ?> :</label>
 			<select name="sub_notes1" id="sub_notes1">
@@ -23,7 +20,7 @@
 		</div>
 		<div class="form-group">
 			<label><?= $title_sub_notes2 ?> :</label>
-			<select name="sub_notes1" id="sub_notes2">
+			<select name="sub_notes2" id="sub_notes2">
 				<?php for ($i=1;$i<6;$i++) : ?>
 					<option value="<?= $i ?>"><?= $i ?></option>
 				<?php endfor; ?>
@@ -31,7 +28,7 @@
 		</div>
 		<div class="form-group">
 			<label><?= $title_sub_notes3 ?> :</label>
-			<select name="sub_notes1" id="sub_notes3">
+			<select name="sub_notes3" id="sub_notes3">
 				<?php for ($i=1;$i<6;$i++) : ?>
 					<option value="<?= $i ?>"><?= $i ?></option>
 				<?php endfor; ?>

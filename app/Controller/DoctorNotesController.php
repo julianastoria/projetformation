@@ -70,7 +70,15 @@ class DoctorNotesController extends Controller
 					$save=false;
 					$error['sub_notes']='les 3 notes doivent etre notés';
 				}
-							
+				//Controle si l'utilisateur a deja noté 
+				$notes=$this->DoctorNotesManager->findAll();
+
+				foreach ($notes as $key => $note) {
+					if ($_SESSION['user']['id']===$note['id_user']){
+						$error['user']="l'utilisateur a deja noté cet etablissement";
+						$save=false;
+					}
+				}			
 				//Verifie les données sont correcte
 				if ($save)
 				{
@@ -95,12 +103,18 @@ class DoctorNotesController extends Controller
 					$main_notes=$this->DoctorNotesManager->findAllMainNotes($id);
 					$i=0;
 					$max=0;
-					foreach ($main_notes as $main_note) {
-						$i+=1;
-						$max+=intval($main_note['main_note']);
+					if (!empty($main_notes)){
+						foreach ($main_notes as $main_note) {
+							$i+=1;
+							$max+=intval($main_note['main_note']);
+						}
+						$average=$max/$i;
+					} 
+					else 
+					{
+						$average=$note_data['main_note'];
 					}
-					$average=$max/$i;
-
+			
 					$this->DoctorsManager->update([
 							'average'=>$average
 						],$id);
@@ -261,13 +275,13 @@ class DoctorNotesController extends Controller
 				}
 				$average=$max/$i;
 				//Mettre a jour la moyenne dans la bdd 
-				$this->DoctorsManager->update(['average'=>$average],$id_doctor)
+				$this->DoctorsManager->update(['average'=>$average],$id_doctor);
 				//Redirige vers la page de details du medecin
 				$this->redirectToRoute('doctor_details',['id'=>$id_doctor]);
 			} else {
 			
-			//Redirige de details du medecin
-			$this->redirectToRoute('doctor_details',['id'=>$id_doctor]);
+				//Redirige de details du medecin
+				$this->redirectToRoute('doctor_details',['id'=>$id_doctor]);
 			}
 		}
 		else 

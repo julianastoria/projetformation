@@ -34,16 +34,19 @@
 		<input type="date" name="birthday" id="birthday" value="<?= $birthday ?>"><br/>
 		</div>
 		<div class="form-group">
-			<label for="departement">Departement</label>
-			<select name="departement" id="departement">
-				<option value="59">Nord</option>
-				<option value="62">Pas De Calais</option>
-			</select><br/>
+			<label for="id_departement">Departement</label>
+			<select name="id_departement" id="id_departement">
+				<?php foreach ($departements as $key => $departement): ?>
+					<option value="<?= $departement['id'] ?>"><?= $departement['name'] ?></option>
+				<?php endforeach ?>
+			</select>
 		</div>
 		<div class="form-group">
 			<label for="id_autism">Autismes</label>
 			<select name="id_autism" id="id_autism">
-				<option value="1">Aucun</option>
+				<?php foreach ($autisms as $key => $autism): ?>
+					<option value="<?= $autism['id'] ?>"><?= $autism['name'] ?></option>
+				<?php endforeach ?>
 			</select><br/>
 		</div>
 		<div class="form-group">

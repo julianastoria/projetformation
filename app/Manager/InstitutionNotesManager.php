@@ -14,4 +14,13 @@ class InstitutionNotesManager extends Manager
 		$sth->execute();
 		return $sth->fetchAll();
 	}
+	public function findTypeInstitution($id)
+	{
+		$sql = "SELECT type_institution FROM institutions WHERE id= :id";
+		
+		$sth = $this->dbh->prepare($sql);
+		$sth->bindValue(":id", $id);
+		$sth->execute();
+		return $sth->fetch();
+	}
 }
