@@ -1,6 +1,5 @@
 <?php $this->layout('layout', ['title' => 'Accueil Annautisma']) ?>
 
-
 <?php $this->start('main_content') ?>
 <header class="jumbotron">
 	<h1 class="text-center">Annautisma</h1>
