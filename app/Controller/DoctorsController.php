@@ -118,6 +118,7 @@ class DoctorsController extends Controller
 			$autisms['haut_niveau']  = isset($_POST['haut_niveau']) ? "Haut niveau" : null;
 			$autisms['asperger'] 	 = isset($_POST['asperger']) 	? "Asperger" 	: null;
 			$autisms['atypique'] 	 = isset($_POST['atypique']) 	? "Atypique" 	: null;
+			var_dump($autisms);
 
 			// Vérification des données
 				// Récupération du département en fonction du code postal
@@ -168,7 +169,16 @@ class DoctorsController extends Controller
 		}
 
 		$this->show('doctors/create', [
-			"doctor" => $doctor
+			"firstname" 	=> $firstname,
+			"lastname" 		=> $lastname,
+			"address" 		=> $address,
+			"postal_code" 	=> $postal_code,
+			"city"			=> $city,
+			"departement" 	=> $departement['name'],
+			"tel" 			=> $tel,
+			"email" 		=> $email,
+			"site" 			=> $site,
+			// "category" 		=> $category
 		]);
 	}
 
@@ -270,7 +280,17 @@ class DoctorsController extends Controller
 		}
 
 		$this->show('doctors/update', [
-			"doctor" => $doctor
+			"firstname" 	=> $firstname,
+			"lastname" 		=> $lastname,
+			"address" 		=> $address,
+			"postal_code" 	=> $postal_code,
+			"city"			=> $city,
+			"departement" 	=> $departement,
+			"tel" 			=> $tel,
+			"email" 		=> $email,
+			"site" 			=> $site,
+			// "category" 		=> $category
+			"autisms" => $autisms
 		]);
 	}
 

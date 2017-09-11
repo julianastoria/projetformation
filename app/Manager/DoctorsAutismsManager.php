@@ -30,4 +30,11 @@ class DoctorsAutismsManager extends Manager
 		}
 		// return $this->find($this->lastInsertId());
 	}
+
+
+
+	public function findWithDoctorId($id)
+	{
+		
+	}
 }

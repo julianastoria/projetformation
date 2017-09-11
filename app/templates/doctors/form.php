@@ -8,58 +8,57 @@
 
 			<div class="form-group">
 				<label for="firstname">Prénom : </label>
-				<input type="text" id="firstname" name="firstname" class="form-control" value="<?= $doctor['firstname']; ?>"/>
+				<input type="text" id="firstname" name="firstname" class="form-control" value="<?= $firstname; ?>"/>
 			</div>
 
 
 			<div class="form-group">
 				<label for="lastname">Nom de famille : </label>
-				<input type="text" id="lastname" name="lastname" class="form-control" value="<?= $doctor['lastname']; ?>"/>
+				<input type="text" id="lastname" name="lastname" class="form-control" value="<?= $lastname; ?>"/>
 			</div>
 			
 
-
 			<div class="form-group">
 				<label for="address">Adresse postale : </label>
-				<input type="text" id="address" name="address" class="form-control" value="<?= $doctor['address'][0]; ?>"/>
+				<input type="text" id="address" name="address" class="form-control" value="<?= $address; ?>"/>
 			</div>
 
 
 			<div class="form-group">
 				<label for="postal_code">Code postal : </label>
-				<input type="text" id="postal_code" name="postal_code" class="form-control" value="<?= $doctor['address'][1]; ?>"/>
+				<input type="text" id="postal_code" name="postal_code" class="form-control" value="<?= $postal_code; ?>"/>
 			</div>
 
 
 			<div class="form-group">
 				<label for="city">Ville : </label>
-				<input type="text" id="city" name="city" class="form-control" value="<?= $doctor['address'][2]; ?>"/>
+				<input type="text" id="city" name="city" class="form-control" value="<?= $city; ?>"/>
 			</div>
 
 
 			<!-- À faire entrer par l'utilisateur ou à faire faire automatiquement à la machine ? Est-ce possible ? -->
 			<div class="form-group">
 				<label for="departement">Département : </label>
-				<input type="text" id="departement" name="departement" class="form-control" value="<?= $doctor['departement']; ?>"/>
+				<input type="text" id="departement" name="departement" class="form-control" value="<?= $departement; ?>"/>
 			</div>
 			
 
 
 			<div class="form-group">
 				<label for="tel">Téléphone : </label>
-				<input type="tel" id="tel" name="tel" class="form-control" value="<?= $doctor['tel']; ?>"/>
+				<input type="tel" id="tel" name="tel" class="form-control" value="<?= $tel; ?>"/>
 			</div>
 
 
 			<div class="form-group">
 				<label for="email">Adresse email : </label>
-				<input type="email" id="email" name="email" class="form-control" value="<?= $doctor['email']; ?>"/>
+				<input type="email" id="email" name="email" class="form-control" value="<?= $email; ?>"/>
 			</div>
 
 
 			<div class="form-group">
 				<label for="site">Site web : </label>
-				<input type="url" id="site" name="site" class="form-control" value="http://<?= $doctor['site']; ?>"/>
+				<input type="url" id="site" name="site" class="form-control" value="<?= $site; ?>" placeholder="http://"/>
 			</div>
 			
 
@@ -77,7 +76,7 @@
 				</select>
 			</div>
 
-
+			<?php var_dump($autisms); ?>
 
 			<div id="types_autisme" class="form-group hidden">
 
@@ -85,21 +84,21 @@
 
 				<div class="checkbox">
 					<label>
-						<input type="checkbox" id="haut_niveau" name="haut_niveau"/>
+						<input <?= isset($_POST['haut_niveau']) ? 'checked' : null ?> type="checkbox" id="haut_niveau" name="haut_niveau"/>
 						Haut Niveau
 					</label>
 				</div>
 
 				<div class="checkbox">
 					<label>
-						<input type="checkbox" id="asperger" name="asperger"/>
+						<input <?= isset($_POST['asperger']) ? 'checked' : null ?> type="checkbox" id="asperger" name="asperger"/>
 						Asperger
 					</label>
 				</div>
 
 				<div class="checkbox">
 					<label>
-						<input type="checkbox" id="atypique" name="atypique"/>
+						<input <?= isset($_POST['atypique']) ? 'checked' : null ?> type="checkbox" id="atypique" name="atypique"/>
 						Atypique
 					</label>
 				</div>
