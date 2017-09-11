@@ -37,7 +37,7 @@ class DoctorsManager extends Manager
 		$sth->execute();
 		return $sth->fetch();
 	}
-	
+
 	public function findWithCategory($id)
 	{
 		if (!is_numeric($id)){
