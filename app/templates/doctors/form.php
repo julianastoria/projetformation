@@ -79,8 +79,6 @@
 
 
 
-
-
 			<div id="types_autisme" class="form-group hidden">
 
 				<label>Les types d'autisme : </label>
@@ -105,7 +103,6 @@
 						Atypique
 					</label>
 				</div>
-
 			</div>
 
 			<button class="btn btn-purple" type="submit">Envoyer</button>

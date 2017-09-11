@@ -5,44 +5,37 @@ namespace Controller;
 use \W\Controller\Controller;
 use \W\Manager\UserManager;
 use \W\Security\AuthentificationManager;
-use \Manager\TokensManager;
-
 
 class UsersController extends Controller 
 {
 
-	private $AuthManager;
-	private $UserManager;
+	private $authManager;
+	private $userManager;
 
 
 	public function __construct()
 	{
-		$this->AuthManager= new AuthentificationManager;
+		$this->authManager= new AuthentificationManager;
 
-		$this->UserManager= new UserManager;
+		$this->userManager= new UserManager;
+		$this->userManager->setTable('users');
 	}
 	public function profile ()
 	{
 		//Verifie si l'existence de la session 
-		if (isset($_SESSION))
+		if (empty($_SESSION))
 		{
-			// Recupere les données de la session 
-			$email=$_SESSION['user']['email'];
-			$firstname=$_SESSION['user']['firstname'];
-			$lastname=$_SESSION['user']['lastname'];
-			$birthday=$_SESSION['user']['birthday'];
-			$autism=$_SESSION['user']['autism'];
-
-		} else {
 			//redirige vers la page login
 			$this->redirectToRoute('user_signin');
-		}
+		} 
+		$UsersManager=new \Manager\UsersManager;
+		$departement=$UsersManager->findDepartement($_SESSION['user']['id_departement']);
+		$autism=$UsersManager->findAutism($_SESSION['user']['id_autism']);
 		$this->show('user/profile',[
-				'email'=>$email,
-				'firstname'=>$firstname,
-				'lastname'=>$lastname,
-				'birthday'=>$birthday,
-				'autism'=>$autism,
+			'title'=>'Profile de '. $_SESSION['user']['firstname'],
+			'user'=>$_SESSION['user'],
+			'departement'=>$departement['name'],
+			'autism'=>$autism['name']
 			]);
 	}
 	public function signin ()
@@ -57,12 +50,12 @@ class UsersController extends Controller
  			$email=$_POST['email'];
  			$password=$_POST['password'];
 			//Controller les identifications 
- 			if ($id=$this->AuthManager->isValidLoginInfo($email, $password))
+ 			if ($id=$this->authManager->isValidLoginInfo($email, $password))
       		{		
-				//récupere les données de l'identfiant dans la bdd
-      			$user=$this->UserManager->find($id);
+				//récupere les données de l'identifiant dans la bdd
+      			$user=$this->userManager->find($id);
 				//Ajoute l'identifiant a la session 
-      			$this->AuthManager->logUserIn($user);
+      			$this->authManager->logUserIn($user);
 				//redirige vers la page de profile
 				$this->redirectToRoute('profile'); 
  			} 
@@ -72,6 +65,7 @@ class UsersController extends Controller
  			}
  		}	
 		$this->show('user/signin',[
+				'title'=>'connexion',
 				'email'=>$email,
 				'error'=>$error,
 			]);
@@ -101,12 +95,18 @@ class UsersController extends Controller
 			$birthday=strip_tags(trim($_POST['birthday']));
 
 			$situation=strip_tags(trim($_POST['situation']));
-			$autism=strip_tags(trim($_POST['autism']));
+			
+			//Récupere l'id de l'autisme 
+			
+			$id_autism=strip_tags(trim($_POST['id_autism']));
+			/*
+			$autismsManager=new \Manager\AutismsManager;
+			$id_autism=$autismsManager->findByName($autism);*/
 
 			//Département : recuperer l'id 
 			$departement=strip_tags(trim($_POST['departement']));
-			$departementmanager= new \Manager\DepartementsManager;
-			$id_departement=$departementmanager->findByNumber($departement)['id'];
+			$departementManager= new \Manager\DepartementsManager;
+			$id_departement=$departementManager->findByNumber($departement)['id'];
 
 			//Controle des données 
 
@@ -122,7 +122,7 @@ class UsersController extends Controller
 				$save=false;
 				$error['email']="l'email n'est pas valide";
 			} 
-			else if ($this->UserManager->emailExists($email))
+			else if ($this->userManager->emailExists($email))
 			{
 				$save=false;
 				$error['email']="l'email a déjà été utilisée";
@@ -155,22 +155,13 @@ class UsersController extends Controller
 				$save=false;
 				$error['birthday']="le champ date de naissance est vide";
 			}
-			// Récupere l'id de l'autisme si il est spécifié
-			if (!empty($autism))
-			{
-				//Récupere l'id de l'autisme 
-				$autismsmanager=new \Manager\AutismsManager;
-				$id_autism=$autismsmanager->findByName($autism)['id'];
-			}
-
+			
+				
 			if ($save)
 			{
-				
 				//Haschage du password
 				$password=password_hash($password,PASSWORD_DEFAULT);
-				
-				//introduction des données dans la BDD
-				$user=$this->UserManager->insert([
+				$user_data=[
 						'firstname'=>$firstname,
 						'lastname'=>$lastname,
 						'email'=>$email,
@@ -180,21 +171,31 @@ class UsersController extends Controller
 						'roles'=>'user',
 						'situations'=>$situation,
 						'id_autism'=>$id_autism,
-					]);
-				var_dump($user);
-				exit;
+					];
+				//introduction des données dans la BDD
+				$user=$this->userManager->insert($user_data);
 				//Ajouter l'utilisateur dans la session 
-				$this->AuthManager->logUserIn($user);
+				$_SESSION['user']= array (
+					'id'=>$user['id'],
+					'firstname'=>$user['firstname'],
+					'lastname'=>$user['lastname'],
+					'birthday'=>$user['birthday'],
+					'id_departement'=>$user['id_departement'],
+					'roles'=>$user['roles'],
+					'situations'=>$user['situation'],
+					'id_autism'=>$user['id_autism'],
+				);
 				//Rediriger vers la page de profile 
 				$this->redirectToRoute('profile'); 				
 			}
 		}
 		$this->show('user/signup',[
+				'title'=>'Inscription',
 				'email'=>$email,
 				'firstname'=>$firstname,
 				'lastname'=>$lastname,
 				'birthday'=>$birthday,
-				'situation'=>$situation,
+				'situations'=>$situation,
 				'autism'=>$autism,
 				'errors'=>$error
 			]);
@@ -209,7 +210,7 @@ class UsersController extends Controller
 			//Recupere les données du post
 			$email=strip_tags(trim($_POST['email']));
 			//Verifie l'existence du mail dans la bdd 
-			if ($user =$this->UsersManager->getUserByUsernameOrEmail($email))
+			if ($user =$this->userManager->getUserByUsernameOrEmail($email))
 			{
 				//Generation du token 
 				$token=array(
@@ -222,6 +223,7 @@ class UsersController extends Controller
 			}
 		}
 		$this->show('user/lost_pwd',[
+				'title'=>'Mot de passe perdu',
 				'error'=>$error,
 			]);
 	}
@@ -238,8 +240,8 @@ class UsersController extends Controller
 			$password=$_POST['password'];
 			$repeat_password=$_POST['repeat_password'];
 			//Récupere le token 
-			$TokensManager= new TokensManager;
-			$token_data=$TokensManager->findByToken($token);
+			$tokensManager= new \Manager\UsersManager;
+			$token_data=$tokensManager->findByToken($token);
 			//Verifier les mdp 
 			if ($password!==$repeat_password)
 			{
@@ -254,7 +256,7 @@ class UsersController extends Controller
 					//Haschage du nouveau mdp
 					$password=password_hash($password,PASSWORD_DEFAULT);
 					//changer l'ancien mdp par le nouveau 
-					$this->UsersManager->update(['password'=>$password],$user['id']);
+					$this->userManager->update(['password'=>$password],$user['id']);
 					//redirige vers la page de connexion
 					$this->redirectToRoute('user_signin');
 				} 
@@ -265,7 +267,15 @@ class UsersController extends Controller
 			}		
 		}
 		$this->show('user/reset_pwd',[
+			'title'=>'reinitialisation mot de passe',
 			'error'=>$error
 			]);
+	}
+	public function logout ()
+	{
+		//Detruire la session 
+		$this->authManager->logUserOut();
+		//Redirige vers la page d'acceuil
+		$this->redirectToRoute('home');
 	}
 }

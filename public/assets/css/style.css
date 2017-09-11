@@ -1,8 +1,29 @@
 /* garder le footer en bas */
+html {
+  height: 100%;
+  box-sizing: border-box;
+ 
+}
 
+body {
+  position: relative;
+  margin: 0;
+  padding-bottom: 6rem;
+  min-height: 100%;
 
+ 
+}
 
+.demo {
+ 	width: 100%;
+}
 
+.footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+ }
 
 /* layout et home.php */
 
@@ -78,6 +99,37 @@ h2 {
 	color: #8845e0;
 	font-family: 'Sorts Mill Goudy', serif;
 
+}
+
+/* pour le dropdown multi-level */
+/* elle me permet de passer la souris sur les sous-éléments */
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu>.dropdown-menu {
+	top: 0;
+    left: 100%;
+    margin-top: -6px;
+    margin-left: -1px;
+}
+
+.dropdown-submenu:hover>.dropdown-menu {
+    display: block;
+
+}
+
+.dropdown-submenu>a:after {
+	display: block;
+	float: right;
+	width: 0;
+    height: 0;
+}
+
+
+.dropdown-submenu.pull-left>.dropdown-menu {
+	left: -100%;
+    margin-left: 10px;
 }
 
 /* header */
@@ -192,12 +244,14 @@ footer p {
 		display: inline;
 		/* méthode pour enlever les traces du linear-gradient */	
 		background: transparent;
+		margin-left: 52px;
 	}
 
 .navbar-default .navbar-nav > li > a {
 		float: left;
 		display: block;
 		font-size: 17px;
+		margin-right: 13px;
 		
 	}
 
@@ -206,11 +260,25 @@ footer p {
 
 }
 
-/* pour afficher la couleur du dropdown en blanc */
-.navbar-default .navbar-nav .open .dropdown-menu > li > a{
-	color: #fff;
-	font-size: 18px;
+.btn-blue .ajout {
+	margin-left: -105px;
+}
 
+/* pour afficher la couleur du dropdown en blanc */
+.navbar-default .navbar-nav .open .dropdown-menu > li > a {
+	color: #fff;
+	font-size: 19px;
+
+}
+
+.navbar-default .navbar-nav .open .dropdown-menu > li > a:hover {
+	color: #8845e0;
+
+}
+
+/* pour réduire le font-size uniquement des sous-menus */
+.navbar-default .navbar-nav .open .dropdown-menu > li .eta {
+	font-size: 16px;
 }
 
 .navbar-default .navbar-toggle .icon-bar {
@@ -225,8 +293,10 @@ footer p {
 	font-size: 53px;
 }
 
-	}
-
+/* pour régler le formulaire en responsive */
+.demo {
+	margin-bottom: 100px;
+}
 
 /* create_medecin.php avec un include de form.php */
 label {
@@ -238,17 +308,47 @@ label {
 
 input {
 	color: #000;
+	font-family: 'Sorts Mill Goudy', serif;
+}
 
+.form-control {
+	border-radius: 10px;
 }
 
 .checkbox {
 	font-size: 13px;
 }
 
+select {
+	font-family: 'Sorts Mill Goudy', serif;
+	color: #000;
+	border-radius: 10px;
+}
+
+/* index.php doctors */
+.index {
+	color: #8845e0; 
+}
+
+.thumbnail:hover {
+	background-color: #fff9f2;
+}
+
+.pagination > li > a, .pagination > li > span {
+	color: #8845e0; 
+}
+
+.pagination > li > a:hover {
+	background-color: #fff9f2;
+}
+
 /* users signup */
 option {
 	color: #000;
 	font-family: 'Sorts Mill Goudy', serif;
+	font-size: 15px;
+	
+	
 }
 
 .alert-danger {
@@ -267,4 +367,22 @@ textarea {
 	color: #000;
 }
 
-/* contact */
+.notes {
+	font-size: 17px;
+}
+
+.note {
+	font-size: 18px;
+}
+
+/* profil */
+.profile {
+	font-size: 40px;
+
+}
+
+.user {
+	color: #000;
+	font-size: 23px;
+
+}

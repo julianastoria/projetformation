@@ -12,7 +12,6 @@ class DoctorsManager extends Manager
 		
 		$sth = $this->dbh->prepare($sql);
 		$sth->execute();
-
 		return $sth->fetchAll();
 	}
 
@@ -22,7 +21,6 @@ class DoctorsManager extends Manager
 		
 		$sth = $this->dbh->prepare($sql);
 		$sth->execute();
-
 		return $sth->fetchAll();
 	}
 
@@ -37,7 +35,6 @@ class DoctorsManager extends Manager
 		$sth = $this->dbh->prepare($sql);
 		$sth->bindValue(":doctor_id", $id);
 		$sth->execute();
-
 		return $sth->fetch();
 	}
 
@@ -52,7 +49,6 @@ class DoctorsManager extends Manager
 		$sth = $this->dbh->prepare($sql);
 		$sth->bindValue(":doctor_id", $id);
 		$sth->execute();
-
 		return $sth->fetch();
 	}
 }

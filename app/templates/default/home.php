@@ -15,9 +15,9 @@
 <div class="container-fluid">
 	<div class="row">
 	<!-- Méthode pour mettre un élément au milieu grâce au colonne -->
-	<div class="col-md-8 col-md-offset-4">
+	<div class="col-md-3 col-md-offset-4">
 		<form class="form-horizontal">
-			<input type="text" name="search">
+			<input class="form-control" type="text" name="search"><br>
 			<button class="btn btn-purple">Envoyer</button>
 		</form>
 	</div>
@@ -80,7 +80,3 @@
 			</div>
 
 		</figure>
-
-
-</div>
-<?php $this->stop('main_content') ?>

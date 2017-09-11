@@ -25,6 +25,7 @@ class DoctorsController extends Controller
 		$pc = isset($_GET['pc']) ? $_GET['pc'] : null;
 		if ($pc) {
 			$departement = substr($pc, 0, 2);
+
 			$data = $this->departements_m->findByNumber($departement);
 
 			$this->showJson($data);
@@ -81,7 +82,6 @@ class DoctorsController extends Controller
 		$haut_niveau = null;
 		$asperger 	 = null;
 		$atypique 	 = null;
-
 
 		$save = true;
 
@@ -157,12 +157,10 @@ class DoctorsController extends Controller
 			"doctor" => $doctor
 			]);
 	}
-
 	public function update()
 	{
 		$this->show('doctors/update');
 	}
-
 	public function delete()
 	{
 		$this->show('doctors/delete');
