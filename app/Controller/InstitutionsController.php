@@ -58,9 +58,9 @@ class InstitutionsController extends Controller
 		//Récupere les notes 
 		$InstitutionNotesManager=new \Manager\InstitutionNotesManager;
 		$notes=$InstitutionNotesManager->findByInstitution($institution['id']);
-		
+
 		$this->show('institutions/read', [
-			'institutions' => $institution,
+			'institution' => $institution,
 			'title'=>$title,
 			'error'=>$error,
 			'notes'=>$notes
