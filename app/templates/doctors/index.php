@@ -13,7 +13,7 @@
 					<div class="caption">
 
 						<a href="<?= $this->url('doctor_details', ['id' => $doctor['id']]); ?>">
-							<h3 class="index"><?= "Dr. ".$doctor['lastname']; ?></h3>
+							<h3 class=" text-center index"><?= "Dr. ".$doctor['lastname']; ?></h3>
 						</a>
 
 						<p><?= $doctor['name_doctor_category']; ?></p>

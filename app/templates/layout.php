@@ -11,14 +11,14 @@
 	<link rel="stylesheet" href="<?= $this->assetUrl('css/font-awesome.css') ?>">
 	
 	<link href="https://fonts.googleapis.com/css?family=Julius+Sans+One" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Sorts+Mill+Goudy" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 	
 </head>
 	<body>
 	<div class="container-fluid demo">
-	
-<header>
+	<header>
+
 		<!--navbar -->
 <nav class="navbar navbar-default navbar-static-top">
 	<div class="container-fluid">

@@ -97,7 +97,7 @@ h2 {
 
 .dropdown-menu > li > a {
 	color: #8845e0;
-	font-family: 'Sorts Mill Goudy', serif;
+	font-family: 'Open Sans', sans-serif;
 
 }
 
@@ -135,23 +135,23 @@ h2 {
 /* header */
 header h2 {
 	color: #fff;
-	font-family: 'Sorts Mill Goudy', serif;
+	font-family: 'Open Sans', sans-serif;
 }
 
 header {
 	/* moyen pour ajuster une image à sa hauteur */
 	background-image: url(../img/water-1330252_1920.jpg);
 	background-size:cover;
-    margin: 0 -30px -24px -15px;
+    margin: 0 -35px -44px -15px;
+    
 }
-
 
 
 .jumbotron h1 {
 	font-family: 'Roboto', sans-serif;
 	font-size: 80px;
-
 }
+
 
 .btn-blue {
 	background: linear-gradient(#0072ff, #00c6ff);
@@ -174,7 +174,7 @@ header {
 .btn-purple {
 	background: linear-gradient(#9D50BB, #6E48AA);
 	color: #fff;
-	font-family: 'Sorts Mill Goudy', serif;
+	font-family: 'Open Sans', sans-serif;
 	padding: 10px 8px 10px 8px;
 	border-radius: 8px;
 	font-size: 15px;
@@ -206,20 +206,29 @@ footer {
 	width: 220px;
 }
 
-/* écriture à côté des photos */
-figure a h4 {
+/* écriture à côté des thumbnails */
+.thumbnail .caption a h4 {
 	color: #8845e0;
-	font-family: 'Sorts Mill Goudy', serif;
+	font-family: 'Open Sans', sans-serif;
+
 
 }
 
-figure a {
+.thumbnail .caption a h4:hover {
+	background-color: #fff9f2;
+}
+
+.thumbnail a {
 	color: #8845e0;
+}
+
+.doc {
+	margin-top: 90px;
 }
 
 .afficher {
 	color: #8845e0;
-	font-family: 'Sorts Mill Goudy', serif;
+	font-family: 'Open Sans', sans-serif;
 }
 
 /* lien et paragraphe du footer */
@@ -290,25 +299,31 @@ footer p {
 }
 
 .jumbotron h1 {
-	font-size: 53px;
+	font-size: 50px;
+
 }
+
+
+
 
 /* pour régler le formulaire en responsive */
 .demo {
 	margin-bottom: 100px;
+	}
 }
+
 
 /* create_medecin.php avec un include de form.php */
 label {
 	color: #8845e0;
 	font-weight: normal;
 	font-size: 17px;
-	font-family: 'Sorts Mill Goudy', serif;
+	font-family: 'Open Sans', sans-serif;
 }
 
 input {
 	color: #000;
-	font-family: 'Sorts Mill Goudy', serif;
+	font-family: 'Open Sans', sans-serif;
 }
 
 .form-control {
@@ -320,7 +335,7 @@ input {
 }
 
 select {
-	font-family: 'Sorts Mill Goudy', serif;
+	font-family: 'Open Sans', sans-serif;
 	color: #000;
 	border-radius: 10px;
 }
@@ -342,24 +357,29 @@ select {
 	background-color: #fff9f2;
 }
 
+.thumbnail p {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 18px;
+}
+
 /* users signup */
 option {
 	color: #000;
-	font-family: 'Sorts Mill Goudy', serif;
+	font-family: 'Open Sans', sans-serif;
 	font-size: 15px;
 	
 	
 }
 
 .alert-danger {
-	font-family: 'Sorts Mill Goudy', serif;
+	font-family: 'Open Sans', sans-serif;
 	font-size: 17px;
 }
 
 /* signin */
 .pwd {
 	color: #8845e0;
-	font-family: 'Sorts Mill Goudy', serif;
+	font-family: 'Open Sans', sans-serif;
 }
 
 /* doctors_notes*/
@@ -384,5 +404,5 @@ textarea {
 .user {
 	color: #000;
 	font-size: 23px;
-
+	font-family: 'Open Sans', sans-serif;
 }
