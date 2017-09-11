@@ -30,7 +30,8 @@ class InstitutionsController extends Controller
 			$institutions[$i]['name_institution_category'] = $institutions_cat[$i]['name'];
 		}
 		$this->show('institutions/index', [
-			'institutions' => $institutions
+			'institutions' => $institutions,
+			'title' => 'Liste des établissements'
 		]);
 	}
 
@@ -93,7 +94,7 @@ class InstitutionsController extends Controller
 				$save=false;
 				$error['address']="les champs addresse , code postal , ville ne doivent pas etre vide";
 			}
-			if (§filter_var($email,FILTER_VALIDATE_EMAIL))
+			if (!filter_var($email,FILTER_VALIDATE_EMAIL))
 			{
 				$save=false;
 				$error['email']="l'email est incorrecte";
