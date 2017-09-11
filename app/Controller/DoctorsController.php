@@ -44,7 +44,7 @@ class DoctorsController extends Controller
 
 		$this->show('doctors/index', [
 			'doctors' => $doctors
-		]);
+			]);
 	}
 
 	public function read($id)
@@ -60,7 +60,7 @@ class DoctorsController extends Controller
 		// Appel de la vue avec passage des données du médecin
 		$this->show('doctors/read', [
 			'doctor' => $doctor
-		]);
+			]);
 	}
 
 	public function create()
@@ -155,7 +155,7 @@ class DoctorsController extends Controller
 
 		$this->show('doctors/create', [
 			"doctor" => $doctor
-		]);
+			]);
 	}
 
 	public function update()
