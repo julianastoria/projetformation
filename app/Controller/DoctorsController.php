@@ -97,7 +97,7 @@ class DoctorsController extends Controller
 
 		$autisms 	 = array();
 
-		$save = true;
+		$save = false;
 
 		if ($_SERVER['REQUEST_METHOD'] === "POST")
 		{
@@ -263,7 +263,9 @@ class DoctorsController extends Controller
 				}
 
 				// Redirection vers la page de détail du médecin traité
-				$this->redirectToRoute('doctors_details', ['id' => $id]);
+				$this->redirectToRoute('doctor_details', [
+					'id' => $id
+				]);
 			}
 		}
 
@@ -274,8 +276,18 @@ class DoctorsController extends Controller
 
 
 
-	public function delete()
+	public function delete($id)
 	{
+		$doctor = $this->doctors_m->find($id);
+		if ($_SERVER['REQUEST_METHOD'] === "POST") {
+			$this->doctors_m->delete($id);
+			$this->redirectToRoute('doctors_index');
+		} else {
+			$this->redirectToRoute('doctor_details', [
+				'id' => $id
+			]);
+		}
+
 		$this->show('doctors/delete');
 	}
 }

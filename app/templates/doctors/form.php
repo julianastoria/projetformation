@@ -21,19 +21,19 @@
 
 			<div class="form-group">
 				<label for="address">Adresse postale : </label>
-				<input type="text" id="address" name="address" class="form-control" value="<?= $doctor['address']; ?>"/>
+				<input type="text" id="address" name="address" class="form-control" value="<?= $doctor['address'][0]; ?>"/>
 			</div>
 
 
 			<div class="form-group">
 				<label for="postal_code">Code postal : </label>
-				<input type="text" id="postal_code" name="postal_code" class="form-control" value="<?= $doctor['postal_code']; ?>"/>
+				<input type="text" id="postal_code" name="postal_code" class="form-control" value="<?= $doctor['address'][1]; ?>"/>
 			</div>
 
 
 			<div class="form-group">
 				<label for="city">Ville : </label>
-				<input type="text" id="city" name="city" class="form-control" value="<?= $doctor['city']; ?>"/>
+				<input type="text" id="city" name="city" class="form-control" value="<?= $doctor['address'][2]; ?>"/>
 			</div>
 
 
