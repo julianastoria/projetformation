@@ -8,9 +8,9 @@
 			</ul>
 		<?php endforeach ?>
 	</div>
-	
+
 	<div class="row">
-	<div class="col-md-3 col-md-offset-4">
+		<div class="col-md-3 col-md-offset-4">
 
 			<h2 class="text-center">Inscription :</h2><br>
 
@@ -75,6 +75,7 @@
 
 				<button class="btn btn-purple" type="submit">S'inscrire</button>
 			</form>
+
 		</div>
 	</div>
 	

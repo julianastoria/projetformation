@@ -80,14 +80,13 @@ class UsersController extends Controller
 		$situation=null;
 		$autism=null;
 		$error=array();
-		
+
 		//Definir les differents autisme et departement avec la bdd
-		$id_departement=null;
-		$autismsManager=new \Manager\AutismsManager;				
+		$autismsManager=new \Manager\AutismsManager;
 		$autisms=$autismsManager->findAll();
 		$departementManager= new \Manager\DepartementsManager;
 		$departements=$departementManager->findAll();
-		
+
 		//Si la requete HTTP est POST
 		if ($_SERVER['REQUEST_METHOD'] === "POST")
 		{
@@ -100,6 +99,7 @@ class UsersController extends Controller
 			$lastname=strip_tags(trim($_POST['lastname']));
 			$birthday=strip_tags(trim($_POST['birthday']));
 			$situation=strip_tags(trim($_POST['situation']));
+
 			$id_autism=strip_tags(trim($_POST['id_autism']));
 			$id_departement=strip_tags(trim($_POST['id_departement']));
 

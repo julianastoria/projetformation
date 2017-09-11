@@ -13,4 +13,8 @@
 	<p class="text-center user">Son domaine médical : <?= $doctor['name_doctor_category']; ?></p>
 	<p class="text-center user">Sa moyenne : <?= $doctor['average']; ?></p>
 
+	<a href="<?= $this->url('doctor_update',['id'=>$doctor['id']]) ?>" class="btn">Modifier</a>
+	<a href="<?= $this->url('doctor_delete',['id'=>$doctor['id']]) ?>" class="btn">Supprimer</a>
+
+
 <?php $this->stop('main_content') ?>

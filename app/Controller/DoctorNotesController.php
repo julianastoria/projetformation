@@ -70,7 +70,15 @@ class DoctorNotesController extends Controller
 					$save=false;
 					$error['sub_notes']='les 3 notes doivent etre notés';
 				}
-							
+				//Controle si l'utilisateur a deja noté 
+				$notes=$this->DoctorNotesManager->findAll();
+
+				foreach ($notes as $key => $note) {
+					if ($_SESSION['user']['id']===$note['id_user']){
+						$error['user']="l'utilisateur a deja noté cet etablissement";
+						$save=false;
+					}
+				}			
 				//Verifie les données sont correcte
 				if ($save)
 				{
@@ -92,15 +100,22 @@ class DoctorNotesController extends Controller
 						];
 					$this->DoctorNotesManager->insert($note_data);
 					//Recalculer la note moyenne
-					$main_notes=$this->DoctorNotesManager->findAllMainNotes($id);
-					$i=0;
-					$max=0;
-					foreach ($main_notes as $main_note) {
-						$i+=1;
-						$max+=intval($main_note['main_note']);
+					$main_notes=$this->DoctorNotesManager->findAllMainNotes($id)['main_notes'];
+					
+					if (!empty($main_notes)){
+						$i=0;
+						$max=0;
+						foreach ($main_notes as $main_note) {
+							$i+=1;
+							$max+=intval($main_note['main_note']);
+						}
+						$average=$max/$i;
+					} 
+					else 
+					{
+						$average=$note_data['main_note'];
 					}
-					$average=$max/$i;
-
+			
 					$this->DoctorsManager->update([
 							'average'=>$average
 						],$id);
@@ -201,7 +216,7 @@ class DoctorNotesController extends Controller
 							];
 						$this->DoctorNotesManager->update($note_data,$id);
 						//Recalculer la note moyenne
-						$main_notes=$this->DoctorNotesManager->findAllMainNotes($id);
+						$main_notes=$this->DoctorNotesManager->findAllMainNotes($id)['main_notes'];
 						$i=0;
 						$max=0;
 						foreach ($main_notes as $main_note) {
@@ -247,18 +262,27 @@ class DoctorNotesController extends Controller
 			$note=$this->DoctorNotesManager->find($id);
 			$id_user=$note['id_user'];
 			$id_doctor=$note['id_doctor'];
+
 			//Verifie si l'utilisateur est propriétaire de la note ou si il est modo ou admin 
 			if ($id_user===$_SESSION['user']['id'] || $_SESSION['user']['roles'] === 'moderator' || $_SESSION['user']['roles'] === 'administrator') 
 			{
 				$this->DoctorNotesManager->delete($id);
 				//Recalculer la note moyenne
-				$main_notes=$this->DoctorNotesManager->findAllMainNotes($id_doctor);
-				$i=0;
-				$max=0;
-				foreach ($main_notes as $main_note) {
-					$i+=1;
-					$max+=intval($main_note['main_note']);
+				$main_notes=$this->DoctorNotesManager->findAllMainNotes($id_doctor)['main_notes'];	
+				if (!empty($main_notes)){
+					$i=0;
+					$max=0;
+					foreach ($main_notes as $main_note) {
+						$i+=1;
+						$max+=intval($main_note['main_note']);
+					}
+					$average=$max/$i;
+				} 
+				else 
+				{
+					$average=0;
 				}
+
 				$average=$max/$i;
 				
 				//Mettre a jour la moyenne dans la bdd 
@@ -268,8 +292,8 @@ class DoctorNotesController extends Controller
 				$this->redirectToRoute('doctor_details',['id'=>$id_doctor]);
 			} else {
 			
-			//Redirige de details du medecin
-			$this->redirectToRoute('doctor_details',['id'=>$id_doctor]);
+				//Redirige de details du medecin
+				$this->redirectToRoute('doctor_details',['id'=>$id_doctor]);
 			}
 		}
 		else 

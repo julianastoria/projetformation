@@ -3,18 +3,29 @@
 namespace Controller;
 
 use \W\Controller\Controller;
-use \W\Manager\ContactManager;
+
+use \Manager\InstitutionsManager;
+use \Manager\DoctorsManager;
 
 class DefaultController extends Controller
 {
-
+	public function __construct()
+	{
+		$this->InstitutionsManager=new InstitutionsManager;
+		$this->DoctorsManager= new DoctorsManager;
+	}
 	/**
 	 * Page d'accueil par défaut
 	 */
 	public function home ()
 	{
+		//Recupere les 4 derniers medecins et etablissements
+		$lastDoctor=$this->DoctorsManager->findAll('id','DESC',4);
+		$lastInstitutions=$this->InstitutionsManager->findAll('id','DESC',4);
 		$this->show('default/home',[
-				'title'=>"page d'accueil"
+				'title'=>"Acceuil - Annautisma",
+				'institutions'=>$lastInstitutions,
+				'doctors'=>$lastDoctor
 			]);
 	}
 	public function contact ()

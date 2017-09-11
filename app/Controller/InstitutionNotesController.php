@@ -51,7 +51,11 @@ class InstitutionNotesController extends Controller
 			{
 				$title_sub_notes2='Prise en charge';
 				$title_sub_notes3='Inspire confiance';
-			} 
+
+			} else {
+				$this->redirectToRoute('institutions_index');
+			}
+
 
 			//verifie si la requete HTTP est POST
 			if ($_SERVER['REQUEST_METHOD'] === "POST")
@@ -241,6 +245,7 @@ class InstitutionNotesController extends Controller
 					//Verifie les données 
 					if ($save)
 					{
+						
 						//Créer la note principale
 						$main_note=($sub_notes1+$sub_notes2+$sub_notes3)/3;
 						//Réunir les sous notes en un tableau de notes

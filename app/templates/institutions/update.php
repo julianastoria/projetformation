@@ -8,6 +8,7 @@
 			</ul>
 		<?php endforeach ?>
 	</div>
+
 	<h2 class="text-center"><?= $title ?></h2>
 	<form method="post">
 

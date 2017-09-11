@@ -54,7 +54,6 @@ class DoctorsController extends Controller
 		$doctor = $this->doctors_m->find($id);
 		$doctor_dp = $this->doctors_m->findWithDepartement($id);
 		$doctor_cat = $this->doctors_m->findWithCategory($id);
-
 		$doctor['name_departement'] = $doctor_dp['name'];
 		$doctor['name_doctor_category'] = $doctor_cat['name'];
 
@@ -68,52 +67,40 @@ class DoctorsController extends Controller
 	{	
 		$firstname 	 = null;
 		$lastname 	 = null;
-
 		$address 	 = null;
 		$postal_code = null;
 		$city		 = null;
 		$departement = null;
-
 		$tel 		 = null;
 		$email 		 = null;
 		$site		 = null;
-
 		$category 	 = null;
 		$haut_niveau = null;
 		$asperger 	 = null;
 		$atypique 	 = null;
-
 		$save = true;
 
 		if ($_SERVER['REQUEST_METHOD'] === "POST")
 		{
 			$firstname 	 = $_POST['firstname'];
 			$lastname	 = $_POST['lastname'];
-
 			$address 	 = $_POST['address'];
 			$postal_code = $_POST['postal_code'];
 			$city		 = $_POST['city'];
 			$departement = $_POST['departement'];
-
 			$tel 		 = $_POST['tel'];
 			$email 		 = $_POST['email'];
 			$site 		 = $_POST['site'];
-
 			$category 	 = $_POST['category'];
-
 			$autisms['haut_niveau']  = isset($_POST['haut_niveau']) ? "Haut niveau" : null;
 			$autisms['asperger'] 	 = isset($_POST['asperger']) 	? "Asperger" 	: null;
 			$autisms['atypique'] 	 = isset($_POST['atypique']) 	? "Atypique" 	: null;
-
 			var_dump($autisms);
 			$doctor = array();
-
 			// Vérification des données
 				// Récupération du département en fonction du code postal
 			$departement = substr($postal_code, 0, 2);
-
 			$departement = $this->departements_m->findByNumber($departement);
-
 
 			if ($save)
 			{
@@ -122,16 +109,13 @@ class DoctorsController extends Controller
 				// $doctor = $this->doctors_m->insert([
 				// 	"firstname"   => $firstname,
 				// 	"lastname" 	  => $lastname,
-
 				// 	"address" 	  => $address,
 				// 	"postal_code" => $postal_code,
 				// 	"city" 		  => $city,
 				// 	"departement" => $departement,
-
 				// 	"tel" 		  => $tel,
 				// 	"email" 	  => $email,
 				// 	"site" 		  => $site,
-
 				// 	"category"	  => $category
 				// ]);
 
