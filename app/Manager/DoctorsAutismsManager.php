@@ -33,8 +33,32 @@ class DoctorsAutismsManager extends Manager
 
 
 
-	public function findWithDoctorId($id)
+	public function delete($id_doctor)
 	{
-		
+		if (!is_numeric($id_doctor)){
+			return false;
+		}
+
+		$sql = "DELETE FROM " . $this->table . " WHERE id_doctor = :id_doctor";
+		$sth = $this->dbh->prepare($sql);
+		$sth->bindValue(":id_doctor", $id_doctor);
+		return $sth->execute();
+	}
+
+
+
+	public function findAllWithDoctorId($id_doctor)
+	{
+		if (!is_numeric($id_doctor))
+		{
+			return false;
+		}
+
+		$sql = "SELECT * FROM " . $this->table . " WHERE id_doctor = :id_doctor";
+		$sth = $this->dbh->prepare($sql);
+		$sth->bindValue(":id_doctor", $id_doctor);
+		$sth->execute();
+
+		return $sth->fetchAll();
 	}
 }

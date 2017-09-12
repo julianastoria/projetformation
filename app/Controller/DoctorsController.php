@@ -82,13 +82,16 @@ class DoctorsController extends Controller
 	{
 		$firstname 	 = null;
 		$lastname 	 = null;
+
 		$address 	 = null;
 		$postal_code = null;
 		$city		 = null;
 		$departement = null;
+
 		$tel 		 = null;
 		$email 		 = null;
 		$site		 = null;
+
 		$category 	 = null;
 
 		$autisms 	 = array();
@@ -99,18 +102,21 @@ class DoctorsController extends Controller
 		{
 			$firstname 	 = $_POST['firstname'];
 			$lastname	 = $_POST['lastname'];
+
 			$address 	 = $_POST['address'];
 			$postal_code = $_POST['postal_code'];
 			$city		 = $_POST['city'];
 			$departement = $_POST['departement'];
+
 			$tel 		 = $_POST['tel'];
 			$email 		 = $_POST['email'];
 			$site 		 = $_POST['site'];
+
 			$category 	 = $_POST['category'];
-			$autisms['haut_niveau']  = isset($_POST['haut_niveau']) ? "Haut niveau" : null;
-			$autisms['asperger'] 	 = isset($_POST['asperger']) 	? "Asperger" 	: null;
-			$autisms['atypique'] 	 = isset($_POST['atypique']) 	? "Atypique" 	: null;
-			var_dump($autisms);
+
+			$autisms['haut_niveau']  = isset($_POST['haut_niveau']) ? "haut_niveau" : null;
+			$autisms['asperger'] 	 = isset($_POST['asperger']) 	? "asperger" 	: null;
+			$autisms['atypique'] 	 = isset($_POST['atypique']) 	? "atypique" 	: null;
 
 			// Vérification des données
 				// Récupération du département en fonction du code postal
@@ -120,11 +126,11 @@ class DoctorsController extends Controller
 				// Récupération de l'id du 'doctor_category'
 			$category = $this->doctor_categories_m->findByName($category);
 
-				// Concaténation des trois string correspondant au champ 'address' dans la table 'doctors'
-			$address .= " ".$postal_code." ".$city;
-
 			if ($save)
 			{
+				// Concaténation des trois string correspondant au champ 'address' dans la table 'doctors'
+				$address .= " ".$postal_code." ".$city;
+
 				// Enregistrement des données dans la BdD
 					// Table 'doctors'
 				$doctor = $this->doctors_m->insert([
@@ -142,7 +148,7 @@ class DoctorsController extends Controller
 				]);
 
 					// Table 'doctors_categories'
-				foreach ($autisms as $key => $autism)
+				foreach ($specialities as $key => $autism)
 				{
 					if (!empty($autism))
 					{
@@ -170,15 +176,18 @@ class DoctorsController extends Controller
 			"tel" 			=> $tel,
 			"email" 		=> $email,
 			"site" 			=> $site,
-			// "category" 		=> $category
+			"category" 		=> $category
+			"autisms"		=> $autisms
 		]);
 	}
 
 
 
-	public function update($id)
+	public function update($id_doctor)
 	{
-		$doctor = $this->doctors_m->find($id);
+		$doctor = $this->doctors_m->find($id_doctor);
+
+		$autisms_db = $this->doctors_autisms_m->findAllWithDoctorId($id_doctor);
 		
 		// Sépare l'adresse en trois morceaux pour le formulaire
 		$doctor['address'] = explode(" ", $doctor['address']);
@@ -189,16 +198,26 @@ class DoctorsController extends Controller
 		$address 	 = $doctor['address'][0];
 		$postal_code = $doctor['address'][1];
 		$city		 = $doctor['address'][2];
-		$departement = $doctor['id_departement'];
+		$departement = $doctor['id_departement']; // À MODIFIER
 
 		$tel 		 = $doctor['tel'];
 		$email 		 = $doctor['email'];
 		$site		 = $doctor['site'];
 
 		$category 	 = $doctor['id_doctor_category'];
-		$autisms 	 = array(); // À FAIRE
+
+		$specialities = array();
+
+		foreach ($autisms_db as $key => $autism) {
+			// $autism = $this->autisms_m->find($autism['id_autism']);
+			array_push($specialities, $this->autisms_m->find($autism['id_autism'])['name']);
+
+			$specialities[$specialities[$key]] = $specialities[$key];
+			unset($specialities[$key]);
+		}
 
 		$save = true;
+		$autisms = array();
 
 		if ($_SERVER['REQUEST_METHOD'] === "POST")
 		{
@@ -216,9 +235,9 @@ class DoctorsController extends Controller
 
 			$category 	 = $_POST['category'];
 
-			$autisms['haut_niveau']  = isset($_POST['haut_niveau']) ? "Haut niveau" : null;
-			$autisms['asperger'] 	 = isset($_POST['asperger']) 	? "Asperger" 	: null;
-			$autisms['atypique'] 	 = isset($_POST['atypique']) 	? "Atypique" 	: null;
+			$autisms['haut_niveau']  = isset($_POST['haut_niveau']) ? "haut_niveau" : null;
+			$autisms['asperger'] 	 = isset($_POST['asperger']) 	? "asperger" 	: null;
+			$autisms['atypique'] 	 = isset($_POST['atypique']) 	? "atypique" 	: null;
 
 			// Vérification des données
 				// Récupération du département en fonction du code postal
@@ -228,11 +247,11 @@ class DoctorsController extends Controller
 				// Récupération de l'id du 'doctor_category'
 			$category = $this->doctor_categories_m->findByName($category);
 
-				// Concaténation des trois string correspondant au champ 'address' dans la table 'doctors'
-			$address .= " ".$postal_code." ".$city;
-
 			if ($save)
 			{
+				// Concaténation des trois string correspondant au champ 'address' dans la table 'doctors'
+				$address .= " ".$postal_code." ".$city;
+
 				// Enregistrement des données dans la BdD
 					// Table 'doctors'
 				$doctor = $this->doctors_m->update([
@@ -247,10 +266,12 @@ class DoctorsController extends Controller
 					"site" 				 => $site,
 
 					"id_doctor_category" => $category['id']
-				], $id);
+				], $id_doctor);
 
 					// Table 'doctors_categories'
 				// À FAIRE
+				$this->doctors_autisms_m->delete($id_doctor);
+
 				foreach ($autisms as $key => $autism)
 				{
 					if (!empty($autism))
@@ -266,7 +287,7 @@ class DoctorsController extends Controller
 
 				// Redirection vers la page de détail du médecin traité
 				$this->redirectToRoute('doctor_details', [
-					'id' => $id
+					'id' => $id_doctor
 				]);
 			}
 		}
@@ -282,7 +303,7 @@ class DoctorsController extends Controller
 			"email" 		=> $email,
 			"site" 			=> $site,
 			// "category" 		=> $category
-			"autisms" => $autisms
+			"autisms" => $specialities
 		]);
 	}
 

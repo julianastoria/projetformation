@@ -56,7 +56,7 @@
 
 			<div class="form-group">
 				<label for="site">Site web : </label>
-				<input type="url" id="site" name="site" class="form-control" value="<?= $site; ?>" placeholder="http://"/>
+				<input type="url" id="site" name="site" class="form-control" placeholder="http://" value="<?= $site; ?>"/>
 			</div>
 			
 
@@ -68,9 +68,9 @@
 				<select id="category" name="category" class="form-control">
 				<!-- La classe hidden permet de masquer dans une catégorie les champs après avoir saisi une option -->
 					<option class="hidden" value="nothing">--</option>
-					<option value="Psychologue">Psychologue</option>
-					<option value="Généraliste">Généraliste</option>
-					<option value="Dentiste">Dentiste</option>
+					<option <?= ($category) ? 'selected' : null ?> value="Psychologue">Psychologue</option>
+					<option <?= ($category) ? 'selected' : null ?> value="Généraliste">Généraliste</option>
+					<option <?= ($category) ? 'selected' : null ?> value="Dentiste">Dentiste</option>
 				</select>
 			</div>
 
@@ -82,21 +82,21 @@
 
 				<div class="checkbox">
 					<label>
-						<input <?= isset($_POST['haut_niveau']) ? 'checked' : null ?> type="checkbox" id="haut_niveau" name="haut_niveau"/>
+						<input <?= isset($autisms['haut_niveau']) ? 'checked' : null ?> type="checkbox" id="haut_niveau" name="haut_niveau"/>
 						Haut Niveau
 					</label>
 				</div>
 
 				<div class="checkbox">
 					<label>
-						<input <?= isset($_POST['asperger']) ? 'checked' : null ?> type="checkbox" id="asperger" name="asperger"/>
+						<input <?= isset($autisms['asperger']) ? 'checked' : null ?> type="checkbox" id="asperger" name="asperger"/>
 						Asperger
 					</label>
 				</div>
 
 				<div class="checkbox">
 					<label>
-						<input <?= isset($_POST['atypique']) ? 'checked' : null ?> type="checkbox" id="atypique" name="atypique"/>
+						<input <?= isset($autisms['atypique']) ? 'checked' : null ?> type="checkbox" id="atypique" name="atypique"/>
 						Atypique
 					</label>
 				</div>
