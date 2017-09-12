@@ -1,1 +1,1 @@
-C:/xampp/htdocs/projetformation/vendor/bower_components/jquery/dist/jquery.js
+C:/xampp/htdocs/formation/projetformation/vendor/bower_components/jquery/dist/jquery.js
