@@ -48,6 +48,7 @@ class InstitutionsController extends Controller
 		$nbresinstitutions=count($this->InstitutionsManager->findAll());
 		//--- Calcule le nombre de page max 
 		$pagemax= $nbresinstitutions/$limit;
+		//Appeller la vue index 
 		$this->show('institutions/index', [
 			'institutions' => $institutions,
 			'title'=>'Liste des etablissement',
@@ -58,6 +59,7 @@ class InstitutionsController extends Controller
 
 	public function read($id)
 	{
+		//Definir toutes les valeur en null par défault
 		$main_notes=null;
 		$sub_notes1=null;
 		$sub_notes2=null;
@@ -67,11 +69,17 @@ class InstitutionsController extends Controller
 		$user=null;
 		$id_user=null;
 
+		//Récuperer la categorie et le nom du département de l'établissement 
+		//--- Recuperer les données de l'etablissement 
 		$institution = $this->InstitutionsManager->find($id);
+		//--- Utiliser les méthodes du InstitutionsManager
 		$institution_dp = $this->InstitutionsManager->findWithDepartement($institution['id_departement']);
 		$institution_cat = $this->InstitutionsManager->findWithCategory($institution['id_institution_category']); 
 		$institution['name_departement'] = $institution_dp['name'];
 		$institution['name_institution_category'] = $institution_cat['name'];
+
+		//Creer une adresse au format JSON 
+		$adresse_json=json_encode($institution['address']);
 
 		//Recuperer les critéres des sous notes 
 		//--- Recuperer le type de l'etalissement avec l'id
@@ -126,6 +134,7 @@ class InstitutionsController extends Controller
 			$comment[$i]=$notes[$i]['comment'];
 
 		}
+		//Appeller la vue du read
 		$this->show('institutions/read', [
 			'institution' => $institution,
 			'title'=>$title,
@@ -141,6 +150,7 @@ class InstitutionsController extends Controller
 			'title_sub_notes1'=>$title_sub_notes1,			
 			'title_sub_notes2'=>$title_sub_notes2,
 			'title_sub_notes3'=>$title_sub_notes3,
+			'adresse_json'=>$adresse_json
 
 		]);
 	}
@@ -148,7 +158,8 @@ class InstitutionsController extends Controller
 	public function create()
 	{
 
-		//$this->allowTo(array('moderator','administrator'));
+		$this->allowTo(array('moderator','administrator'));
+		//Définir tous les valeurs par défault
 		$error=array();
 		$name=null;
 		$address=null;
@@ -173,7 +184,6 @@ class InstitutionsController extends Controller
 			$tel=$_POST['tel'];
 			$email=$_POST['email'];
 			$site=$_POST['site'];
-
 			$photos=$_POST['photos'];
 			$type_institution=$_POST['type_institution'];
 			$id_institution_category=$_POST['id_institution_category'];
@@ -236,6 +246,7 @@ class InstitutionsController extends Controller
 			}
 
 		}
+		//Appeller la vue 
 		$this->show('institutions/create',[
 				'title'=>"Création d'un etablissement",
 				'name'=>$name,
@@ -254,7 +265,9 @@ class InstitutionsController extends Controller
 
 	public function update($id)
 	{
+		//Definit les droits d'administration
 		//$this->allowTo(array(0=>'moderator',1=>'administrator'));
+		//Declarer toutes les valeurs par défault
 		$error=null;
 		$name=null;
 		$address=null;
@@ -342,6 +355,7 @@ class InstitutionsController extends Controller
 			}
 
 		}
+		//Appeller la vue
 		$this->show('institutions/update',[
 				'title'=>'Modifier un etablissement',
 				'name'=>$name,
@@ -362,7 +376,8 @@ class InstitutionsController extends Controller
 
 	public function delete($id)
 	{
-		$this->allowTo(array(0=>'moderator',1=>'administrator'));
+		//Definit les droits d'administrateur
+		$this->allowTo(array('moderator','administrator'));
 		$this->InstitutionsManager->delete($id);
 		$this->redirectToRoute('institutions_index');
 	}

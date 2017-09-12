@@ -125,18 +125,15 @@ class InstitutionNotesController extends Controller
 					//Recalculer la note moyenne
 					$main_notes=$this->InstitutionNotesManager->findAllMainNotes($id);
 					
-					if (!empty($main_notes)){
-						$i=0;
-						$max=0;
-						foreach ($main_notes as $main_note) 
-						{
-							$i+=1;
-							$max+=floatval($main_note['main_note']);
-						}
-		
-						$average=floatval($max/$i);
-						
-					} 
+					$i=0;
+					$max=0;
+					foreach ($main_notes as $main_note) 
+					{
+						$i+=1;
+						$max+=floatval($main_note['main_note']);
+					}
+	
+					$average=floatval($max/$i);
 					$this->InstitutionsManager->update([
 							'average'=>$average
 						],$id);
@@ -145,6 +142,7 @@ class InstitutionNotesController extends Controller
 				}
 					
 			}
+			//Appeller la vue 
 			$this->show('institution_note/create',[
 					'title'=>"Création d'une note",
 					'title_comment'=>$title_comment,
@@ -289,6 +287,7 @@ class InstitutionNotesController extends Controller
 
 					]);
 			} else {
+				//Redirige vers la page des details de l'etablissement
 				$this->redirectToRoute('institution_details',['id'=>$id]);
 			}
 		} else {
@@ -311,6 +310,7 @@ class InstitutionNotesController extends Controller
 			{
 				$this->InstitutionNotesManager->delete($id);
 				//Recalculer la note moyenne
+				//--- Récuperer toutes les notes moyenne
 				$main_notes=$this->InstitutionNotesManager->findAllMainNotes($id_institution)['main_notes'];
 				$i=0;
 				$max=0;

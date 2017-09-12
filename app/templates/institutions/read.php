@@ -42,3 +42,14 @@
 
 
 <?php $this->stop('main_content') ?>
+
+<?php $this->start('main_script') ?>
+<script type="text/javascript">
+	/*var adress=<?php echo $adresse_json ?>;
+
+	var coordonnees=$.getJSON("http://maps.googleapis.com/maps/api/geocode/json?address="+adress+"&sensor=false");
+ 	console.log(coordonnees);
+	*/
+</script>
+
+<?php $this->stop('main_script') ?>
