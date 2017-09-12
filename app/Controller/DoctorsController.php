@@ -46,7 +46,7 @@ class DoctorsController extends Controller
 	public function index()
 	{
 
-		if (empty($_GET['page']))
+		if (empty($_GET['page']) || $_GET['page']<1 )
 		{
 			$page=1;
 		}
@@ -54,7 +54,7 @@ class DoctorsController extends Controller
 		{
 			$page=intval($_GET['page']);
 		}
-		var_dump($page);
+		$limit=1;
 		$offset=($page-1)*1;
 		$doctors = $this->doctors_m->findAll('id',"ASC",1,$offset);
 		$doctors_dp = $this->doctors_m->findAllWithDepartement();
@@ -65,10 +65,15 @@ class DoctorsController extends Controller
 			$doctors[$i]['name_departement'] = $doctors_dp[$i]['name'];
 			$doctors[$i]['name_doctor_category'] = $doctors_cat[$i]['name'];
 		}
-
+		// Definir la page max 
+		//--- Récuperer le nombre d'etablissement
+		$nbresdoctors=count($this->doctors_m->findAll());
+		//--- Calcule le nombre de page max 
+		$pagemax= $nbresdoctors/$limit;
 		$this->show('doctors/index', [
 			'doctors' => $doctors,
-			'page'=>$page
+			'page'=>$page,
+			'page_max'=>$pagemax
 			]);
 	}
 

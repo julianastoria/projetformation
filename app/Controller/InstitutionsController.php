@@ -23,7 +23,17 @@ class InstitutionsController extends Controller
 
 	public function index()
 	{
-		$institutions = $this->InstitutionsManager->findAll();
+		if (empty($_GET['page']))
+		{
+			$page=1;
+		}
+		else
+		{
+			$page=intval($_GET['page']);
+		}
+		$limit=1;
+		$offset=($page-1)*$limit;
+		$institutions = $this->InstitutionsManager->findAll('id','ASC',$limit,$offset);
 		$institutions_dp = $this->InstitutionsManager->findAllWithDepartement();
 		$institutions_cat = $this->InstitutionsManager->findAllWithCategory();
 
@@ -32,9 +42,17 @@ class InstitutionsController extends Controller
 			$institutions[$i]['name_institution_category'] = $institutions_cat[$i]['name'];
 			
 		}
+
+		// Definir la page max 
+		//--- Récuperer le nombre d'etablissement
+		$nbresinstitutions=count($this->InstitutionsManager->findAll());
+		//--- Calcule le nombre de page max 
+		$pagemax= $nbresinstitutions/$limit;
 		$this->show('institutions/index', [
 			'institutions' => $institutions,
 			'title'=>'Liste des etablissement',
+			'page'=>$page,
+			'page_max'=>$pagemax
 		]);
 	}
 
@@ -47,6 +65,7 @@ class InstitutionsController extends Controller
 		$title_comment=null;
 		$comment=null;
 		$user=null;
+
 		$institution = $this->InstitutionsManager->find($id);
 		$institution_dp = $this->InstitutionsManager->findWithDepartement($institution['id_departement']);
 		$institution_cat = $this->InstitutionsManager->findWithCategory($institution['id_institution_category']); 
@@ -77,7 +96,7 @@ class InstitutionsController extends Controller
 			$title='les details sur '.$institution['name'];
 			$error=null;
 		}
-		
+
 		//Récupere les notes 
 		$InstitutionNotesManager=new \Manager\InstitutionNotesManager;
 		$notes=$InstitutionNotesManager->findByInstitution($institution['id']);

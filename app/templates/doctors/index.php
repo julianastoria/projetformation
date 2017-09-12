@@ -39,15 +39,17 @@
 
 		  <ul class="pagination">
 		    <li>
-		      <a href="<?= $this->url('doctors_index') ?>?page=<?= $page-1 ?>" aria-label="Previous">
+		      <a href="<?= $this->url('doctors_index') ?>?page=<?= $page-1 ?>" aria-label="Previous" <?= ($page===1) ? 'hidden' : null ?> >
 		        <span aria-hidden="true">&laquo;</span>
 		      </a>
 		    </li>
-		     <?php for($i = 1; $i <= 5; $i++) { ?>
-		    <li><a href="<?= $this->url('doctors_index') ?>?page=<?= $i ?>"><?= $i ?></a></li>
-		    <?php } ?>
+		    <?php for($i = $page-2 ; $i <= $page+2 ; $i++) : ?>
+		     	<?php if ($i>0 && $i<=$page_max) : ?>
+		    		<li><a href="<?= $this->url('doctors_index') ?>?page=<?= $i ?>"><?= $i ?></a></li>
+		    	<?php endif; ?>
+		    <?php endfor; ?>
 		    <li>
-		      <a href="<?= $this->url('doctors_index') ?>?page=<?= $page+1 ?>" aria-label="Next">
+		      <a href="<?= $this->url('doctors_index') ?>?page=<?= $page+1 ?>" aria-label="Next" <?= $page===$page_max ? 'hidden' : null ?>>
 		        <span aria-hidden="true">&raquo;</span>
 		      </a>
 
