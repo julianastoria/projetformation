@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Lun 11 Septembre 2017 à 09:25
+-- Généré le :  Mar 12 Septembre 2017 à 17:26
 -- Version du serveur :  10.1.21-MariaDB
 -- Version de PHP :  5.6.30
 
@@ -28,18 +28,19 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `autisms` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(64) NOT NULL,
-  `definition` text NOT NULL
+  `label` varchar(64) NOT NULL,
+  `definition` text NOT NULL,
+  `name` varchar(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `autisms`
 --
 
-INSERT INTO `autisms` (`id`, `name`, `definition`) VALUES
-(1, 'Haut niveau', 'Une forme d’autisme dans laquelle la personne concernée est, à des degrés divers, capable d\'exprimer son intelligence et d\'avoir des interactions sociales.'),
-(2, 'Asperger', 'Le syndrome d\'Asperger fait partie des troubles du spectre autistique, également connu sous le nom de TSA. Il s\'agit d\'une forme légère d\'autisme qui se manifeste généralement sans handicaps mentaux extrêmes.'),
-(3, 'Atypique', 'L\'autisme atypique est un trouble du développement humain qui altère certaines fonctions cognitives. Il fait partie des troubles envahissants du développement.');
+INSERT INTO `autisms` (`id`, `label`, `definition`, `name`) VALUES
+(1, 'Haut niveau', 'Une forme d’autisme dans laquelle la personne concernée est, à des degrés divers, capable d\'exprimer son intelligence et d\'avoir des interactions sociales.', 'haut_niveau'),
+(2, 'Asperger', 'Le syndrome d\'Asperger fait partie des troubles du spectre autistique, également connu sous le nom de TSA. Il s\'agit d\'une forme légère d\'autisme qui se manifeste généralement sans handicaps mentaux extrêmes.', 'asperger'),
+(3, 'Atypique', 'L\'autisme atypique est un trouble du développement humain qui altère certaines fonctions cognitives. Il fait partie des troubles envahissants du développement.', 'atypique');
 
 -- --------------------------------------------------------
 
@@ -87,9 +88,17 @@ CREATE TABLE `doctors` (
 --
 
 INSERT INTO `doctors` (`id`, `firstname`, `lastname`, `address`, `tel`, `email`, `site`, `id_departement`, `average`, `id_doctor_category`) VALUES
-(6, 'Toto', 'Pingouin', '15 rue de la Clémentine 62487 Arras', '645789513', 'toto.pingouin@gmail.com', NULL, 2, '2.58', 1),
-(7, 'Denis', 'Forage', '154 rue de la République 59456 Lille', '684751352', 'denis@forage.outlook.fr', NULL, 1, '4.56', 3),
-(8, 'Jason', 'Colynaire', '25 rue de Père Noël 59153 Lille', '748561237', 'jason.colynaire@gmail.com', NULL, 1, '3.24', 2);
+(6, 'Toto', 'Pingouin', '15 rue de la Clémentine|62487|Arras', '645789513', 'toto.pingouin@gmail.com', NULL, 2, '2.58', 1),
+(7, 'Denis', 'Forage', '154 rue de la République|59456|Lille', '684751352', 'denis@forage.outlook.fr', NULL, 1, '4.56', 3),
+(8, 'Jason', 'Colynaire', '25 rue de Père Noël|59153|Lille', '748561237', 'jason.colynaire@gmail.com', NULL, 1, '3.24', 2),
+(12, 'gtgtgtgtgt', 'gtgtgtgtgt', 'gtgtgtgtg|59475|gtgtgtgtgtg', '645789512', 'gtgtgt@gtgtgt.gt', 'http://gtgtgt.com/frfrfrfrf', 1, '0.00', 1),
+(13, 'gtgtgtgtgt', 'gtgtgtgtgt', 'gtgtgtgtg|59475|gtgtgtgtgtg', '645789512', 'gtgtgt@gtgtgt.gt', 'http://gtgtgt.com/frfrfrfrf', 1, '0.00', 1),
+(14, 'gtgtgtgtgt', 'gtgtgtgtgt', 'gtgtgtgtg|59475|gtgtgtgtgtg', '645789512', 'gtgtgt@gtgtgt.gt', 'http://gtgtgt.com/frfrfrfrf', 1, '0.00', 1),
+(15, 'gtgtgtgtgt', 'gtgtgtgtgt', 'gtgtgtgtg|59475|gtgtgtgtgtg', '645789512', 'gtgtgt@gtgtgt.gt', 'http://gtgtgt.com/frfrfrfrf', 1, '0.00', 1),
+(16, 'gtgtgtgtgt', 'gtgtgtgtgt', 'gtgtgtgtg|59475|gtgtgtgtgtg', '645789512', 'gtgtgt@gtgtgt.gt', 'http://gtgtgt.com/frfrfrfrf', 1, '0.00', 1),
+(17, 'gtgtgtgtgt', 'gtgtgtgtgt', 'gtgtgtgtg|59475|gtgtgtgtgtg', '645789512', 'gtgtgt@gtgtgt.gt', 'http://gtgtgt.com/frfrfrfrf', 1, '0.00', 3),
+(18, 'gtgtgtgtgt', 'gtgtgtgtgt', 'gtgtgtgtg|59475|gtgtgtgtgtg', '645789512', 'gtgtgt@gtgtgt.gt', 'http://gtgtgt.com/frfrfrfrf', 1, '0.00', 3),
+(19, 'gtgtgtgtgt', 'gtgtgtgtgt', 'gtgtgtgtg|59475|gtgtgtgtgtg', '645789512', 'gtgtgt@gtgtgt.gt', 'http://gtgtgt.com/frfrfrfrf', 1, '0.00', 3);
 
 -- --------------------------------------------------------
 
@@ -101,6 +110,21 @@ CREATE TABLE `doctors_autisms` (
   `id_autism` int(10) UNSIGNED NOT NULL,
   `id_doctor` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `doctors_autisms`
+--
+
+INSERT INTO `doctors_autisms` (`id_autism`, `id_doctor`) VALUES
+(1, 12),
+(1, 13),
+(1, 14),
+(1, 16),
+(2, 12),
+(2, 13),
+(2, 14),
+(2, 16),
+(3, 15);
 
 -- --------------------------------------------------------
 
@@ -314,7 +338,7 @@ ALTER TABLE `departements`
 -- AUTO_INCREMENT pour la table `doctors`
 --
 ALTER TABLE `doctors`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT pour la table `doctor_categories`
 --
