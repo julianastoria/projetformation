@@ -58,12 +58,60 @@ class InstitutionsController extends Controller
 		//Récupere les notes 
 		$InstitutionNotesManager=new \Manager\InstitutionNotesManager;
 		$notes=$InstitutionNotesManager->findByInstitution($institution['id']);
+		for ($i=0;$i<count($notes);$i++)
+		{
+			//Recuperer l'utilisateur par l'id de la note 
+			//--- Recuperer l'id de l'utilisateur 
+			$id_user[$i]=$notes[$i]['id_user'];
+			//--- Instancier le UserManager 
+			$userManager=new \W\Manager\userManager;
+			$userManager->setTable('users');
+			//--- Chercher l'utilsateur avec l'id
+			$user[$i]=$userManager->find($id_user[$i])['firstname'];
+			//Recuperer les notes principales 
+			$main_notes[$i]=$notes[$i]['main_note'];
 
+			//Decomposer les sous notes 
+			$sub_notes[$i]=$notes[$i]['sub_notes'];
+			$sub_notes[$i]=explode(':', $sub_notes[$i]);
+			$sub_notes1[$i]=$sub_notes[$i][0];
+			$sub_notes2[$i]=$sub_notes[$i][1];
+			$sub_notes3[$i]=$sub_notes[$i][2];
+			//Recuperer les critéres des sous notes 
+			//--- Recuperer l'id de l'etalissement
+			$id_institution[$i]=$notes[$i]['id_institution'];
+			$type_institution[$i]=$this->InstitutionsManager->find($id_institution[$i])['type_institution'];
+			//--- defenir les critere des sous notes en fonction du tpe trouvé
+			$title_sub_notes1[$i]="Acceuil";
+			if ($type_institution[$i] === 'École')
+			{
+				
+				$title_sub_notes2[$i]='Inclusion sociale';
+				$title_sub_notes3[$i]='Adaptation envers l’autisme';
+			} 
+			else if ($type_institution[$i] === 'Établissement spécialisé')
+			{
+				$title_sub_notes2[$i]='Prise en charge';
+				$title_sub_notes3[$i]='Inspire confiance';
+			}
+			//Recuperer le commentaire et le titre 
+			$title_comment[$i]=$notes[$i]['title_comment'];
+			$comment[$i]=$notes[$i]['comment'];
+		}
 		$this->show('institutions/read', [
 			'institution' => $institution,
 			'title'=>$title,
 			'error'=>$error,
-			'notes'=>$notes
+			'main_notes'=>$main_notes,
+			'sub_notes1'=>$sub_notes1,
+			'sub_notes2'=>$sub_notes2,
+			'sub_notes3'=>$sub_notes3,
+			'title_comment'=>$title_comment,
+			'comment'=>$comment,
+			'user'=>$user,
+			'title_sub_notes1'=>$title_sub_notes1,			
+			'title_sub_notes2'=>$title_sub_notes2,
+			'title_sub_notes3'=>$title_sub_notes3
 		]);
 	}
 

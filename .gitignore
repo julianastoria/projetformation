@@ -1,4 +1,6 @@
 /vendor/
 /app/config.php
 /phpDocumentor.phar
-/public/assets/
+/public/assets/css/bootstrap.css
+/public/assets/js/bootstrap.js
+/public/assets/js/jquery.js

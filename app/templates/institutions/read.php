@@ -12,21 +12,20 @@
 	<p class="text-center user">Le ou les photos : <br><img src="<?= $institution['photos']; ?>"></p>
 	<p class="text-center user">Le type d'institution : <?= $institution['type_institution']; ?></p><br>
 
-	<?php for ($i=0;$i<count($notes);$i++) : ?>
+	<?php for ($i=0;$i<count($main_notes);$i++) : ?>
+		<div>
+			<h2>Notes de : <?= $user[$i] ?></h2>
+			<h3>Note principale : <?= $main_notes[$i] ?></h3>
 
-		<?php foreach ($notes[$i] as $key => $note): ?>
-
-			<div>
-				<?php if ($key==='main_note' || $key==='sub_notes' || $key==='post_date' || $key==='title_comment' || $key==='comment') : ?>
-				<div>
-					<h2><?= $key ?></h2>
-					<p><?= $note ?></p>
-				</div>
-			</div>
-			<?php endif; ?>
-			
-		<?php endforeach ?>
-		
+			<h3><?= $title_sub_notes1[$i] ?></h3>
+			<p><?= $sub_notes1[$i] ?></p>		
+			<h3><?= $title_sub_notes2[$i] ?></h3>
+			<p><?= $sub_notes2[$i] ?></p>
+			<h3><?= $title_sub_notes3[$i] ?></h3>
+			<p><?= $sub_notes3[$i] ?></p>
+			<h3><?= $title_comment[$i] ?></h3>
+			<p><?= $comment[$i] ?></p>
+		</div>
 	<?php endfor; ?>
 
 
