@@ -96,7 +96,7 @@ class DoctorsController extends Controller
 
 		$autisms 	 = array();
 
-		$save = false;
+		$save = true;
 
 		if ($_SERVER['REQUEST_METHOD'] === "POST")
 		{
@@ -129,7 +129,7 @@ class DoctorsController extends Controller
 			if ($save)
 			{
 				// Concaténation des trois string correspondant au champ 'address' dans la table 'doctors'
-				$address .= " ".$postal_code." ".$city;
+				$address .= "|".$postal_code."|".$city;
 
 				// Enregistrement des données dans la BdD
 					// Table 'doctors'
@@ -148,7 +148,8 @@ class DoctorsController extends Controller
 				]);
 
 					// Table 'doctors_categories'
-				foreach ($specialities as $key => $autism)
+				// if (!empty($autisms))
+				foreach ($autisms as $key => $autism)
 				{
 					if (!empty($autism))
 					{
@@ -176,8 +177,9 @@ class DoctorsController extends Controller
 			"tel" 			=> $tel,
 			"email" 		=> $email,
 			"site" 			=> $site,
-			"category" 		=> $category
-			"autisms"		=> $autisms
+			"category" 		=> $category,
+			"autisms"		=> $autisms,
+			"checkbox_hidden" => "hidden"
 		]);
 	}
 
@@ -190,7 +192,7 @@ class DoctorsController extends Controller
 		$autisms_db = $this->doctors_autisms_m->findAllWithDoctorId($id_doctor);
 		
 		// Sépare l'adresse en trois morceaux pour le formulaire
-		$doctor['address'] = explode(" ", $doctor['address']);
+		$doctor['address'] = explode("|", $doctor['address']);
 
 		$firstname 	 = $doctor['firstname'];
 		$lastname 	 = $doctor['lastname'];
@@ -198,13 +200,16 @@ class DoctorsController extends Controller
 		$address 	 = $doctor['address'][0];
 		$postal_code = $doctor['address'][1];
 		$city		 = $doctor['address'][2];
-		$departement = $doctor['id_departement']; // À MODIFIER
+
+		$departement = $this->departements_m->find($doctor['id_departement']);
+		$departement = $departement['name']; // À MODIFIER
 
 		$tel 		 = $doctor['tel'];
 		$email 		 = $doctor['email'];
 		$site		 = $doctor['site'];
 
-		$category 	 = $doctor['id_doctor_category'];
+		$category = $this->doctor_categories_m->find($doctor['id_doctor_category']);
+		$category 	 = $category['name'];
 
 		$specialities = array();
 
@@ -250,7 +255,7 @@ class DoctorsController extends Controller
 			if ($save)
 			{
 				// Concaténation des trois string correspondant au champ 'address' dans la table 'doctors'
-				$address .= " ".$postal_code." ".$city;
+				$address .= "|".$postal_code."|".$city;
 
 				// Enregistrement des données dans la BdD
 					// Table 'doctors'
@@ -302,8 +307,9 @@ class DoctorsController extends Controller
 			"tel" 			=> $tel,
 			"email" 		=> $email,
 			"site" 			=> $site,
-			// "category" 		=> $category
-			"autisms" => $specialities
+			"category" 		=> $category,
+			"autisms" => $specialities,
+			"checkbox_hidden" => ($category != "Psychologue") ? "hidden" : null
 		]);
 	}
 

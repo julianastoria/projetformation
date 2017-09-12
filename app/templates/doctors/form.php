@@ -68,15 +68,15 @@
 				<select id="category" name="category" class="form-control">
 				<!-- La classe hidden permet de masquer dans une catégorie les champs après avoir saisi une option -->
 					<option class="hidden" value="nothing">--</option>
-					<option <?= ($category) ? 'selected' : null ?> value="Psychologue">Psychologue</option>
-					<option <?= ($category) ? 'selected' : null ?> value="Généraliste">Généraliste</option>
-					<option <?= ($category) ? 'selected' : null ?> value="Dentiste">Dentiste</option>
+					<option <?= ($category == "Psychologue") ? 'selected' : null ?> value="Psychologue">Psychologue</option>
+					<option <?= ($category == "Généraliste") ? 'selected' : null ?> value="Généraliste">Généraliste</option>
+					<option <?= ($category == "Dentiste") ? 'selected' : null ?> value="Dentiste">Dentiste</option>
 				</select>
 			</div>
 
 		
 
-			<div id="types_autisme" class="form-group hidden">
+			<div id="types_autisme" class="form-group <?= $checkbox_hidden; ?>">
 
 				<label>Les types d'autisme : </label>
 
