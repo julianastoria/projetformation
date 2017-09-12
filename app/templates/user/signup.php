@@ -10,7 +10,7 @@
 	</div>
 
 	<div class="row">
-		<div class="col-md-3 col-md-offset-4">
+		<div class="col-md-5 col-lg-4 col-md-offset-3 col-lg-offset-4">
 
 			<h2 class="text-center">Inscription :</h2><br>
 

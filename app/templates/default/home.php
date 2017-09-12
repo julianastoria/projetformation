@@ -5,7 +5,7 @@
 	<h1 class="text-center">Annautisma</h1>
 	<h2 class="text-center">Site de note-annuaire de l'autisme en France</h2>
 	<div class="row">
-		<div class="col-md-8 col-md-offset-4">
+		<div class=" col-sm-4 col-md-4 col-md-offset-4 col-sm-offset-4">
 			<button class="btn btn-purple btn-md" id="savoir">En savoir plus</button>
 		</div>
 	</div>
@@ -14,11 +14,15 @@
 <div class="container-fluid">
 	<div class="row">
 	<!-- Méthode pour mettre un élément au milieu grâce au colonne -->
-	<div class="col-md-3 col-md-offset-4">
+	<div class="col-md-5 col-lg-4 col-md-offset-3 col-lg-offset-4">
 		<form class="form-horizontal">
 		<h3 class="text-center">Recherche :</h3>
 			<input class="form-control" type="text" name="search"><br>
-			<button class="btn btn-purple">Envoyer</button>
+		<div class="row">
+			<div class="col-sm-4 col-sm-offset-4">
+			<button class="btn btn-purple envoyer">Envoyer</button>
+			</div>
+		</div>	
 		</form>
 	</div>
 	</div>
@@ -30,7 +34,7 @@
 
 		<div class="row">
 			<?php foreach ($institutions as $key => $institution): ?>
-				<div class="col-md-3">
+				<div class="col-md-3 col-sm-6">
 					<div class="thumbnail">
 						<div class="caption">
 							<img class="img-responsive" src="<$= $institution['photos'] ?>" alt=¨"Photo de <?= $institution['name'] ?>">
@@ -45,7 +49,7 @@
 	<a class="afficher" href="#">Afficher</a>
 			<div class="row">
 				<?php foreach ($doctors as $key => $doctor): ?>
-					<div class="col-md-3">
+					<div class="col-md-3 col-sm-6">
 					<div class="thumbnail">
 						<div class="caption">
 							<img class="img-responsive" src="<$= $doctor['photos'] ?>" alt=¨"Photo de <?= $doctor['firstname'] ?>">

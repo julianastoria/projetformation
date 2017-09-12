@@ -6,7 +6,7 @@
 		
 	<?php foreach ($institutions as $key => $institution) : ?>
 			
-			<div class="col-md-3">
+			<div class="col-md-3 col-sm-4">
 				<div class="thumbnail">
 					<img src="<?=$institution['photos'] ?>" alt="photo de <?= $institution['name'] ?>">
 

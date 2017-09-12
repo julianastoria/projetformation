@@ -6,7 +6,7 @@
 		
 	<?php foreach ($doctors as $key => $doctor) : ?>
 			
-			<div class="col-md-3">
+			<div class="col-md-3 col-sm-4">
 				<div class="thumbnail">
 					<!-- <img src="..." alt="..."> -->
 

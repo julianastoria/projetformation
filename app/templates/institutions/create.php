@@ -14,7 +14,7 @@
 	<form method="post">
 
 	<div class="row">
-		<div class="col-md-3 col-md-offset-4">
+		<div class="col-md-5 col-lg-4 col-md-offset-3 col-lg-offset-4">
 			<div class="form-group">
 				<label for="name">Nom :</label>
 				<input class="form-control" type="text" name="name" id="name" value="<?= $name ?>">

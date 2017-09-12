@@ -13,7 +13,7 @@
 	<form method="POST">
 
 		<div class="row">
-			<div class="col-md-4 col-md-offset-4">	
+			<div class="col-md-5 col-lg-4 col-md-offset-3 col-lg-offset-4">	
 				
 				<div class="form-group">
 					<label><?= $title_sub_notes1 ?> :</label>

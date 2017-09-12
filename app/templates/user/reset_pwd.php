@@ -4,7 +4,7 @@
 
 	<h2 class="text-center">Résolution du mot de passe :</h2><br>
 	<div class="row">
-		<div class="col-md-3 col-md-offset-4">
+		<div class="col-md-5 col-lg-4 col-md-offset-3 col-lg-offset-4">
 
 	<form method="post">
 		<div class="form-group">

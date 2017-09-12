@@ -34,11 +34,11 @@
 
 
 			<ul class="nav navbar-nav navbar-left">
-				
+
 			<li>
 				<div class="dropdown">
 					<button class="btn btn-blue dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-						<li class="navbar-left"><a href="#Etablissements"><i class="fa fa-home visible-xs" aria-hidden="true"></i><p class="hidden-xs">Etablissements</p></a></li>
+						<li class="navbar-left"><a href="#Etablissements"><i class="fa fa-home visible-xs hidden-sm hidden-md hidden-lg" aria-hidden="true"></i><p class="hidden-xs visible-sm visible-md visible-lg">Etablissements</p></a></li>
 						 <span class="caret"></span>
 					</button>
 							<ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu1">
@@ -71,7 +71,7 @@
 			<li>
 				<div class="dropdown">
 					<button class="btn btn-blue dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-							<li class="navbar-left"><a href="#Medecins"><i class="fa fa-user-md visible-xs" aria-hidden="true"></i><p class="hidden-xs">Médecins</p></a></li>
+							<li class="navbar-left"><a href="#Medecins"><i class="fa fa-user-md visible-xs hidden-sm hidden-md hidden-lg" aria-hidden="true"></i><p class="hidden-xs">Médecins</p></a></li>
 							 <span class="caret"></span>
 				  		</button>
 				  		 <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
@@ -95,8 +95,8 @@
 							 <span class="caret"></span>
 				  		</button>
 				  		 <ul class="dropdown-menu ajouts" aria-labelledby="dropdownMenu4">
-						    <li><a href="<?= $this->url('institution_create')?>">Etablissements</a></li>
-						    <li><a href="<?= $this->url('doctor_create') ?>">Médecins</a></li>
+						    <li class=""><a href="<?= $this->url('institution_create')?>">Etablissements</a></li>
+						    <li class=""><a href="<?= $this->url('doctor_create') ?>">Médecins</a></li>
 						</ul>
 					</div>
 			</li>
@@ -115,6 +115,7 @@
 		<section>
 			<?= $this->section('main_content') ?>
 		</section>
+
 
 		<footer class="container-fluid footer">
 			<div class="row">

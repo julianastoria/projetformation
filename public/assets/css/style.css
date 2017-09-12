@@ -267,7 +267,7 @@ footer p {
 
 
 
-/* responsive design */
+/* responsive design pour petit écran */
 @media screen and (max-width: 767px) {
 	/* méthode pour afficher les éléments dans le navbar */
 	.btn-blue{
@@ -284,6 +284,10 @@ footer p {
 		font-size: 17px;
 		margin-right: -15px;
 		
+	}
+
+	.navbar > .container .navbar-brand, .navbar > .container-fluid .navbar-brand {
+    	padding-left: 30px;
 	}
 
 .btn-blue a {
@@ -308,7 +312,6 @@ footer p {
 .navbar-default .navbar-nav .open .dropdown-menu > li > a {
 	color: #fff;
 	font-size: 19px;
-
 }
 
 .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover {
@@ -363,6 +366,62 @@ header h2 {
 	}
 }
 
+/* media-queries pour tablette */
+@media only screen and (min-width: 767px) and (max-width: 992px) {
+	.demo {
+		margin-bottom: 40px;
+	}
+
+	.navbar-default .navbar-nav > li > a {
+		padding-right: 135px;
+		
+	}
+
+	.fa-user-plus{
+		padding-right: 71px;
+	}
+
+	.btn-blue {
+		padding-left: 27px;
+	}
+
+	.navbar > .container .navbar-brand, .navbar > .container-fluid .navbar-brand {
+    	padding-left: 25px;
+	}
+
+	.ajout {
+		padding-right: 71px;
+	}
+
+	#savoir {
+		margin-left: -2px;
+	}
+
+	.envoyer {
+		margin-left: 56px;
+	}
+
+
+	footer p {
+		padding-left: 207px;
+	}
+
+	footer a {
+		padding-left: 31px;
+	}
+
+	/* liste */
+	h3 {
+		font-size: 20px;
+	}
+}
+
+/* responsive design pour md */
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+	.demo {
+		margin-bottom: 30px;
+	}
+}
 
 
 /* create_medecin.php avec un include de form.php */
@@ -464,4 +523,9 @@ textarea {
 /* centrer les boutons avec le col-md et row et faire un float left pour séparer les deux boutons */
 .readins {
 	float: right;
+}
+
+/* modal doctors read */
+.supp {
+	font-family: 'Open Sans', sans-serif;
 }
