@@ -74,7 +74,7 @@
 				</select>
 			</div>
 
-			<?php var_dump($autisms); ?>
+		
 
 			<div id="types_autisme" class="form-group hidden">
 

@@ -275,7 +275,7 @@ footer p {
 		display: inline;
 		/* méthode pour enlever les traces du linear-gradient */	
 		background: transparent;
-		margin-left: 52px;
+		margin-left: 68px;
 	}
 
 .navbar-default .navbar-nav > li > a {
@@ -362,7 +362,7 @@ header h2 {
 	margin-bottom: 100px;
 	}
 }
-}
+
 
 
 /* create_medecin.php avec un include de form.php */
@@ -437,6 +437,7 @@ option {
 /* doctors_notes*/
 textarea {
 	color: #000;
+	font-family: 'Open Sans', sans-serif;
 }
 
 .notes {

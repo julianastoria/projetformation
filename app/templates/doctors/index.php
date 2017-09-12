@@ -34,7 +34,7 @@
 
 		</div>
 
-	<div class="text-center">
+	<!-- <div class="text-center">
 		<nav aria-label="Page navigation">
 
 		  <ul class="pagination">
@@ -54,6 +54,6 @@
    				 </li>
   			</ul>
 		</nav>
-	</div>
+	</div> -->
  
  <?php $this->stop('main_content') ?>
