@@ -84,10 +84,13 @@
 			</ul>
 
 			<ul class=" nav navbar-nav navbar-right">
-				<li class="navbar-right"><a href="<?= $this->url('user_signup') ?>"><i class="fa fa-user-plus bonhomme" aria-hidden="true"></i></a></li>
+				<?php if (!isset($_SESSION['user'])) : ?>
+					<li class="navbar-right"><a href="<?= $this->url('user_signup') ?>"><i class="fa fa-user-plus bonhomme" aria-hidden="true"></i></a></li>
 					<li class="navbar-right"><a href="<?= $this->url('user_signin') ?>"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a></li>
-
-
+				<?php else : ?>	
+					<li><a href="<?=$this->url('profile')?>"><?= $_SESSION['user']['firstname'] ?></a></li>
+					<li><a href="<?= $this->url('logout') ?>">Deconnexion</a></li>
+				<?php endif; ?>
 					<li>
 					<div class="dropdown">
 						<button class="btn btn-blue ajout dropdown-toggle" type="button" id="dropdownMenu4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
