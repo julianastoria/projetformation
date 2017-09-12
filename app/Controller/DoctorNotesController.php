@@ -23,7 +23,7 @@ class DoctorNotesController extends Controller
 	{
 		
 		//Verifie si l'utilisateur est connecte 
-		if (!empty($_SESSION))
+		if (!empty($_SESSION['user']))
 		{
 			$sub_notes1=null;
 			$sub_notes2=null;
@@ -146,7 +146,7 @@ class DoctorNotesController extends Controller
 		//Récupere les données du docteur
 		$id_doctor=$this->DoctorNotesManager->find($id)['id_doctor'];
 		//Verifie si l'utilisateur est connecté
-		if (isset($_SESSION))
+		if (isset($_SESSION['user']))
 		{
 			// Récupere l'id de l'utilisateur qui a cree la note 
 			$user=$this->DoctorNotesManager->find($id);
@@ -221,7 +221,7 @@ class DoctorNotesController extends Controller
 						$max=0;
 						foreach ($main_notes as $main_note) {
 							$i+=1;
-							$max+=intval($main_note['main_note']);
+							$max+=floatval($main_note['main_note']);
 						}
 						$average=$max/$i;
 
@@ -256,7 +256,7 @@ class DoctorNotesController extends Controller
 	public function delete ($id)
 	{
 		//Verifie si l'utilisateur est connecte 
-		if (isset($_SESSION))
+		if (isset($_SESSION['user']))
 		{
 			// Récupere l'id de l'utilisateur qui a cree la note 
 			$note=$this->DoctorNotesManager->find($id);
@@ -274,7 +274,7 @@ class DoctorNotesController extends Controller
 					$max=0;
 					foreach ($main_notes as $main_note) {
 						$i+=1;
-						$max+=intval($main_note['main_note']);
+						$max+=floatval($main_note['main_note']);
 					}
 					$average=$max/$i;
 				} 

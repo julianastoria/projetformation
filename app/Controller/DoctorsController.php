@@ -45,17 +45,35 @@ class DoctorsController extends Controller
 
 	public function index()
 	{
-		$doctors = $this->doctors_m->findAll();
+
+		if (empty($_GET['page']) || $_GET['page']<1 )
+		{
+			$page=1;
+		}
+		else
+		{
+			$page=intval($_GET['page']);
+		}
+		$limit=1;
+		$offset=($page-1)*1;
+		$doctors = $this->doctors_m->findAll('id',"ASC",1,$offset);
 		$doctors_dp = $this->doctors_m->findAllWithDepartement();
 		$doctors_cat = $this->doctors_m->findAllWithCategory();
+
 
 		for ($i = 0; $i < count($doctors); $i++) { 
 			$doctors[$i]['name_departement'] = $doctors_dp[$i]['name'];
 			$doctors[$i]['name_doctor_category'] = $doctors_cat[$i]['name'];
 		}
-
+		// Definir la page max 
+		//--- Récuperer le nombre d'etablissement
+		$nbresdoctors=count($this->doctors_m->findAll());
+		//--- Calcule le nombre de page max 
+		$pagemax= $nbresdoctors/$limit;
 		$this->show('doctors/index', [
-			'doctors' => $doctors
+			'doctors' => $doctors,
+			'page'=>$page,
+			'page_max'=>$pagemax
 			]);
 	}
 
@@ -93,9 +111,7 @@ class DoctorsController extends Controller
 		$site		 = null;
 
 		$category 	 = null;
-
 		$autisms 	 = array();
-
 		$save = true;
 
 		if ($_SERVER['REQUEST_METHOD'] === "POST")
@@ -118,11 +134,11 @@ class DoctorsController extends Controller
 			$autisms['asperger'] 	 = isset($_POST['asperger']) 	? "asperger" 	: null;
 			$autisms['atypique'] 	 = isset($_POST['atypique']) 	? "atypique" 	: null;
 
+
 			// Vérification des données
 				// Récupération du département en fonction du code postal
 			$departement = substr($postal_code, 0, 2);
 			$departement = $this->departements_m->findByNumber($departement);
-
 				// Récupération de l'id du 'doctor_category'
 			$category = $this->doctor_categories_m->findByName($category);
 
@@ -137,17 +153,13 @@ class DoctorsController extends Controller
 				$doctor = $this->doctors_m->insert([
 					"firstname"			 => $firstname,
 					"lastname" 			 => $lastname,
-
 					"address" 			 => $address,
 					"id_departement"	 => $departement['id'],
-
 					"tel" 				 => $tel,
 					"email" 			 => $email,
 					"site" 				 => $site,
-
 					"id_doctor_category" => $category['id']
 				]);
-
 					// Table 'doctors_categories'
 				// if (!empty($autisms))
 				foreach ($autisms as $key => $autism)
@@ -162,12 +174,10 @@ class DoctorsController extends Controller
 						]);
 					}
 				}
-
 				// Redirection vers la page d'index des médecins
 				$this->redirectToRoute('doctors_index', ['id' => $doctor['id']]);
 			}
 		}
-
 		$this->show('doctors/create', [
 			"firstname" 	=> $firstname,
 			"lastname" 		=> $lastname,
@@ -183,7 +193,6 @@ class DoctorsController extends Controller
 			"checkbox_hidden" => "hidden"
 		]);
 	}
-
 
 
 	public function update($id_doctor)

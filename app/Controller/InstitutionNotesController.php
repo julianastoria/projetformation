@@ -27,7 +27,7 @@ class InstitutionNotesController extends Controller
 	{
 		
 		//Verifie si l'utilisateur est connecte 
-		if (isset($_SESSION))
+		if (isset($_SESSION['user']))
 		{
 			$sub_notes1=null;
 			$sub_notes2=null;
@@ -93,7 +93,7 @@ class InstitutionNotesController extends Controller
 				$notes=$this->InstitutionNotesManager->findAll();
 
 				foreach ($notes as $key => $note) {
-					if ($_SESSION['user']['id']===$note['id_user']){
+					if ($_SESSION['user']['id']===$note['id_user'] && $note['id_institution']===$id){
 						$error['user']="l'utilisateur a deja noté cet etablissement";
 						$save=false;
 					}
@@ -102,7 +102,8 @@ class InstitutionNotesController extends Controller
 				if ($save)
 				{
 						//Créer la note principale
-						$main_note=($sub_notes1+$sub_notes2+$sub_notes3)/3;
+						$main_note=floatval(($sub_notes1+$sub_notes2+$sub_notes3)/3);
+
 						//Réunir les sous notes en un tableau de notes
 						$sub_notes="$sub_notes1:$sub_notes2:$sub_notes3";
 						//Récupere l'id de l'utilisateur 
@@ -123,24 +124,16 @@ class InstitutionNotesController extends Controller
 					$this->InstitutionNotesManager->insert($note_data);
 					//Recalculer la note moyenne
 					$main_notes=$this->InstitutionNotesManager->findAllMainNotes($id);
-					if (!empty($main_notes)){
-						$i=0;
-						$max=0;
-						foreach ($main_notes as $main_note) 
-						{
-							$i+=1;
-							$max+=intval($main_note['main_note']);
-						}
-
-						$average=$max/$i;
-						
-					} 
-					else 
+					
+					$i=0;
+					$max=0;
+					foreach ($main_notes as $main_note) 
 					{
-						
-						$average=$note_data['main_note'];
+						$i+=1;
+						$max+=floatval($main_note['main_note']);
 					}
-
+	
+					$average=floatval($max/$i);
 					$this->InstitutionsManager->update([
 							'average'=>$average
 						],$id);
@@ -149,6 +142,7 @@ class InstitutionNotesController extends Controller
 				}
 					
 			}
+			//Appeller la vue 
 			$this->show('institution_note/create',[
 					'title'=>"Création d'une note",
 					'title_comment'=>$title_comment,
@@ -171,7 +165,7 @@ class InstitutionNotesController extends Controller
 		$institution=$this->InstitutionNotesManager->find($id);
 		$id_institution=$institution['id_institution'];
 		//Verifie si l'utilisateur est connecté
-		if (isset($_SESSION))
+		if (isset($_SESSION['user']))
 		{
 
 			// Récupere l'id de l'utilisateur qui a cree la note 
@@ -268,7 +262,7 @@ class InstitutionNotesController extends Controller
 						$max=0;
 						foreach ($main_notes as $main_note) {
 							$i+=1;
-							$max+=intval($main_note['main_note']);
+							$max+=floatval($main_note['main_note']);
 						}
 						$average=$max/$i;
 						var_dump($average);
@@ -293,6 +287,7 @@ class InstitutionNotesController extends Controller
 
 					]);
 			} else {
+				//Redirige vers la page des details de l'etablissement
 				$this->redirectToRoute('institution_details',['id'=>$id]);
 			}
 		} else {
@@ -304,7 +299,7 @@ class InstitutionNotesController extends Controller
 	public function delete ($id)
 	{
 		//Verifie si l'utilisateur est connecte 
-		if (isset($_SESSION))
+		if (isset($_SESSION['user']))
 		{
 			// Récupere l'id de l'utilisateur qui a cree la note 
 			$note=$this->InstitutionNotesManager->find($id);
@@ -315,6 +310,7 @@ class InstitutionNotesController extends Controller
 			{
 				$this->InstitutionNotesManager->delete($id);
 				//Recalculer la note moyenne
+				//--- Récuperer toutes les notes moyenne
 				$main_notes=$this->InstitutionNotesManager->findAllMainNotes($id_institution)['main_notes'];
 				$i=0;
 				$max=0;
@@ -323,7 +319,7 @@ class InstitutionNotesController extends Controller
 					foreach ($main_notes as $main_note) 
 					{
 						$i+=1;
-						$max+=intval($main_note['main_note']);
+						$max+=floatval($main_note['main_note']);
 					}
 					$average=$max/$i;
 				} 

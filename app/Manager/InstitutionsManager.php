@@ -39,4 +39,5 @@ class InstitutionsManager extends Manager
 		$sth->execute();
 		return $sth->fetch();
 	}
+	
 }

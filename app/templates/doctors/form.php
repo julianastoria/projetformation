@@ -74,8 +74,6 @@
 				</select>
 			</div>
 
-		
-
 			<div id="types_autisme" class="form-group <?= $checkbox_hidden; ?>">
 
 				<label>Les types d'autisme : </label>

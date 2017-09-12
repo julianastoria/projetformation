@@ -6,6 +6,7 @@ use \W\Manager\Manager;
 
 class InstitutionNotesManager extends Manager 
 {
+	//Methode pour recuperer toutes les notes moyennes 
 	public function findAllMainNotes($id)
 	{
 		$sql = "SELECT main_note FROM institution_notes WHERE id_institution = :id ";
@@ -14,6 +15,7 @@ class InstitutionNotesManager extends Manager
 		$sth->execute();
 		return $sth->fetchAll();
 	}
+	//Methode pour recuperer le type de l'etablissement
 	public function findTypeInstitution($id)
 	{
 		$sql = "SELECT type_institution FROM institutions WHERE id= :id";

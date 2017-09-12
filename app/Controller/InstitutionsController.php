@@ -23,7 +23,17 @@ class InstitutionsController extends Controller
 
 	public function index()
 	{
-		$institutions = $this->InstitutionsManager->findAll();
+		if (empty($_GET['page']))
+		{
+			$page=1;
+		}
+		else
+		{
+			$page=intval($_GET['page']);
+		}
+		$limit=1;
+		$offset=($page-1)*$limit;
+		$institutions = $this->InstitutionsManager->findAll('id','ASC',$limit,$offset);
 		$institutions_dp = $this->InstitutionsManager->findAllWithDepartement();
 		$institutions_cat = $this->InstitutionsManager->findAllWithCategory();
 
@@ -32,21 +42,61 @@ class InstitutionsController extends Controller
 			$institutions[$i]['name_institution_category'] = $institutions_cat[$i]['name'];
 			
 		}
+
+		// Definir la page max 
+		//--- Récuperer le nombre d'etablissement
+		$nbresinstitutions=count($this->InstitutionsManager->findAll());
+		//--- Calcule le nombre de page max 
+		$pagemax= $nbresinstitutions/$limit;
+		//Appeller la vue index 
 		$this->show('institutions/index', [
 			'institutions' => $institutions,
 			'title'=>'Liste des etablissement',
+			'page'=>$page,
+			'page_max'=>$pagemax
 		]);
 	}
 
 	public function read($id)
 	{
+		//Definir toutes les valeur en null par défault
+		$main_notes=null;
+		$sub_notes1=null;
+		$sub_notes2=null;
+		$sub_notes3=null;
+		$title_comment=null;
+		$comment=null;
+		$user=null;
+		$id_user=null;
 
+		//Récuperer la categorie et le nom du département de l'établissement 
+		//--- Recuperer les données de l'etablissement 
 		$institution = $this->InstitutionsManager->find($id);
+		//--- Utiliser les méthodes du InstitutionsManager
 		$institution_dp = $this->InstitutionsManager->findWithDepartement($institution['id_departement']);
 		$institution_cat = $this->InstitutionsManager->findWithCategory($institution['id_institution_category']); 
 		$institution['name_departement'] = $institution_dp['name'];
 		$institution['name_institution_category'] = $institution_cat['name'];
-		
+
+		//Creer une adresse au format JSON 
+		$adresse_json=json_encode($institution['address']);
+
+		//Recuperer les critéres des sous notes 
+		//--- Recuperer le type de l'etalissement avec l'id
+		$type_institution=$this->InstitutionsManager->find($id)['type_institution'];
+		//--- definir les critere des sous notes en fonction du type trouvé
+		$title_sub_notes1="Acceuil";
+		if ($type_institution === 'École')
+		{
+			
+			$title_sub_notes2='Inclusion sociale';
+			$title_sub_notes3='Adaptation envers l’autisme';
+		} 
+		else if ($type_institution === 'Établissement spécialisé')
+		{
+			$title_sub_notes2='Prise en charge';
+			$title_sub_notes3='Inspire confiance';
+		}
 		if (!isset($institution['name_departement']))
 		{
 			$error="l'etablissement n'existe pas ou a ete supprimée";
@@ -55,22 +105,61 @@ class InstitutionsController extends Controller
 			$title='les details sur '.$institution['name'];
 			$error=null;
 		}
+
 		//Récupere les notes 
 		$InstitutionNotesManager=new \Manager\InstitutionNotesManager;
 		$notes=$InstitutionNotesManager->findByInstitution($institution['id']);
+		for ($i=0;$i<count($notes);$i++)
+		{
+			//Recuperer l'utilisateur par l'id de la note 
+			//--- Recuperer l'id de l'utilisateur 
+			$id_user[$i]=$notes[$i]['id_user'];
+			//--- Instancier le UserManager 
+			$userManager=new \W\Manager\userManager;
+			$userManager->setTable('users');
+			//--- Chercher l'utilsateur avec l'id
+			$user[$i]=$userManager->find($id_user[$i])['firstname'];
+			//Recuperer les notes principales 
+			$main_notes[$i]=$notes[$i]['main_note'];
 
+			//Decomposer les sous notes 
+			$sub_notes[$i]=$notes[$i]['sub_notes'];
+			$sub_notes[$i]=explode(':', $sub_notes[$i]);
+			$sub_notes1[$i]=$sub_notes[$i][0];
+			$sub_notes2[$i]=$sub_notes[$i][1];
+			$sub_notes3[$i]=$sub_notes[$i][2];
+			
+			//Recuperer le commentaire et le titre 
+			$title_comment[$i]=$notes[$i]['title_comment'];
+			$comment[$i]=$notes[$i]['comment'];
+
+		}
+		//Appeller la vue du read
 		$this->show('institutions/read', [
 			'institution' => $institution,
 			'title'=>$title,
 			'error'=>$error,
-			'notes'=>$notes
+			'main_notes'=>$main_notes,
+			'sub_notes1'=>$sub_notes1,
+			'sub_notes2'=>$sub_notes2,
+			'sub_notes3'=>$sub_notes3,
+			'title_comment'=>$title_comment,
+			'comment'=>$comment,
+			'user'=>$user,
+			'id_user'=>$id_user,
+			'title_sub_notes1'=>$title_sub_notes1,			
+			'title_sub_notes2'=>$title_sub_notes2,
+			'title_sub_notes3'=>$title_sub_notes3,
+			'adresse_json'=>$adresse_json
+
 		]);
 	}
 
 	public function create()
 	{
 
-		//$this->allowTo(array('moderator','administrator'));
+		$this->allowTo(array('moderator','administrator'));
+		//Définir tous les valeurs par défault
 		$error=array();
 		$name=null;
 		$address=null;
@@ -95,7 +184,6 @@ class InstitutionsController extends Controller
 			$tel=$_POST['tel'];
 			$email=$_POST['email'];
 			$site=$_POST['site'];
-
 			$photos=$_POST['photos'];
 			$type_institution=$_POST['type_institution'];
 			$id_institution_category=$_POST['id_institution_category'];
@@ -158,6 +246,7 @@ class InstitutionsController extends Controller
 			}
 
 		}
+		//Appeller la vue 
 		$this->show('institutions/create',[
 				'title'=>"Création d'un etablissement",
 				'name'=>$name,
@@ -176,7 +265,9 @@ class InstitutionsController extends Controller
 
 	public function update($id)
 	{
+		//Definit les droits d'administration
 		//$this->allowTo(array(0=>'moderator',1=>'administrator'));
+		//Declarer toutes les valeurs par défault
 		$error=null;
 		$name=null;
 		$address=null;
@@ -264,6 +355,7 @@ class InstitutionsController extends Controller
 			}
 
 		}
+		//Appeller la vue
 		$this->show('institutions/update',[
 				'title'=>'Modifier un etablissement',
 				'name'=>$name,
@@ -284,7 +376,8 @@ class InstitutionsController extends Controller
 
 	public function delete($id)
 	{
-		$this->allowTo(array(0=>'moderator',1=>'administrator'));
+		//Definit les droits d'administrateur
+		$this->allowTo(array('moderator','administrator'));
 		$this->InstitutionsManager->delete($id);
 		$this->redirectToRoute('institutions_index');
 	}

@@ -111,22 +111,21 @@ header h2 {
 	color: #fff;
 	font-family: 'Open Sans', sans-serif;
 	font-size: 45px;
-
 }
 
 header {
 	/* moyen pour ajuster une image à sa hauteur */
 	background-image: url(../img/water-1330252_1920.jpg);
 	background-size:cover;
-	margin: 0 -45px -44px -15px;
- }
+    margin: 0 -45px -44px -15px;
+  
+}
 
 
 .jumbotron h1 {
 	font-family: 'Roboto', sans-serif;
 	font-size: 80px;
 }
-
 
 .btn-blue {
 	background: linear-gradient(#0072ff, #00c6ff);
@@ -214,11 +213,7 @@ footer {
 }
 
 .fa-star-half-o {
- 	color: #8845e0;
-}
-
-.doc {
-	margin-top: 90px;
+	color: #8845e0;
 }
 
 .afficher {
@@ -249,6 +244,7 @@ footer p {
 		/* méthode pour enlever les traces du linear-gradient */	
 		background: transparent;
 		margin-left: 68px;
+
 	}
 
 .navbar-default .navbar-nav > li > a {
@@ -401,7 +397,6 @@ header h2 {
 	}
 
 }
-
 
 /* create_medecin.php avec un include de form.php */
 label {
