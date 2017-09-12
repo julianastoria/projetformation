@@ -65,6 +65,7 @@ class InstitutionsController extends Controller
 		$title_comment=null;
 		$comment=null;
 		$user=null;
+		$id_user=null;
 
 		$institution = $this->InstitutionsManager->find($id);
 		$institution_dp = $this->InstitutionsManager->findWithDepartement($institution['id_departement']);
@@ -123,6 +124,7 @@ class InstitutionsController extends Controller
 			//Recuperer le commentaire et le titre 
 			$title_comment[$i]=$notes[$i]['title_comment'];
 			$comment[$i]=$notes[$i]['comment'];
+
 		}
 		$this->show('institutions/read', [
 			'institution' => $institution,
@@ -135,9 +137,11 @@ class InstitutionsController extends Controller
 			'title_comment'=>$title_comment,
 			'comment'=>$comment,
 			'user'=>$user,
+			'id_user'=>$id_user,
 			'title_sub_notes1'=>$title_sub_notes1,			
 			'title_sub_notes2'=>$title_sub_notes2,
-			'title_sub_notes3'=>$title_sub_notes3
+			'title_sub_notes3'=>$title_sub_notes3,
+
 		]);
 	}
 

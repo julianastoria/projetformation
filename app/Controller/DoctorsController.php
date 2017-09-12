@@ -108,11 +108,8 @@ class DoctorsController extends Controller
 		$email 		 = null;
 		$site		 = null;
 		$category 	 = null;
-
 		$autisms 	 = array();
-
 		$save = false;
-
 		if ($_SERVER['REQUEST_METHOD'] === "POST")
 		{
 			$firstname 	 = $_POST['firstname'];
@@ -129,18 +126,14 @@ class DoctorsController extends Controller
 			$autisms['asperger'] 	 = isset($_POST['asperger']) 	? "Asperger" 	: null;
 			$autisms['atypique'] 	 = isset($_POST['atypique']) 	? "Atypique" 	: null;
 			var_dump($autisms);
-
 			// Vérification des données
 				// Récupération du département en fonction du code postal
 			$departement = substr($postal_code, 0, 2);
 			$departement = $this->departements_m->findByNumber($departement);
-
 				// Récupération de l'id du 'doctor_category'
 			$category = $this->doctor_categories_m->findByName($category);
-
 				// Concaténation des trois string correspondant au champ 'address' dans la table 'doctors'
 			$address .= " ".$postal_code." ".$city;
-
 			if ($save)
 			{
 				// Enregistrement des données dans la BdD
@@ -148,17 +141,13 @@ class DoctorsController extends Controller
 				$doctor = $this->doctors_m->insert([
 					"firstname"			 => $firstname,
 					"lastname" 			 => $lastname,
-
 					"address" 			 => $address,
 					"id_departement"	 => $departement['id'],
-
 					"tel" 				 => $tel,
 					"email" 			 => $email,
 					"site" 				 => $site,
-
 					"id_doctor_category" => $category['id']
 				]);
-
 					// Table 'doctors_categories'
 				foreach ($autisms as $key => $autism)
 				{
@@ -172,12 +161,10 @@ class DoctorsController extends Controller
 						]);
 					}
 				}
-
 				// Redirection vers la page d'index des médecins
 				$this->redirectToRoute('doctors_index', ['id' => $doctor['id']]);
 			}
 		}
-
 		$this->show('doctors/create', [
 			"firstname" 	=> $firstname,
 			"lastname" 		=> $lastname,
@@ -191,7 +178,6 @@ class DoctorsController extends Controller
 			// "category" 		=> $category
 		]);
 	}
-
 
 
 	public function update($id)
