@@ -22,7 +22,7 @@
 		['GET'		, '/medecin/[i:id]/details'	, 'Doctors#read', 'doctor_details'],
 		['GET|POST'	, '/medecin/create'			, 'Doctors#create', 'doctor_create'],
 		['GET|POST'	, '/medecin/[i:id]/edit'	, 'Doctors#update', 'doctor_update'],
-		['GET'		, '/medecin/[i:id]/delete'	, 'Doctors#delete', 'doctor_delete'],
+		['GET|POST'		, '/medecin/[i:id]/delete'	, 'Doctors#delete', 'doctor_delete'],
 		//DoctorsNotes Routes
 		['GET|POST'	, '/medecin/note/[i:id]/add'	, 'DoctorNotes#create', 'create_doctor_note'],
 		['GET|POST'	, '/medecin/note/[i:id]/edit'	, 'DoctorNotes#update', 'edit_doctor_note'],

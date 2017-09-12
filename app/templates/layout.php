@@ -34,54 +34,11 @@
 
 
 			<ul class="nav navbar-nav navbar-left">
-
-			<li>
-				<div class="dropdown">
-					<button class="btn btn-blue dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-						<li class="navbar-left"><a href="#Etablissements"><i class="fa fa-home visible-xs hidden-sm hidden-md hidden-lg" aria-hidden="true"></i><p class="hidden-xs visible-sm visible-md visible-lg">Etablissements</p></a></li>
-						 <span class="caret"></span>
-					</button>
-							<ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu1">
-								 <li class="dropdown-submenu">
-								 	<a class="dropdown-toggle" data-toggle="dropdown" href="<?= $this->url('institutions_index',['type'=>'etablissementsspe']) ?>">Etablissements spécialisés</a>
-										 <ul class="dropdown-menu">
-									 		<li><a class="eta" href="<?= $this->url('institutions_index',['type'=>'ime']) ?>">IME</a></li>
-									 		<li><a class="eta" href="<?= $this->url('institutions_index',['type'=>'sessad']) ?>">SESSAD</a></li>
-									 		<li><a class="eta" href="<?= $this->url('institutions_index',['type'=>'ulis']) ?>">ULIS</a></li>
-									 		
-										</ul>
-								</li>	 		
-							
-
-								<li class="dropdown-submenu"><a href="<?= $this->url('institutions_index',['type'=>'ecoles']) ?>">Ecoles</a>
-						    		 <ul class="dropdown-menu">
-									 		<li><a class="eta" tabindex="-1" href="<?= $this->url('institutions_index',['type'=>'maternelle']) ?>">Maternelle</a></li>
-									 		<li><a class="eta" href="<?= $this->url('institutions_index',['type'=>'primaire']) ?>">Primaire</a></li>
-									 		<li><a class="eta" href="<?= $this->url('institutions_index',['type'=>'college']) ?>">Collège</a></li>
-									 		<li><a class="eta" href="<?= $this->url('institutions_index',['type'=>'lycee']) ?>">Lycée</a></li>
-										</ul>
-						    	</li>
-							</ul>
-					
-				</div>
-			</li>
-			
-
-
-			<li>
-				<div class="dropdown">
-					<button class="btn btn-blue dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-							<li class="navbar-left"><a href="#Medecins"><i class="fa fa-user-md visible-xs hidden-sm hidden-md hidden-lg" aria-hidden="true"></i><p class="hidden-xs">Médecins</p></a></li>
-							 <span class="caret"></span>
-				  		</button>
-				  		 <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-						    <li><a href="<?= $this->url('doctors_index',['type'=>'generaliste']) ?>">Généraliste</a></li>
-						    <li><a href="<?= $this->url('doctors_index',['type'=>'psychiatre']) ?>">Psychologue/Psychiatre</a></li>
-						    <li><a href="<?= $this->url('doctors_index',['type'=>'dentiste']) ?>">Dentiste</a></li>
-						</ul>
-					</div>
-				</li>
+				<li class="navbar-left"><a href="<?= $this->url('institutions_index') ?>"><i class="fa fa-home visible-xs hidden-sm hidden-md hidden-lg" aria-hidden="true"></i><p class="hidden-xs visible-sm visible-md visible-lg">Etablissements</p></a></li>
+				<li class="navbar-left"><a href="<?= $this->url('doctors_index') ?>"><i class="fa fa-user-md visible-xs hidden-sm hidden-md hidden-lg" aria-hidden="true"></i><p class="hidden-xs visible-sm visible-md visible-lg">Médecins</p></a></li>
+							 
 			</ul>
+	
 
 			<ul class=" nav navbar-nav navbar-right">
 				<li class="navbar-right"><a href="<?= $this->url('user_signup') ?>"><i class="fa fa-user-plus bonhomme" aria-hidden="true"></i></a></li>
@@ -101,7 +58,7 @@
 					</div>
 			</li>
 		</ul>
-			</div>
+		</div>
 	</div>
 </nav>
 </header>

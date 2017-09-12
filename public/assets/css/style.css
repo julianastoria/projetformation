@@ -63,9 +63,11 @@ h2 {
 }
 
 /* navbar */
-.navbar, .navbar-default, .navbar-static-top{
+.navbar, .navbar-default, .navbar-static-top {
 	background: linear-gradient(#0072ff, #00c6ff);
 	padding-right: 25px;
+	
+
 	
 }
 
@@ -82,7 +84,8 @@ h2 {
 .navbar-default .navbar-nav > li > a {
 	color: #fff;
 	font-size: 20px;
-	padding-right: 43px;
+	padding-right: 60px;
+	
 }
 
 .navbar-default .navbar-nav > li > a:hover {
@@ -102,36 +105,6 @@ h2 {
 
 }
 
-/* pour le dropdown multi-level */
-/* elle me permet de passer la souris sur les sous-éléments */
-.dropdown-submenu {
-    position: relative;
-}
-
-.dropdown-submenu>.dropdown-menu {
-	top: 0;
-    left: 100%;
-    margin-top: -6px;
-    margin-left: -1px;
-}
-
-.dropdown-submenu:hover>.dropdown-menu {
-    display: block;
-
-}
-
-.dropdown-submenu>a:after {
-	display: block;
-	float: right;
-	width: 0;
-    height: 0;
-}
-
-
-.dropdown-submenu.pull-left>.dropdown-menu {
-	left: -100%;
-    margin-left: 10px;
-}
 
 /* header */
 header h2 {
@@ -304,9 +277,14 @@ footer p {
 	margin-left: 135px;
 }
 
-.bonhomme {
-	margin-left: 25px;
+.fa-user-md {
+	padding-left: 59px;
 }
+
+.fa-home {
+	padding-left: 20px;
+}
+
 
 /* pour afficher la couleur du dropdown en blanc */
 .navbar-default .navbar-nav .open .dropdown-menu > li > a {
@@ -421,6 +399,7 @@ header h2 {
 	.demo {
 		margin-bottom: 30px;
 	}
+
 }
 
 

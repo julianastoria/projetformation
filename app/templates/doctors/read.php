@@ -26,7 +26,7 @@
 			  <div class="modal-dialog">
 			    <div class="modal-content">
 			      <div class="modal-header">
-			        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			        <button type="submit" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 			        <h2 class="modal-title" id="myModalLabel">Supprimer un médecin ?</h2>
 			      </div>
 			      <div class="modal-body">
@@ -34,9 +34,10 @@
 			      </div>
 			      
 			      <div class="modal-footer">
-			      	<form method="POST">	
-			       	<button type="submit" class="btn btn-purple" data-dismiss="modal" href="<?= $this->url('doctor_delete',['id'=>$doctor['id']]) ?>" >Oui</button>
-		        	<button type="submit" class="btn btn-purple" href="<?= $this->url('doctor_details',['id'=>$doctor['id']]) ?>">Non</button>
+			      	<form method="POST" action="<?= $this->url('doctor_delete',['id'=>$doctor['id']]) ?>">	
+			       		<button type="submit" class="btn btn-purple">Oui</button>
+		        		<!-- <a class="btn btn-purple" href="<?= $this->url('doctor_details',['id'=>$doctor['id']]) ?>">Non</a> -->
+		        		<a class="btn btn-purple" data-dismiss="modal">Non</a>
 		        	</form>
 			      </div>
 			      </div>
