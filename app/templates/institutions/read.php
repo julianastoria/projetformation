@@ -17,11 +17,11 @@
 			<h2>Notes de : <?= $user[$i] ?></h2>
 			<h3>Note principale : <?= $main_notes[$i] ?></h3>
 
-			<h3><?= $title_sub_notes1[$i] ?></h3>
+			<h3><?= $title_sub_notes1 ?></h3>
 			<p><?= $sub_notes1[$i] ?></p>		
-			<h3><?= $title_sub_notes2[$i] ?></h3>
+			<h3><?= $title_sub_notes2 ?></h3>
 			<p><?= $sub_notes2[$i] ?></p>
-			<h3><?= $title_sub_notes3[$i] ?></h3>
+			<h3><?= $title_sub_notes3 ?></h3>
 			<p><?= $sub_notes3[$i] ?></p>
 			<h3><?= $title_comment[$i] ?></h3>
 			<p><?= $comment[$i] ?></p>

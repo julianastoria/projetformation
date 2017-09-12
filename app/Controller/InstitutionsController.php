@@ -40,13 +40,35 @@ class InstitutionsController extends Controller
 
 	public function read($id)
 	{
-
+		$main_notes=null;
+		$sub_notes1=null;
+		$sub_notes2=null;
+		$sub_notes3=null;
+		$title_comment=null;
+		$comment=null;
+		$user=null;
 		$institution = $this->InstitutionsManager->find($id);
 		$institution_dp = $this->InstitutionsManager->findWithDepartement($institution['id_departement']);
 		$institution_cat = $this->InstitutionsManager->findWithCategory($institution['id_institution_category']); 
 		$institution['name_departement'] = $institution_dp['name'];
 		$institution['name_institution_category'] = $institution_cat['name'];
-		
+
+		//Recuperer les critéres des sous notes 
+		//--- Recuperer le type de l'etalissement avec l'id
+		$type_institution=$this->InstitutionsManager->find($id)['type_institution'];
+		//--- definir les critere des sous notes en fonction du type trouvé
+		$title_sub_notes1="Acceuil";
+		if ($type_institution === 'École')
+		{
+			
+			$title_sub_notes2='Inclusion sociale';
+			$title_sub_notes3='Adaptation envers l’autisme';
+		} 
+		else if ($type_institution === 'Établissement spécialisé')
+		{
+			$title_sub_notes2='Prise en charge';
+			$title_sub_notes3='Inspire confiance';
+		}
 		if (!isset($institution['name_departement']))
 		{
 			$error="l'etablissement n'existe pas ou a ete supprimée";
@@ -55,6 +77,7 @@ class InstitutionsController extends Controller
 			$title='les details sur '.$institution['name'];
 			$error=null;
 		}
+		
 		//Récupere les notes 
 		$InstitutionNotesManager=new \Manager\InstitutionNotesManager;
 		$notes=$InstitutionNotesManager->findByInstitution($institution['id']);
@@ -77,23 +100,7 @@ class InstitutionsController extends Controller
 			$sub_notes1[$i]=$sub_notes[$i][0];
 			$sub_notes2[$i]=$sub_notes[$i][1];
 			$sub_notes3[$i]=$sub_notes[$i][2];
-			//Recuperer les critéres des sous notes 
-			//--- Recuperer l'id de l'etalissement
-			$id_institution[$i]=$notes[$i]['id_institution'];
-			$type_institution[$i]=$this->InstitutionsManager->find($id_institution[$i])['type_institution'];
-			//--- defenir les critere des sous notes en fonction du tpe trouvé
-			$title_sub_notes1[$i]="Acceuil";
-			if ($type_institution[$i] === 'École')
-			{
-				
-				$title_sub_notes2[$i]='Inclusion sociale';
-				$title_sub_notes3[$i]='Adaptation envers l’autisme';
-			} 
-			else if ($type_institution[$i] === 'Établissement spécialisé')
-			{
-				$title_sub_notes2[$i]='Prise en charge';
-				$title_sub_notes3[$i]='Inspire confiance';
-			}
+			
 			//Recuperer le commentaire et le titre 
 			$title_comment[$i]=$notes[$i]['title_comment'];
 			$comment[$i]=$notes[$i]['comment'];

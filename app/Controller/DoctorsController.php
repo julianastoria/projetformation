@@ -45,9 +45,21 @@ class DoctorsController extends Controller
 
 	public function index()
 	{
-		$doctors = $this->doctors_m->findAll();
+
+		if (empty($_GET['page']))
+		{
+			$page=1;
+		}
+		else
+		{
+			$page=intval($_GET['page']);
+		}
+		var_dump($page);
+		$offset=($page-1)*1;
+		$doctors = $this->doctors_m->findAll('id',"ASC",1,$offset);
 		$doctors_dp = $this->doctors_m->findAllWithDepartement();
 		$doctors_cat = $this->doctors_m->findAllWithCategory();
+
 
 		for ($i = 0; $i < count($doctors); $i++) { 
 			$doctors[$i]['name_departement'] = $doctors_dp[$i]['name'];
@@ -55,7 +67,8 @@ class DoctorsController extends Controller
 		}
 
 		$this->show('doctors/index', [
-			'doctors' => $doctors
+			'doctors' => $doctors,
+			'page'=>$page
 			]);
 	}
 
