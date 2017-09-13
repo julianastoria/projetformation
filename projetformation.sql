@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Mar 12 Septembre 2017 à 17:26
+-- Généré le :  Mer 13 Septembre 2017 à 10:37
 -- Version du serveur :  10.1.21-MariaDB
 -- Version de PHP :  5.6.30
 
@@ -88,17 +88,10 @@ CREATE TABLE `doctors` (
 --
 
 INSERT INTO `doctors` (`id`, `firstname`, `lastname`, `address`, `tel`, `email`, `site`, `id_departement`, `average`, `id_doctor_category`) VALUES
-(6, 'Toto', 'Pingouin', '15 rue de la Clémentine|62487|Arras', '645789513', 'toto.pingouin@gmail.com', NULL, 2, '2.58', 1),
+(6, 'Toto', 'Pingouin', '15 rue de la Clémentine|62487|Arras', '645789513', 'toto.pingouin@gmail.com', NULL, 2, '2.67', 1),
 (7, 'Denis', 'Forage', '154 rue de la République|59456|Lille', '684751352', 'denis@forage.outlook.fr', NULL, 1, '4.56', 3),
 (8, 'Jason', 'Colynaire', '25 rue de Père Noël|59153|Lille', '748561237', 'jason.colynaire@gmail.com', NULL, 1, '3.24', 2),
-(12, 'gtgtgtgtgt', 'gtgtgtgtgt', 'gtgtgtgtg|59475|gtgtgtgtgtg', '645789512', 'gtgtgt@gtgtgt.gt', 'http://gtgtgt.com/frfrfrfrf', 1, '0.00', 1),
-(13, 'gtgtgtgtgt', 'gtgtgtgtgt', 'gtgtgtgtg|59475|gtgtgtgtgtg', '645789512', 'gtgtgt@gtgtgt.gt', 'http://gtgtgt.com/frfrfrfrf', 1, '0.00', 1),
-(14, 'gtgtgtgtgt', 'gtgtgtgtgt', 'gtgtgtgtg|59475|gtgtgtgtgtg', '645789512', 'gtgtgt@gtgtgt.gt', 'http://gtgtgt.com/frfrfrfrf', 1, '0.00', 1),
-(15, 'gtgtgtgtgt', 'gtgtgtgtgt', 'gtgtgtgtg|59475|gtgtgtgtgtg', '645789512', 'gtgtgt@gtgtgt.gt', 'http://gtgtgt.com/frfrfrfrf', 1, '0.00', 1),
-(16, 'gtgtgtgtgt', 'gtgtgtgtgt', 'gtgtgtgtg|59475|gtgtgtgtgtg', '645789512', 'gtgtgt@gtgtgt.gt', 'http://gtgtgt.com/frfrfrfrf', 1, '0.00', 1),
-(17, 'gtgtgtgtgt', 'gtgtgtgtgt', 'gtgtgtgtg|59475|gtgtgtgtgtg', '645789512', 'gtgtgt@gtgtgt.gt', 'http://gtgtgt.com/frfrfrfrf', 1, '0.00', 3),
-(18, 'gtgtgtgtgt', 'gtgtgtgtgt', 'gtgtgtgtg|59475|gtgtgtgtgtg', '645789512', 'gtgtgt@gtgtgt.gt', 'http://gtgtgt.com/frfrfrfrf', 1, '0.00', 3),
-(19, 'gtgtgtgtgt', 'gtgtgtgtgt', 'gtgtgtgtg|59475|gtgtgtgtgtg', '645789512', 'gtgtgt@gtgtgt.gt', 'http://gtgtgt.com/frfrfrfrf', 1, '0.00', 3);
+(20, 'Antoine', 'Jouguet', '48 rue De Gaulle|02456|Saint-Quentin', '678459512', 'antoine.jouguet@yahoo.fr', NULL, 3, '0.00', 2);
 
 -- --------------------------------------------------------
 
@@ -116,15 +109,8 @@ CREATE TABLE `doctors_autisms` (
 --
 
 INSERT INTO `doctors_autisms` (`id_autism`, `id_doctor`) VALUES
-(1, 12),
-(1, 13),
-(1, 14),
-(1, 16),
-(2, 12),
-(2, 13),
-(2, 14),
-(2, 16),
-(3, 15);
+(1, 6),
+(2, 6);
 
 -- --------------------------------------------------------
 
@@ -166,6 +152,13 @@ CREATE TABLE `doctor_notes` (
   `nb_dislikes` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Contenu de la table `doctor_notes`
+--
+
+INSERT INTO `doctor_notes` (`id`, `main_note`, `sub_notes`, `id_doctor`, `id_user`, `post_date`, `title_comment`, `comment`, `nb_likes`, `nb_dislikes`) VALUES
+(1, '2.67', '4:2:2', 6, 1, '0000-00-00 00:00:00', 'Franchement bof', 'Ce médecin est accueillant, mais a plein de préjugés.', 0, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -185,6 +178,15 @@ CREATE TABLE `institutions` (
   `type_institution` enum('École','Établissement spécialisé') NOT NULL,
   `id_institution_category` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `institutions`
+--
+
+INSERT INTO `institutions` (`id`, `name`, `address`, `tel`, `email`, `site`, `id_departement`, `photos`, `average`, `type_institution`, `id_institution_category`) VALUES
+(1, 'Les Papillons Blancs', '2 rue des Curieux', '102030405', 'lespapillonsblancs@hotmail.fr', 'http://snsd.fr', 1, 'https://www.adapei35.com/system/html/IMELaRive.JPG-07e648fd.jpg', '3.33', 'Établissement spécialisé', 1),
+(2, 'SESSAD Recueil', '43 Rue de la Station 59650 Villeneuve-d\'Ascq', '320473030', 'sessadrecueil@rxtg.org', 'http://sessadrecueil', 1, 'https://www.papillonsblancs-rxtg.org/wp-content/uploads/2015/07/SESSAD-Villeneuve-dAscq_02.jpg', '0.00', 'Établissement spécialisé', 2),
+(3, 'Lycée Georges Clémenceau', '27 boulevard Napoléon 02456 Laon', '356489512', 'georgesclemenceau.laon@lycee.fr', 'georgesclemenceau-laon.fr', 3, NULL, '0.00', 'École', NULL);
 
 -- --------------------------------------------------------
 
@@ -226,6 +228,13 @@ CREATE TABLE `institution_notes` (
   `nb_dislikes` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Contenu de la table `institution_notes`
+--
+
+INSERT INTO `institution_notes` (`id`, `main_note`, `sub_notes`, `id_institution`, `id_user`, `post_date`, `title_comment`, `comment`, `nb_likes`, `nb_dislikes`) VALUES
+(1, '3.33', '3:4:3', 1, 1, '0000-00-00 00:00:00', 'Cool', 'Super agréable, je suis content de l\'IME', 0, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -244,6 +253,13 @@ CREATE TABLE `users` (
   `situations` varchar(255) DEFAULT NULL,
   `id_autism` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `users`
+--
+
+INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `password`, `birthday`, `id_departement`, `roles`, `situations`, `id_autism`) VALUES
+(1, 'juliana', 'Pontois', 'juliana.histoire@hotmail.fr', '$2y$10$KyYF/z/lTIKUq/14LRzuleKrjKSARm6qt4AUJxTf2IYPftWyMZwYa', '1992-08-17', 1, 'user', 'autiste', 2);
 
 --
 -- Index pour les tables exportées
@@ -338,7 +354,7 @@ ALTER TABLE `departements`
 -- AUTO_INCREMENT pour la table `doctors`
 --
 ALTER TABLE `doctors`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT pour la table `doctor_categories`
 --
@@ -348,12 +364,12 @@ ALTER TABLE `doctor_categories`
 -- AUTO_INCREMENT pour la table `doctor_notes`
 --
 ALTER TABLE `doctor_notes`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT pour la table `institutions`
 --
 ALTER TABLE `institutions`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT pour la table `institution_categories`
 --
@@ -363,12 +379,12 @@ ALTER TABLE `institution_categories`
 -- AUTO_INCREMENT pour la table `institution_notes`
 --
 ALTER TABLE `institution_notes`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- Contraintes pour les tables exportées
 --

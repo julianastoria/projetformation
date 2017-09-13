@@ -60,7 +60,7 @@ class DoctorNotesController extends Controller
 					$save=false;
 					$error['comment']='le champ commentaire est vide';
 				}
-				else if (strlen($comment) < 200)
+				else if (strlen($comment) < 20)
 				{
 					$save=false;
 					$error['comment']='le commentaire est trop court';

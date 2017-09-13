@@ -158,7 +158,7 @@ class InstitutionsController extends Controller
 	public function create()
 	{
 
-		$this->allowTo(array('moderator','administrator'));
+		// $this->allowTo(array('moderator','administrator'));
 		//Définir tous les valeurs par défault
 		$error=array();
 		$name=null;
@@ -377,7 +377,7 @@ class InstitutionsController extends Controller
 	public function delete($id)
 	{
 		//Definit les droits d'administrateur
-		$this->allowTo(array('moderator','administrator'));
+		// $this->allowTo(array('moderator','administrator'));
 		$this->InstitutionsManager->delete($id);
 		$this->redirectToRoute('institutions_index');
 	}
