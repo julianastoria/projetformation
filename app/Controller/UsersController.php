@@ -61,7 +61,7 @@ class UsersController extends Controller
  			} 
  			else 
  			{
- 				$error="l'email ou le mot de passe est incorrecte";
+ 				$error="L'email ou le mot de passe est incorrect";
  			}
  		}	
 		$this->show('user/signin',[
