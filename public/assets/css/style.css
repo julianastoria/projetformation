@@ -147,7 +147,7 @@ header {
 
 .btn-purple:hover,
 .btn-purple:focus {
-	color: #00d8ff;
+	color: #F0FFFF;
 	font-size: 20px;
 }
 
@@ -192,14 +192,14 @@ footer {
 
 
 /* écriture à côté des thumbnails */
-.thumbnail .caption a h4 {
+.thumbnail .caption a h3 {
 	color: #8845e0;
 	font-family: 'Open Sans', sans-serif;
 
 
 }
 
-.thumbnail .caption a h4:hover {
+.thumbnail .caption a h3:hover {
 	background-color: #fff9f2;
 }
 
@@ -509,4 +509,6 @@ textarea {
 /* modal doctors read */
 .supp {
 	font-family: 'Open Sans', sans-serif;
+	color: #8845e0;
+	font-size: 2.5rem;
 }
