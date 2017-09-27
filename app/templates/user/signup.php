@@ -49,15 +49,17 @@
 					<label for="id_departement">Departement</label>
 					<select class="form-control" name="id_departement" id="id_departement">
 					<?php foreach ($departements as $key => $departement): ?>
+
 						<option value="<?= $departement['id'] ?>"><?= $departement['name'] ?></option>
 					<?php endforeach ?>
 					</select><br/>
 				</div>
 
 				<div class="form-group">
-					<label for="autism">Autismes</label>
+					<label for="id_autism">Autismes</label>
 					<select class="form-control" name="id_autism" id="id_autism">
 						<?php foreach ($autisms as $key => $autism): ?>
+
 						<option value="<?= $autism['id'] ?>"><?= $autism['name'] ?></option>
 						<?php endforeach ?>
 					</select><br/>						
@@ -65,8 +67,8 @@
 
 				<div class="form-group">
 					<label for="situation">Situation</label>
-					<select class="form-control" name="situation">
-					<option class="hidden" value="nothing">--</option>
+					<select class="form-control" name="situation" id="situation">
+						<option class="hidden" value="nothing">--</option>
 						<option value="autiste">Autiste</option>
 						<option value="parent d'autiste">Parent d'autiste</option>
 						<option value="medecin">Medecin</option>

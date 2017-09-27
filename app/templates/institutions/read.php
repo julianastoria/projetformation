@@ -13,7 +13,7 @@
 	<p class="text-center user">Le numéro de téléphone : <?= $institution['tel']; ?></p>
 	<p class="text-center user">La photo : <br><img src="<?= $institution['photos']; ?>"></p>
 	<p class="text-center user">Le type d'institution : <?= $institution['type_institution']; ?></p><br>
-
+	<div id="map"></div>
 	<div class="row">
 		<div class="col-lg-4 col-lg-offset-4">
 			<a class="btn btn-purple" href="<?= $this->url('institution_update',['id'=>$institution['id']]) ?>" class="btn">Modifier</a>
@@ -47,3 +47,20 @@
 
 <?php $this->stop('main_content') ?>
 
+<?php $this->start('main_script') ?>
+<script type="text/javascript">
+	var adress=<?php echo $adresse_json ?>;
+
+ 	var map;
+ 	function initMap() {
+		  map = new google.maps.Map(document.getElementById('map'), {
+	    	zoom: 4
+    	});
+    	map.data.loadGeoJson("http://maps.googleapis.com/maps/api/geocode/json?address="+adress+"&sensor=false");
+  };
+	
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA5EvRQZFpNd3qH7z2FPBzVMrTMDJjgdzc&callback=initMap"
+    async defer></script>
+
+<?php $this->stop('main_script') ?>
