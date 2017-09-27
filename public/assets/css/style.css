@@ -71,7 +71,8 @@ h2 {
 
 .navbar-default .navbar-brand {
 	color: #fff;
-	font-size: 25px;
+	text-shadow: 1px 0px 1px #000;
+	font-size: 1.5em;
 
 }
 
@@ -81,14 +82,18 @@ h2 {
 
 .navbar-default .navbar-nav > li > a {
 	color: #fff;
-	font-size: 20px;
+	text-shadow: 1px 0px 1px #000;
+	font-size: 1.5em;
 	padding-right: 43px;
 }
 
 .navbar-default .navbar-nav > li > a:hover {
 	color: #8845e0;
 }
-
+.dropdown a {
+	text-shadow: 1px 0px 1px #000;
+	font-size: 1.5em;
+}
 .dropdown-menu, .fa, i{
 	color: #fff;
 	font-size: 15px;
@@ -98,6 +103,7 @@ h2 {
 
 .dropdown-menu > li > a {
 	color: #8845e0;
+
 	font-family: 'Open Sans', sans-serif;
 
 }
@@ -132,7 +138,7 @@ h2 {
 	left: -100%;
     margin-left: 10px;
 }
-
+ 
 /* header */
 header h2 {
 	color: #fff;
