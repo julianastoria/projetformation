@@ -82,13 +82,13 @@
 				<div class="col-md-6">
 					<ul class="list-inline">
 						<li class="text-left contact"><a href="<?= $this->url('contact') ?>">Contacts</a></li>
-						<li class="text-left"><a href="#">à propos</a></li>
-						<li class="text-left"><a href="#">Mentions légales</a></li>
+						<li class="text-left"><a>à propos</a></li>
+						<li class="text-left"><a>Mentions légales</a></li>
 					</ul>
 				</div>
 
 				<div class="col-md-6">
-					<p class=><i class="fa fa-copyright" aria-hidden="true"></i> Copyright Mouton à 5 pattes, Compéthance, WebForce3, Urbilog 2017 </p>
+					<p class="copyright"><i class="fa fa-copyright" aria-hidden="true"></i> Copyright Mouton à 5 pattes, Compéthance, WebForce3, Urbilog 2017 </p>
 				</div>	
 			</div>
 		</footer>

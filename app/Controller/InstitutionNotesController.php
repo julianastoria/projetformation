@@ -121,18 +121,21 @@ class InstitutionNotesController extends Controller
 							'nb_likes'=>0,
 							'nb_dislikes'=>0
 						];
+						
 					$this->InstitutionNotesManager->insert($note_data);
 					//Recalculer la note moyenne
 					$main_notes=$this->InstitutionNotesManager->findAllMainNotes($id);
 					
 					$i=0;
 					$max=0;
+
 					foreach ($main_notes as $main_note) 
 					{
+
 						$i+=1;
 						$max+=floatval($main_note['main_note']);
 					}
-	
+
 					$average=floatval($max/$i);
 					$this->InstitutionsManager->update([
 							'average'=>$average

@@ -1,8 +1,8 @@
-<?php $this->layout('layout', ['title' => 'Détails du médecin']) ?>
+<?php $this->layout('layout', ['title' => 'Détails du docteur '. $doctor['lastname']]) ?>
 
 <?php $this->start('main_content') ?>
-
-	<h2 class="text-center">Détails de Dr. <?= $doctor['lastname']; ?></h2>
+	<main>
+	<h1 class="text-center">Détails de Dr. <?= $doctor['lastname']; ?></h1>
 	<p class="text-center user">Son nom : <?= $doctor['lastname']; ?></p>
 	<p class="text-center user">Son prénom : <?= $doctor['firstname']; ?></p>
 	<p class="text-center user">Son adresse : <?= $doctor['address']; ?></p>
@@ -16,8 +16,8 @@
 	
 	<div class="row">
 		<div class="col-md-4 col-md-offset-4">
-			<a href="<?= $this->url('doctor_update',['id'=>$doctor['id']]) ?>" class="btn btn-purple">Modifier</a>
-			<a type="button" data-toggle="modal" data-target="#basicModal" class="btn btn-purple readins">Supprimer</a>
+			<a href="<?= $this->url('doctor_update',['id'=>$doctor['id']]) ?>" title="Modifier le docteur <?= $doctor['lastname']; ?>" class="btn btn-purple">Modifier</a>
+			<a role="button" title="supprimer le docteur <?= $doctor['lastname']; ?>" data-toggle="modal" data-target="#basicModal" class="btn btn-purple readins">Supprimer</a>
 		</div>
 	</div>
 
@@ -43,5 +43,5 @@
 			      </div>
 			  </div>
 			</div>
-		        
+		    </main>
 <?php $this->stop('main_content') ?>

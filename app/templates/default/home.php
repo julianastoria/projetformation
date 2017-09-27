@@ -4,16 +4,11 @@
 <header class="jumbotron">
 	<h1 class="text-center">Annautisma</h1>
 	<h2 class="text-center">Site de note-annuaire de l'autisme en France</h2>
-	<div class="row">
-		<div class=" col-sm-4 col-md-4 col-md-offset-4 col-sm-offset-4">
-			<button class="btn btn-purple btn-md" id="savoir">En savoir plus</button>
-		</div>
-	</div>
 </header>
 
-<div class="container-fluid">
+<!-- <div class="container-fluid">
 	<div class="row">
-	<!-- Méthode pour mettre un élément au milieu grâce au colonne -->
+	// Méthode pour mettre un élément au milieu grâce au colonne
 	<div class="col-md-5 col-lg-4 col-md-offset-3 col-lg-offset-4">
 		<form class="form-horizontal">
 		<h3 class="text-center">Recherche :</h3>
@@ -26,7 +21,7 @@
 		</form>
 	</div>
 	</div>
-</div>
+</div> -->
 
 <div class="container-fluid">
 	<h2 class="text-center regions">Derniers établissements ajoutés :</h2><br>
@@ -37,7 +32,7 @@
 				<div class="col-md-3 col-sm-6">
 					<div class="thumbnail">
 						<div class="caption">
-							<img class="img-responsive" src="<$= $institution['photos'] ?>" alt=¨"Photo de <?= $institution['name'] ?>">
+							<img class="img-responsive" src="<$= $institution['photos'] ?>" alt="Photo de <?= $institution['name'] ?>">
 							<a href="<?= $this->url('institution_details',['id'=>$institution['id']]) ?>"><h4><?= $institution['name'] ?></h4></a>
 						</div>
 					</div>
@@ -52,8 +47,8 @@
 					<div class="col-md-3 col-sm-6">
 					<div class="thumbnail">
 						<div class="caption">
-							<img class="img-responsive" src="<$= $doctor['photos'] ?>" alt=¨"Photo de <?= $doctor['firstname'] ?>">
-							<a href="<?= $this->url('doctor_details',['id'=>$doctor['id']]) ?>"><h4>Dr <?= $doctor['lastname'] ?><?= $doctor['firstname'] ?></h4></a>
+							<img class="img-responsive" src="<$= $doctor['photos'] ?>" alt="Photo de <?= $doctor['firstname'] ?>">
+							<a href="<?= $this->url('doctor_details',['id'=>$doctor['id']]) ?>"><h4>Dr <?= $doctor['lastname'] ?> <?= $doctor['firstname'] ?></h4></a>
 						</div>
 					</div>
 				</div>

@@ -29,7 +29,6 @@ body {
 
 html, body {
 	font-family: 'Julius Sans One', sans-serif;
-	color: #F8F8F2;
 	background-color: #F2E4D1;
 	
 }
@@ -37,6 +36,10 @@ html, body {
 .container {
 	margin: 50px;
 	
+}
+
+.copyright {
+	color: #F8F8F2;
 }
 
 a {
@@ -53,7 +56,7 @@ a:hover {
 
 /* Titre du site */
 h1 {
-	color: #00d8ff;
+	color: #8845e0;
 
 }
 
@@ -142,8 +145,10 @@ header {
 	margin-right: 45px;
 }
 
-.btn-purple:hover {
+.btn-purple:hover,
+.btn-purple:focus {
 	color: #00d8ff;
+	font-size: 20px;
 }
 
 .btn-blue:hover {
@@ -157,6 +162,8 @@ header {
 	padding: 10px 8px 10px 8px;
 	border-radius: 8px;
 	font-size: 15px;
+	/* css pour la transition animation */
+	transition: font-size 0.5s;
 }
 
 #savoir {
@@ -489,7 +496,7 @@ textarea {
 
 .user {
 	color: #000;
-	font-size: 23px;
+	font-size: 2.4rem;
 	font-family: 'Open Sans', sans-serif;
 }
 
