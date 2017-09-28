@@ -81,7 +81,7 @@
 			</select>
 
 		</div>
-			<button class="btn btn-purple" type="submit">Envoyer</button>
+			<button class="btn btn-purple" type="submit">Créer<span class="sr-only"> l'établissement</span></button>
 
 		</div>
 	</div>
