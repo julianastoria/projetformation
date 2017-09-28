@@ -4,14 +4,14 @@
 
 	<h2 class="text-center"><?= $title ?></h2>
 
-<div class="row">
+<div class="row" id="institution">
 	<div class="col-md-6 col-lg-6">
 	<p class="text-center user">Le nom : <?= $institution['name']; ?></p>
 	<p class="text-center user">L'adresse : <?= $institution['address']; ?></p>
 	<p class="text-center user">L'email : <?= $institution['email']; ?></p>
 	<p class="text-center user">Le site : <?= $institution['site']; ?></p>
 	<p class="text-center user">Le numéro de téléphone : <?= $institution['tel']; ?></p>
-	<p class="text-center user">La photo : <br><img src="<?= $institution['photos']; ?>"></p>
+	<p class="text-center user" aria-hidden="true">La photo : <br><img src="<?= $institution['photos']; ?>" alt="" class="img-responsive"></p>
 	<p class="text-center user">Le type d'institution : <?= $institution['type_institution']; ?></p><br>
 
 	<div class="row">
