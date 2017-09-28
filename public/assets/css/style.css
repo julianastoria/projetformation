@@ -106,11 +106,14 @@ h2 {
 
 .dropdown-menu > li > a {
 	color: #8845e0;
-
+	text-shadow:1px 0px 1px #8845e0;
 	font-family: 'Open Sans', sans-serif;
 
 }
-
+/* barre de recherche */
+#search {
+	margin-left:0;
+}
 /* pour le dropdown multi-level */
 /* elle me permet de passer la souris sur les sous-éléments */
 .dropdown-submenu {
@@ -453,10 +456,11 @@ header h2 {
 }
 
 /* create_medecin.php avec un include de form.php */
-label {
+label , legend {
 	color: #8845e0;
+
 	font-weight: normal;
-	font-size: 17px;
+	font-size: 1.5em;
 	font-family: 'Open Sans', sans-serif;
 }
 
@@ -566,3 +570,14 @@ textarea {
 	height: 70%;
 	margin: 0 auto;
 }
+
+/* Style css pour l'acessibilite 
+*/
+.hide_access{
+	position: absolute !important;
+	height: 1px; width: 1px;
+	overflow: hidden;
+	clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+	clip: rect(1px, 1px, 1px, 1px);
+}
+
