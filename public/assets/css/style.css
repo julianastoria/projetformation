@@ -55,15 +55,14 @@ a:hover {
 }
 
 /* Titre du site */
-h1 {
+/*h1 {
 	color: #8845e0;
 
 }
 
 h2 {
 	color:  #8845e0;
-	
-}
+}*/
 
 /* navbar */
 .navbar, .navbar-default, .navbar-static-top {
@@ -158,10 +157,24 @@ header {
   
 }
 
-
-.jumbotron h1 {
+#slogan h1 {
 	font-family: 'Roboto', sans-serif;
 	font-size: 80px;
+	color: #FFF;
+}
+
+#slogan h2 {
+	font-weight: bold;
+}
+
+#slogan {
+	background-color: rgba(0, 135, 170, .8);
+	width: 66%;
+	margin-left: 17%;
+	height: 170px;
+	border-radius: 40px;
+	border-top-right-radius: 15px;
+	border-bottom-left-radius: 15px;
 }
 
 .btn-blue {
@@ -201,6 +214,7 @@ header {
 }
 
 #savoir {
+	margin-top: 20px;
 	padding: 8px 8px 8px 8px;
 	font-size: 25px;
 	margin-left: 59px;
@@ -288,7 +302,7 @@ footer p {
 
 	}
 
-.navbar-default .navbar-nav > li > a {
+	.navbar-default .navbar-nav > li > a {
 		float: left;
 		display: block;
 		font-size: 17px;
@@ -331,7 +345,6 @@ footer p {
 
 .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover {
 	color: #8845e0;
-
 }
 
 /* pour réduire le font-size uniquement des sous-menus */
@@ -352,7 +365,7 @@ footer p {
 	background-color: #fff9f2;
 }
 
-.jumbotron h1 {
+#slogan h1 {
 	font-size: 48px;
 
 }
@@ -545,4 +558,11 @@ textarea {
 	font-family: 'Open Sans', sans-serif;
 	color: #8845e0;
 	font-size: 2.5rem;
+}
+
+/* Détails établissement */
+#institution img {
+	width: 70%;
+	height: 70%;
+	margin: 0 auto;
 }

@@ -1,26 +1,27 @@
-<?php $this->layout('layout', ['title' =>  $title ]) ?>
+<?php $this->layout('layout', ['title' =>  $title." - Annautisma" ]) ?>
 
 <?php $this->start('main_content') ?>
 
 	<h2 class="text-center"><?= $title ?></h2>
 
-<div class="row">
+<div class="row" id="institution">
 	<div class="col-md-6 col-lg-6">
-	<p class="text-center user">Le nom : <?= $institution['name']; ?></p>
-	<p class="text-center user">L'adresse : <?= $institution['address']; ?></p>
-	<p class="text-center user">L'email : <?= $institution['email']; ?></p>
-	<p class="text-center user">Le site : <?= $institution['site']; ?></p>
-	<p class="text-center user">Le numéro de téléphone : <?= $institution['tel']; ?></p>
-	<p class="text-center user">La photo : <br><img src="<?= $institution['photos']; ?>"></p>
-	<p class="text-center user">Le type d'institution : <?= $institution['type_institution']; ?></p><br>
-	<div id="map"></div>
-	<div class="row">
-		<div class="col-lg-4 col-lg-offset-4">
-			<a class="btn btn-purple" href="<?= $this->url('institution_update',['id'=>$institution['id']]) ?>" class="btn">Modifier</a>
-			<a class="btn btn-purple readins" href="<?= $this->url('institution_delete',['id'=>$institution['id']]) ?>" class="btn">Supprimer</a>
+		<p class="text-center user">Le nom : <?= $institution['name']; ?></p>
+		<p class="text-center user">L'adresse : <?= $institution['address']; ?></p>
+		<p class="text-center user">L'email : <?= $institution['email']; ?></p>
+		<p class="text-center user">Le site : <?= $institution['site']; ?></p>
+		<p class="text-center user">Le numéro de téléphone : <?= $institution['tel']; ?></p>
+		<p class="text-center user" aria-hidden="true">La photo : <br><img src="<?= $institution['photos']; ?>" alt="" class="img-responsive"></p>
+		<p class="text-center user">Le type d'institution : <?= $institution['type_institution']; ?></p><br>
+		<div id="map"></div>
+		<div class="row">
+			<div class="col-lg-4 col-lg-offset-4">
+				<a class="btn btn-purple" href="<?= $this->url('institution_update',['id'=>$institution['id']]) ?>">Modifier</a>
+				<a class="btn btn-purple readins" href="<?= $this->url('institution_delete',['id'=>$institution['id']]) ?>">Supprimer</a>
+			</div>
 		</div>
 	</div>
-	</div>
+</div>
 
 
 	<?php for ($i=0;$i<count($main_notes);$i++) : ?>
@@ -40,7 +41,6 @@
 					<a href="<?= $this->url('delete_institution_note',['id'=>$id_user[$i]]) ?>" class="btn btn-purple readins">Supprimer</a>
 				</div>
 			</div>
-	</div>
 		</div>
 	<?php endfor; ?>
 

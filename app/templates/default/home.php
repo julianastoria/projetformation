@@ -2,8 +2,15 @@
 
 <?php $this->start('main_content') ?>
 <header class="jumbotron">
-	<h1 class="text-center">Annautisma</h1>
-	<h2 class="text-center">Site de note-annuaire de l'autisme en France</h2>
+	<div id="slogan">
+		<h1 class="text-center">Annautisma</h1>
+		<h2 class="text-center">Site de note-annuaire de l'autisme en France</h2>
+	</div>
+	<div class="row">
+		<div class=" col-sm-4 col-md-4 col-md-offset-5 col-sm-offset-5">
+			<button class="btn btn-purple btn-md" id="savoir">En savoir plus</button>
+		</div>
+	</div>
 </header>
 
 <!-- <div class="container-fluid">
