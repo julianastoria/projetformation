@@ -75,7 +75,9 @@ class UsersController extends Controller
 		$email=null;
 		$firstname=null;
 		$lastname=null;
-		$birthday=null;
+		$birth_day=null;
+		$birth_month=null;
+		$birth_year=null;
 		$departement=null;
 		$situation=null;
 		$autism=null;
@@ -97,7 +99,9 @@ class UsersController extends Controller
  			$repeat_password=strip_tags(trim($_POST['repeat_password']));
 			$firstname=strip_tags(trim($_POST['firstname']));
 			$lastname=strip_tags(trim($_POST['lastname']));
-			$birthday=strip_tags(trim($_POST['birthday']));
+			$birth_day=strip_tags(trim($_POST['birth_day']));
+			$birth_month=strip_tags(trim($_POST['birth_month']));
+			$birth_year=strip_tags(trim($_POST['birth_year']));
 			$situation=strip_tags(trim($_POST['situation']));
 
 			$id_autism=strip_tags(trim($_POST['id_autism']));
@@ -145,7 +149,7 @@ class UsersController extends Controller
 				$save=false;
 				$error['lastname']="le champ nom est vide";
 			}
-			if (empty($birthday))
+			if (empty($birth_day) )
 			{
 				$save=false;
 				$error['birthday']="le champ date de naissance est vide";
@@ -190,7 +194,6 @@ class UsersController extends Controller
 				'email'=>$email,
 				'firstname'=>$firstname,
 				'lastname'=>$lastname,
-				'birthday'=>$birthday,
 				'situations'=>$situation,
 				'autisms'=>$autisms,
 				'departements'=>$departements,

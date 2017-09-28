@@ -107,7 +107,10 @@ h2 {
 	font-family: 'Open Sans', sans-serif;
 
 }
-
+/* barre de recherche */
+#search {
+	margin-left:0;
+}
 /* pour le dropdown multi-level */
 /* elle me permet de passer la souris sur les sous-éléments */
 .dropdown-submenu {
