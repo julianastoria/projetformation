@@ -1,8 +1,8 @@
-<?php $this->layout('layout', ['title' => 'Détails du médecin']) ?>
+<?php $this->layout('layout', ['title' => 'Détails du docteur '. $doctor['lastname']]) ?>
 
 <?php $this->start('main_content') ?>
-
-	<h2 class="text-center">Détails de Dr. <?= $doctor['lastname']; ?></h2>
+	<main>
+	<h1 class="text-center">Détails de Dr. <?= $doctor['lastname']; ?></h1>
 	<p class="text-center user">Son nom : <?= $doctor['lastname']; ?></p>
 	<p class="text-center user">Son prénom : <?= $doctor['firstname']; ?></p>
 	<p class="text-center user">Son adresse : <?= $doctor['address']; ?></p>
@@ -16,32 +16,33 @@
 	
 	<div class="row">
 		<div class="col-md-4 col-md-offset-4">
-			<a href="<?= $this->url('doctor_update',['id'=>$doctor['id']]) ?>" class="btn btn-purple">Modifier</a>
-			<a type="button" data-toggle="modal" data-target="#basicModal" class="btn btn-purple readins">Supprimer</a>
+			<a type="button" href="<?= $this->url('doctor_update',['id'=>$doctor['id']]) ?>" title="Modifier le docteur <?= $doctor['lastname']; ?>" class="btn btn-purple">Modifier</a>
+			<button type="button" name="button" title="supprimer le docteur <?= $doctor['lastname']; ?>" data-toggle="modal" data-target="#basicModal" class="btn btn-purple readins">Supprimer</button>
 		</div>
 	</div>
 
 			<!-- mise en place de la popup modal -->
-			<div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+			<div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal">
 			  <div class="modal-dialog">
 			    <div class="modal-content">
 			      <div class="modal-header">
-			        <button type="submit" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			        <h2 class="modal-title" id="myModalLabel">Supprimer un médecin ?</h2>
+			        <button type="submit" class="close" data-dismiss="modal">&times;<span class="sr-only">fermer la fenêtre de  confirmation de suppression</span></button>
+			        <h1 class="modal-title" id="myModalLabel">Supprimer un médecin ?</h1>
 			      </div>
 			      <div class="modal-body">
-			        <h3 class="supp">Êtes-vous sûr de vouloir supprimer ce médecin ?</h3>
+			        <p class="supp">Êtes-vous sûr de vouloir supprimer ce médecin ?</p>
 			      </div>
 			      
 			      <div class="modal-footer">
 			      	<form method="POST" action="<?= $this->url('doctor_delete',['id'=>$doctor['id']]) ?>">	
-			       		<button type="submit" class="btn btn-purple">Oui</button>
+			       		<button type="submit" class="btn btn-purple">Oui <span class="sr-only">Supprimer <?= $doctor['lastname']; ?> </span></button>
 		        		<!-- <a class="btn btn-purple" href="<?= $this->url('doctor_details',['id'=>$doctor['id']]) ?>">Non</a> -->
-		        		<a class="btn btn-purple" data-dismiss="modal">Non</a>
+		        		<button class="btn btn-purple" data-dismiss="modal">Non <span class="sr-only">Ne pas supprimer <?= $doctor['lastname']; ?></span></button>
 		        	</form>
 			      </div>
 			      </div>
 			  </div>
 			</div>
-		        
+		    </main>
 <?php $this->stop('main_content') ?>
+
