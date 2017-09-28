@@ -67,10 +67,7 @@ h2 {
 /* navbar */
 .navbar, .navbar-default, .navbar-static-top {
 	background: linear-gradient(#0072ff, #00c6ff);
-	padding-right: 25px;
-	
-
-	
+	padding-right: 25px;	
 }
 
 .navbar-default .navbar-brand {
@@ -565,4 +562,18 @@ textarea {
 	width: 70%;
 	height: 70%;
 	margin: 0 auto;
+}
+
+.quick_link {
+	position: absolute !important;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+	clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+	clip: rect(1px, 1px, 1px, 1px);
+}
+
+.quick_link:focus {
+	overflow: visible;
+	clip: default;
 }

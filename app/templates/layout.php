@@ -21,6 +21,11 @@
 		<!--navbar -->
 <nav class="navbar navbar-default navbar-static-top" id="nav" role="navigation">
 	<div class="container-fluid">
+		<div>
+			<a href="#navbar" class="quick_link">Barre de navigation</a>
+			<a href="#content" class="quick_link">Zone de contenu</a>
+			<a href="#footer" class="quick_link">Pied de page</a>
+		</div>
 		<div class="navbar-header">
 			<a class="navbar-brand" href="<?= $this->url('home') ?>">Annautisma</a>
 			<button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#annautisma">
