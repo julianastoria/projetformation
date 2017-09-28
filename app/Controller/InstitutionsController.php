@@ -102,7 +102,7 @@ class InstitutionsController extends Controller
 			$error="l'etablissement n'existe pas ou a ete supprimée";
 			$title=null;
 		} else {
-			$title='les details sur '.$institution['name'];
+			$title='Les détails du '.$institution['name'];
 			$error=null;
 		}
 

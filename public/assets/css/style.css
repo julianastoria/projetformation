@@ -55,15 +55,14 @@ a:hover {
 }
 
 /* Titre du site */
-h1 {
+/*h1 {
 	color: #8845e0;
 
 }
 
 h2 {
 	color:  #8845e0;
-	
-}
+}*/
 
 /* navbar */
 .navbar, .navbar-default, .navbar-static-top {
@@ -161,6 +160,7 @@ header {
 #slogan h1 {
 	font-family: 'Roboto', sans-serif;
 	font-size: 80px;
+	color: #FFF;
 }
 
 #slogan h2 {
@@ -173,13 +173,9 @@ header {
 	margin-left: 17%;
 	height: 170px;
 	border-radius: 40px;
-	border-top-right-radius: 10px;
-	border-bottom-left-radius: 10px;
+	border-top-right-radius: 15px;
+	border-bottom-left-radius: 15px;
 }
-
-/*#slogan h1, #slogan h2 {
-	text-shadow: 0px 0px 30px rgba(0, 0, 0, 1);
-}*/
 
 .btn-blue {
 	background: linear-gradient(#0072ff, #00c6ff);

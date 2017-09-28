@@ -13,9 +13,8 @@
 	<link href="https://fonts.googleapis.com/css?family=Julius+Sans+One" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-	
 </head>
-	<body>
+<body>
 	<div class="container-fluid demo">
 	<header id="header">
 
@@ -120,11 +119,11 @@
 
 		
 
-		<section>
+		<section id="main_content">
 			<?= $this->section('main_content') ?>
 		</section>
 
-		<footer class="container-fluid footer" role="contentinfo">
+		<footer class="container-fluid footer" role="contentinfo" id="footer">
 			<div class="row">
 				<div class="col-md-6">
 					<ul class="list-inline">
@@ -147,5 +146,5 @@
 	<script src="<?= $this->assetUrl('js/jquery.js') ?>" charset="utf-8"></script>
 	<script src="<?= $this->assetUrl('js/bootstrap.js') ?>" charset="utf-8"></script>
 	<?= $this->section('main_script') ?>
-	</body>
+</body>
 </html>
