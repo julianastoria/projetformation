@@ -575,5 +575,5 @@ textarea {
 
 .quick_link:focus {
 	overflow: visible;
-	clip: default;
+	clip: initial;
 }
