@@ -2,7 +2,7 @@
 
 <?php $this->start('main_content') ?>
 
-	<h2 class="text-center"><?= $title ?></h2>
+	<h1 class="text-center"><?= $title ?></h1>
 
 <div class="row" id="institution">
 	<div class="col-md-6 col-lg-6">
@@ -23,17 +23,17 @@
 	</div>
 </div>
 
+	<h2 class="text-center user">Notes de : <?= $user[$i] ?></h2>
 
 	<?php for ($i=0;$i<count($main_notes);$i++) : ?>
 		<div class="col-md-6 col-lg-6">
-			<h2 class="text-center user">Notes de : <?= $user[$i] ?></h2>
 			<h3 class="text-center user">Note principale : <?= $main_notes[$i] ?></h3>
 
-			<h3 class="text-center user"><?= $title_sub_notes1 ?> : <?= $sub_notes1[$i] ?></h3>	
-			<h3 class="text-center user"><?= $title_sub_notes2 ?> : <?= $sub_notes2[$i] ?></h3>
-			<h3 class="text-center user"><?= $title_sub_notes3 ?> : <?= $sub_notes3[$i] ?></h3>
-			<h3 class="text-center user"><?= $title_comment[$i] ?></h3>
-			<h4 class="text-center user"><?= $comment[$i] ?></h4>
+			<p class="text-center user"><?= $title_sub_notes1 ?> : <?= $sub_notes1[$i] ?></p>	
+			<p class="text-center user"><?= $title_sub_notes2 ?> : <?= $sub_notes2[$i] ?></p>
+			<p class="text-center user"><?= $title_sub_notes3 ?> : <?= $sub_notes3[$i] ?></p>
+			<p class="text-center user"><?= $title_comment[$i] ?></p>
+			<p class="text-center user"><?= $comment[$i] ?></p>
 
 			<div class="row">
 				<div class="col-lg-4 col-lg-offset-4">

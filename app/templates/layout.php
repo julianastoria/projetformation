@@ -21,6 +21,11 @@
 		<!--navbar -->
 <nav class="navbar navbar-default navbar-static-top" id="nav" role="navigation">
 	<div class="container-fluid">
+		<div>
+			<a href="#navbar" class="quick_link">Barre de navigation</a>
+			<a href="#content" class="quick_link">Zone de contenu</a>
+			<a href="#footer" class="quick_link">Pied de page</a>
+		</div>
 		<div class="navbar-header">
 			<a class="navbar-brand" href="<?= $this->url('home') ?>">Annautisma</a>
 			<button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#annautisma">
@@ -38,28 +43,29 @@
 			<li>
 				<div class="dropdown">
 					
-						<a role="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="btn btn-blue dropdown-toggle" href="#Etablissements"><i class="fa fa-home visible-xs" aria-hidden="true"></i><p class="hidden-xs">Etablissements</p></a>
+						<a role="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="btn btn-blue dropdown-toggle" href="#Etablissements"><i class="fa fa-home visible-xs" aria-hidden="true"></i><p class="hidden-xs">Établissements</p></a>
 						<span class="caret"></span>
 						 
 							<ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu1">
 								 <li class="dropdown-submenu">
-								 	<a class="dropdown-toggle" data-toggle="dropdown" href="<?= $this->url('institutions_index',['type'=>'etablissementsspe']) ?>">Etablissements spécialisés</a>
-										 <ul class="dropdown-menu">
+								 	<a href="<?= $this->url('institutions_index',['type'=>'etablissementsspe']) ?>">Établissements spécialisés</a>
+										 <!-- <ul class="dropdown-menu">
 									 		<li><a class="eta" href="<?= $this->url('institutions_index',['type'=>'ime']) ?>">IME</a></li>
 									 		<li><a class="eta" href="<?= $this->url('institutions_index',['type'=>'sessad']) ?>">SESSAD</a></li>
 									 		<li><a class="eta" href="<?= $this->url('institutions_index',['type'=>'ulis']) ?>">ULIS</a></li>
 									 		
-										</ul>
+										</ul> -->
 								</li>	 		
 							
 
-								<li class="dropdown-submenu"><a href="<?= $this->url('institutions_index',['type'=>'ecoles']) ?>">Ecoles</a>
-						    		 <ul class="dropdown-menu">
+								<li class="dropdown-submenu">
+									<a href="<?= $this->url('institutions_index',['type'=>'ecoles']) ?>">Ecoles</a>
+						    			<!-- <ul class="dropdown-menu">
 									 		<li><a class="eta" tabindex="-1" href="<?= $this->url('institutions_index',['type'=>'maternelle']) ?>">Maternelle</a></li>
 									 		<li><a class="eta" href="<?= $this->url('institutions_index',['type'=>'primaire']) ?>">Primaire</a></li>
 									 		<li><a class="eta" href="<?= $this->url('institutions_index',['type'=>'college']) ?>">Collège</a></li>
 									 		<li><a class="eta" href="<?= $this->url('institutions_index',['type'=>'lycee']) ?>">Lycée</a></li>
-										</ul>
+										</ul> -->
 						    	</li>
 							</ul>
 					
@@ -90,54 +96,58 @@
 			
 			<ul class=" nav navbar-nav navbar-right">
 				<?php if (!isset($_SESSION['user'])) : ?>
-					<li class="navbar-right"><a href="<?= $this->url('user_signup') ?>"><i class="fa fa-user-plus bonhomme" aria-hidden="true"></i></a></li>
-					<li class="navbar-right"><a href="<?= $this->url('user_signin') ?>"><i class="fa fa-sign-in" aria-hidden="true"></i><span  class="hide_access">Se connecter</span><span aria-hidden="true">Login</span></a></li>
+
+					<li><a href="<?= $this->url('user_signin') ?>"><i class="fa fa-sign-in" aria-hidden="true"></i><span  class="hide_access">Se connecter</span><span aria-hidden="true">Login</span></a></li>
+					<li><a href="<?= $this->url('user_signup') ?>"><i class="fa fa-user-plus bonhomme" aria-hidden="true"></i></a></li>
+
 				<?php else : ?>	
+
+					<li>
+						<div class="dropdown">
+							<a href="#Ajout" class="btn btn-blue ajout dropdown-toggle" id="dropdownMenu4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" role="button">Ajout <span class="caret"></span></a>
+						
+					  		 <ul class="dropdown-menu ajouts" aria-labelledby="dropdownMenu4">
+							    <li class=""><a href="<?= $this->url('institution_create')?>">Établissements</a></li>
+							    <li class=""><a href="<?= $this->url('doctor_create') ?>">Médecins</a></li>
+							</ul>
+						</div>
+					</li>
 					<li><a href="<?=$this->url('profile')?>"><?= $_SESSION['user']['firstname'] ?></a></li>
 					<li><a href="<?= $this->url('logout') ?>">Deconnexion</a></li>
+
 				<?php endif; ?>
-					<li>
-					<div class="dropdown">
-		
-							<a href="#Ajout" class="btn btn-blue ajout dropdown-toggle" id="dropdownMenu4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" role="button">Ajout <span class="caret"></span></a>
-							 
-				  		
-				  		 <ul class="dropdown-menu ajouts" aria-labelledby="dropdownMenu4">
-						    <li class=""><a href="<?= $this->url('institution_create')?>">Etablissements</a></li>
-						    <li class=""><a href="<?= $this->url('doctor_create') ?>">Médecins</a></li>
-						</ul>
-					</div>
-			</li>
-		</ul>
+			</ul>
+			</div>
 		</div>
-	</div>
-</nav>
+	</nav>
 </header>
 <br>
 
 
-	
 
-		
 
-		<section id="main_content">
+		<section id="content">
 			<?= $this->section('main_content') ?>
 		</section>
+
+
+
+		
 
 		<footer class="container-fluid footer" role="contentinfo" id="footer">
 			<div class="row">
 				<div class="col-md-6">
 					<ul class="list-inline">
-						<li class="text-left contact"><a href="<?= $this->url('contact') ?>">Contacts</a></li>
-						<li class="text-left"><a>à propos</a></li>
-						<li class="text-left"><a>Mentions légales</a></li>
+						<li class="text-left contact"><a href="<?= $this->url('contact') ?>">Contact</a></li>
+						<li class="text-left"><a href="#">À propos</a></li>
+						<li class="text-left"><a href="#">Mentions légales</a></li>
 					</ul>
 				</div>
 
 				<div class="col-md-6">
 					<p><i class="fa fa-copyright" aria-hidden="true"></i> Copyright Mouton à 5 pattes, Compéthance, WebForce3, Urbilog 2017 </p>
 
-				</div>	
+				</div>
 			</div>
 		</footer>
 	</div>
