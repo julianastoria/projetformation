@@ -223,8 +223,10 @@ header {
 h3 {
 	color: #8845e0;
 }
-
-
+/* Main  */ 
+main {
+	margin-top:45px;
+}
 /* footer */
 footer {
 	
@@ -280,11 +282,13 @@ footer {
 footer a {
 	font-size: 15px;
 	padding-left: 24px;
+	text-shadow: 1px 0px 1px #000;
 
 }
 
 footer p {
 	padding-left: 12px;
+	text-shadow: 1px 0px 1px #000;
 }
 
 
