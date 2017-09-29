@@ -76,31 +76,31 @@
 
 			<div id="types_autisme" class="form-group <?= $checkbox_hidden; ?>">
 
-				<label>Les types d'autisme : </label>
+				<label for="types_autisme">Les types d'autisme : </label>
 
 				<div class="checkbox">
-					<label>
+					<label for="haut_niveau">
 						<input <?= isset($autisms['haut_niveau']) ? 'checked' : null ?> type="checkbox" id="haut_niveau" name="haut_niveau"/>
 						Haut Niveau
 					</label>
 				</div>
 
 				<div class="checkbox">
-					<label>
+					<label for="asperger">
 						<input <?= isset($autisms['asperger']) ? 'checked' : null ?> type="checkbox" id="asperger" name="asperger"/>
 						Asperger
 					</label>
 				</div>
 
 				<div class="checkbox">
-					<label>
+					<label for="atypique">
 						<input <?= isset($autisms['atypique']) ? 'checked' : null ?> type="checkbox" id="atypique" name="atypique"/>
 						Atypique
 					</label>
 				</div>
 			</div>
 
-			<button class="btn btn-purple" type="submit">Envoyer</button>
+			<button class="btn btn-purple" type="submit">Créer<span class="sr-only">le médecin</span></button>
 		</div>
 
 	</div>

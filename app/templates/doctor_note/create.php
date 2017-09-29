@@ -46,7 +46,7 @@
 				</div>
 
 				<div class="form-group">
-					<label id="comment">Commentaires :</label>
+					<label for="comment">Commentaires :</label>
 					<textarea class="form-control" name="comment" id="comment" rows="20" cols="50"><?= $comment ?></textarea>
 				</div>
 				

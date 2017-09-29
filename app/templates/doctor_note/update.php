@@ -30,7 +30,7 @@
 			<input class="form-control" type="text" name="title_comment" id="title_comment" value="<?= $title_comment ?>">
 		</div>
 		<div class="form-group">
-			<label id="comment">Commentaires :</label>
+			<label for="comment">Commentaires :</label>
 			<textarea class="form-control" name="comment" id="comment" rows="20" cols="50"><?= $comment ?></textarea>
 		</div>
 		<button type="submit" class="btn btn-purple">Envoyer</button>

@@ -43,7 +43,8 @@
 			<li>
 				<div class="dropdown">
 					
-						<a role="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="btn btn-blue dropdown-toggle" href="#Etablissements"><i class="fa fa-home visible-xs" aria-hidden="true"></i><p class="hidden-xs">Etablissements</p><span class="caret"></span></a>
+						<a role="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="btn btn-blue dropdown-toggle" href="#Etablissements"><i class="fa fa-home visible-xs" aria-hidden="true"></i><p class="hidden-xs">Etablissements</p></a>
+						<span class="caret"></span>
 						 
 							<ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu1">
 								 <li class="dropdown-submenu">
@@ -87,7 +88,7 @@
 				</li>
 			</ul>
 		
-				<form class="form-group">
+				<form class="col-md-3" id="search">
 					<input type="text" name="search" id="search" aria-label="rechercher">
 					<button class="btn btn-purple">Rechercher</button>
 				</form>
@@ -95,7 +96,7 @@
 			<ul class=" nav navbar-nav navbar-right">
 				<?php if (!isset($_SESSION['user'])) : ?>
 					<li class="navbar-right"><a href="<?= $this->url('user_signup') ?>"><i class="fa fa-user-plus bonhomme" aria-hidden="true"></i></a></li>
-					<li class="navbar-right"><a href="<?= $this->url('user_signin') ?>"><i class="fa fa-sign-in" aria-hidden="true"></i><span lang="en"> Login</span></a></li>
+					<li class="navbar-right"><a href="<?= $this->url('user_signin') ?>"><i class="fa fa-sign-in" aria-hidden="true"></i><span  class="hide_access">Se connecter</span><span aria-hidden="true">Login</span></a></li>
 				<?php else : ?>	
 					<li><a href="<?=$this->url('profile')?>"><?= $_SESSION['user']['firstname'] ?></a></li>
 					<li><a href="<?= $this->url('logout') ?>">Deconnexion</a></li>
