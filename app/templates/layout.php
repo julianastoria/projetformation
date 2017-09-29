@@ -16,7 +16,12 @@
 	
 </head>
 	<body>
+	<a href="#main" class="hide_access">Aller au contenu</a>
+	
+
+	<a href="#footer" class="hide_access">Aller au vers la barre d'informations</a>
 	<div class="container-fluid demo">
+	
 	<header id="header">
 
 		<!--navbar -->
@@ -84,13 +89,13 @@
 			</ul>
 		
 				<form class="col-md-3" id="search">
-					<input type="text" name="search" id="search" aria-label="rechercher">
+					<input type="text" name="search" aria-label="rechercher">
 					<button class="btn btn-purple">Rechercher</button>
 				</form>
 			
 			<ul class=" nav navbar-nav navbar-right">
 				<?php if (!isset($_SESSION['user'])) : ?>
-					<li class="navbar-right"><a href="<?= $this->url('user_signup') ?>"><i class="fa fa-user-plus bonhomme" aria-hidden="true"></i></a></li>
+					<li class="navbar-right"><a href="<?= $this->url('user_signup') ?>"><i class="fa fa-user-plus bonhomme" aria-hidden="true"><span class="hide_access"></span></i></a></li>
 					<li class="navbar-right"><a href="<?= $this->url('user_signin') ?>"><i class="fa fa-sign-in" aria-hidden="true"></i><span  class="hide_access">Se connecter</span><span aria-hidden="true">Login</span></a></li>
 				<?php else : ?>	
 					<li><a href="<?=$this->url('profile')?>"><?= $_SESSION['user']['firstname'] ?></a></li>
@@ -113,7 +118,7 @@
 	</div>
 </nav>
 </header>
-<br>
+<main id="main">
 
 
 	
@@ -123,8 +128,8 @@
 		<section>
 			<?= $this->section('main_content') ?>
 		</section>
-
-		<footer class="container-fluid footer" role="contentinfo">
+	</main>
+		<footer class="container-fluid footer" role="contentinfo" id="footer">
 			<div class="row">
 				<div class="col-md-6">
 					<ul class="list-inline">

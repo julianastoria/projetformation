@@ -81,6 +81,10 @@ class InstitutionsController extends Controller
 		//Creer une adresse au format JSON 
 		$adresse_json=json_encode($institution['address']);
 
+		//Recuperer les id du precedent et suivant 
+		$previous_id=
+		$next_id=
+
 		//Recuperer les critéres des sous notes 
 		//--- Recuperer le type de l'etalissement avec l'id
 		$type_institution=$this->InstitutionsManager->find($id)['type_institution'];

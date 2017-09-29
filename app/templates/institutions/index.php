@@ -1,7 +1,7 @@
 <?php $this->layout('layout', ['title' => $title]) ?>
 
 <?php $this->start('main_content') ?>
-	<h2 class="text-center"><?= $title ?></h2>
+	<h1 class="text-center"><?= $title ?></h1>
 		<div class="row">
 		
 	<?php foreach ($institutions as $key => $institution) : ?>
@@ -13,7 +13,7 @@
 					<div class="caption">
 
 						<a href="<?= $this->url('institution_details', ['id' => $institution['id']]); ?>">
-							<h3 class="index"><?= $institution['name']; ?></h3>
+							<h3 class="index">Détails de "<?= $institution['name']; ?>"</h3>
 						</a>
 
 						<p><?= $institution['name_institution_category']; ?></p>

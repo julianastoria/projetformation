@@ -12,12 +12,12 @@
 	<div class="row">
 		<div class="col-md-3 col-md-offset-4">
 
-			<h2 class="text-center">Inscription :</h2>
+			<h1 class="text-center">Inscription :</h1>
 
 			<form method="post" action="<?= $this->url('user_signup') ?>">
 				<div class="form-group">
 					<label for="email">Identifiant (Adresse Mail) : </label>
-					<input type="email" name="email" class="form-control" id="email" value="<?= $email ?>" aria-required="true"><br/>
+					<input type="email" name="email" class="form-control" id="email" value="<?= $email ?>" aria-required="true">
 				</div>
 				<fieldset>
 					<legend class="hide_access">Mot de passe :</legend>
@@ -44,7 +44,7 @@
 					</div>
 					<fieldset>
 						<legend>Date de naissance :</legend>
-						<div class="row">
+						<div>
 							<label for="birth_day" class="hide_access">Jour de naissance</label>							
 							<select class="col-md-3" id="birth_day" aria-required="true">
 								<option class="hidden" value="nothing">--</option>
@@ -84,7 +84,7 @@
 							<?php endif; ?>
 							<?php $last_region=$new_region; ?>
 						<?php endforeach ?>
-						</select><br/>
+						</select>
 					</div>
 
 					<div class="form-group">
@@ -95,7 +95,7 @@
 
 							<option value="<?= $autism['id'] ?>"><?= $autism['name'] ?></option>
 							<?php endforeach ?>
-						</select><br/>						
+						</select>						
 					</div>
 
 					<div class="form-group">
@@ -105,7 +105,7 @@
 							<option value="autiste">Autiste</option>
 							<option value="parent d'autiste">Parent d'autiste</option>
 							<option value="medecin">Medecin</option>
-						</select><br/>
+						</select>
 					</div>
 				</fieldset>
 				<button class="btn btn-purple" type="submit">S'inscrire<span class='hide_access'>Renvoie vers la page de profil</span></button>

@@ -35,4 +35,5 @@ class InstitutionNotesManager extends Manager
 		return $sth->fetchAll();
 
 	}
+	public function selectPreviousId($id)
 }
