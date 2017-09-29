@@ -124,13 +124,15 @@
 <br>
 
 
-	
 
-		
 
-		<section id="main_content">
+		<section id="content">
 			<?= $this->section('main_content') ?>
 		</section>
+
+
+
+		
 
 		<footer class="container-fluid footer" role="contentinfo" id="footer">
 			<div class="row">
